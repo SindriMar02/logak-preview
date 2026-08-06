@@ -137,6 +137,7 @@ p{font-size:16px;line-height:1.5}
 .js .mask.d1 > *{transition-delay:.07s}
 .js .mask.d2 > *{transition-delay:.14s}
 .js .mask.d3 > *{transition-delay:.21s}
+.js .mask.d4 > *{transition-delay:.28s}
 .drift{will-change:transform}
 
 /* header */
@@ -464,19 +465,19 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
         <article data-pv="0">
           <em>01</em>
           <div class="mask"><h3>Umferðarslys</h3></div>
-          <p>Ökumenn, farþegar og gangandi vegfarendur. Ökumenn eru tryggðir fyrir því tjóni sem þeir verða fyrir, óháð því hvort þeir voru í rétti eða órétti.</p>
+          <div class="mask d1"><p>Ökumenn, farþegar og gangandi vegfarendur. Ökumenn eru tryggðir fyrir því tjóni sem þeir verða fyrir, óháð því hvort þeir voru í rétti eða órétti.</p></div>
           <div class="svc-thumb"><img src="img/hover-umferd.webp" alt="Vegur séður úr ökumannssæti" width="760" height="570" loading="lazy" decoding="async"></div>
         </article>
         <article data-pv="1">
           <em>02</em>
           <div class="mask d1"><h3>Vinnuslys</h3></div>
-          <p>Slys sem verða við störf geta skapað rétt til bóta úr fleiri en einni tryggingu, meðal annars slysatryggingu launþega. Við könnum þær allar.</p>
+          <div class="mask d2"><p>Slys sem verða við störf geta skapað rétt til bóta úr fleiri en einni tryggingu, meðal annars slysatryggingu launþega. Við könnum þær allar.</p></div>
           <div class="svc-thumb"><img src="img/hover-vinnu.webp" alt="Starfsmaður á byggingarsvæði" width="760" height="570" loading="lazy" decoding="async"></div>
         </article>
         <article data-pv="2">
           <em>03</em>
           <div class="mask d2"><h3>Frítímaslys</h3></div>
-          <p>Slys utan vinnu falla oft undir tryggingar sem fólk veit ekki af. Það kostar ekkert að láta athuga hvaða tryggingar eiga við í þínu tilviki.</p>
+          <div class="mask d3"><p>Slys utan vinnu falla oft undir tryggingar sem fólk veit ekki af. Það kostar ekkert að láta athuga hvaða tryggingar eiga við í þínu tilviki.</p></div>
           <div class="svc-thumb"><img src="img/hover-fritima.webp" alt="Göngufólk á fjallastíg" width="760" height="570" loading="lazy" decoding="async"></div>
         </article>
       </div>
@@ -508,8 +509,8 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
             <div class="mask d1"><h2 id="h-bot">Hver borgar lögmanninn?</h2></div>
           </div>
           <div class="drift" data-drift="11">
-            <p>Þegar unnið er að innheimtu slysabóta greiðir tryggingafélagið sem bæturnar greiðir að jafnaði stærstan hluta kostnaðarins. Sé um aðra lögfræðiþjónustu að ræða er unnið samkvæmt tímagjaldi, 16.000 kr. án virðisaukaskatts.</p>
-            <p>Það að fá ráðgjöf um réttarstöðu vegna slyss er þér að kostnaðarlausu, og fyrsta samtalið skuldbindur þig ekki til neins.</p>
+            <div class="mask d2"><p>Þegar unnið er að innheimtu slysabóta greiðir tryggingafélagið sem bæturnar greiðir að jafnaði stærstan hluta kostnaðarins. Sé um aðra lögfræðiþjónustu að ræða er unnið samkvæmt tímagjaldi, 16.000 kr. án virðisaukaskatts.</p></div>
+            <div class="mask d3"><p>Það að fá ráðgjöf um réttarstöðu vegna slyss er þér að kostnaðarlausu, og fyrsta samtalið skuldbindur þig ekki til neins.</p></div>
             <div class="facts">
               <div class="fact"><b>2011</b><span>Stofnuð</span></div>
               <div class="fact"><b>0 kr.</b><span>Fyrsta ráðgjöf</span></div>
@@ -534,13 +535,13 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
       </div>
       <div class="steps">
         <div class="step"><em>01</em><div class="mask"><h3>Fyrsta samtal</h3></div>
-          <p>Þú lýsir því sem gerðist. Við metum hvort grundvöllur sé fyrir kröfu. Samtalið kostar ekkert.</p></div>
+          <div class="mask d1"><p>Þú lýsir því sem gerðist. Við metum hvort grundvöllur sé fyrir kröfu. Samtalið kostar ekkert.</p></div></div>
         <div class="step"><em>02</em><div class="mask d1"><h3>Gagnaöflun</h3></div>
-          <p>Við öflum gagnanna sem málið byggir á, svo sem læknisvottorða og skýrslna, og höldum utan um samskiptin.</p></div>
+          <div class="mask d2"><p>Við öflum gagnanna sem málið byggir á, svo sem læknisvottorða og skýrslna, og höldum utan um samskiptin.</p></div></div>
         <div class="step"><em>03</em><div class="mask d2"><h3>Krafa sett fram</h3></div>
-          <p>Krafan er sett fram gagnvart því tryggingafélagi sem á að greiða og fylgt eftir þar til svar berst.</p></div>
+          <div class="mask d3"><p>Krafan er sett fram gagnvart því tryggingafélagi sem á að greiða og fylgt eftir þar til svar berst.</p></div></div>
         <div class="step"><em>04</em><div class="mask d3"><h3>Uppgjör</h3></div>
-          <p>Farið er yfir uppgjörið með þér áður en það er samþykkt, svo þú vitir hvað þú ert að skrifa undir.</p></div>
+          <div class="mask d4"><p>Farið er yfir uppgjörið með þér áður en það er samþykkt, svo þú vitir hvað þú ert að skrifa undir.</p></div></div>
       </div>
     </div>
   </section>
@@ -566,8 +567,8 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
             <div class="mask d1"><h2 id="h-bal">Baldvin Már Kristjánsson</h2></div>
           </div>
           <div class="drift" data-drift="11">
-            <p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness og heldur áfram þeirri sérhæfingu sem stofan hefur byggt upp frá 2011: hagsmunagæslu fyrir fólk sem hefur slasast.</p>
-            <p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram og eftir nám starfaði hann hjá Lögheimtunni, Arion banka og hjá NJORD Law Firm í Kaupmannahöfn.</p>
+            <div class="mask d2"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness og heldur áfram þeirri sérhæfingu sem stofan hefur byggt upp frá 2011: hagsmunagæslu fyrir fólk sem hefur slasast.</p></div>
+            <div class="mask d3"><p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram og eftir nám starfaði hann hjá Lögheimtunni, Arion banka og hjá NJORD Law Firm í Kaupmannahöfn.</p></div>
             <div class="cv">
               <div><b>2017</b><span>BA í lögfræði, Háskólinn í Reykjavík</span></div>
               <div><b>2019</b><span>Meistaranám í lögfræði, Háskólinn í Lundi</span></div>
