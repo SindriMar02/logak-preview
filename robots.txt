@@ -1,0 +1,14 @@
+# Lögfræðiþjónusta Akraness
+# PROTOTYPE: this file currently blocks everything. At launch, delete the two
+# lines below the marker and remove the noindex meta tag from index.html.
+
+# ---- PROTOTYPE ONLY, REMOVE AT LAUNCH ----
+User-agent: *
+Disallow: /
+# ---- END PROTOTYPE BLOCK ----
+
+# ---- LAUNCH CONFIG (uncomment at launch) ----
+# User-agent: *
+# Allow: /
+#
+# Sitemap: https://logak.is/sitemap.xml
