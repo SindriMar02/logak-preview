@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://logak.is/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -14,5 +14,23 @@
       <image:loc>https://logak.is/img/baldvin.webp</image:loc>
       <image:title>Baldvin Már Kristjánsson héraðsdómslögmaður</image:title>
     </image:image>
+  </url>
+  <url>
+    <loc>https://logak.is/fasteignamal/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://logak.is/erfdarettur/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://logak.is/samningar-og-innheimta/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

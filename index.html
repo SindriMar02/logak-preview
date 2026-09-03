@@ -59,17 +59,17 @@
     "alumniOf":[{"@type":"CollegeOrUniversity","name":"Háskólinn í Reykjavík"},{"@type":"CollegeOrUniversity","name":"Háskólinn í Lundi"}],
     "knowsAbout":["Fasteignaréttur","Erfðaréttur","Sifjaréttur","Samningaréttur","Innheimtumál"]},
   "hasOfferCatalog":{"@type":"OfferCatalog","name":"Þjónusta","itemListElement":[
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Fasteignamál og kauparéttur"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Erfðaréttur og sifjaréttur"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Samningaréttur og innheimta"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Fasteignamál","url":"https://logak.is/fasteignamal/"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Erfðaréttur og sifjaréttur","url":"https://logak.is/erfdarettur/"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Samningaréttur og innheimta","url":"https://logak.is/samningar-og-innheimta/"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Almenn lögfræðiráðgjöf"}}]}},
  {"@type":"FAQPage","@id":"https://logak.is/#faq","mainEntity":[
   {"@type":"Question","name":"Hvað kostar að fá lögmann í mitt mál?","acceptedAnswer":{"@type":"Answer","text":"Fyrsta samtalið er alltaf endurgjaldslaust, hvert sem málið er. Eftir það er unnið samkvæmt tímagjaldi, 16.000 kr. án virðisaukaskatts."}},
   {"@type":"Question","name":"Er fyrsta samtalið skuldbindandi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Þú færð hreinskilið mat á stöðunni og ræður svo hvort lengra er haldið."}},
-  {"@type":"Question","name":"Hvers konar mál tekur stofan að sér?","acceptedAnswer":{"@type":"Answer","text":"Fasteignamál, erfðamál, samningagerð, innheimtumál og almenn lögfræðiráðgjöf fyrir einstaklinga og fyrirtæki. Ef þitt mál fellur ekki hreint undir neinn af þessum flokkum skaltu samt hafa samband."}},
+  {"@type":"Question","name":"Hvers konar mál tekur stofan að sér?","acceptedAnswer":{"@type":"Answer","text":"Fasteignamál, erfðamál, samningagerð, innheimtumál og almenn lögfræðiráðgjöf fyrir einstaklinga og fyrirtæki. Passar málið þitt ekki fullkomlega í einn af þessum flokkum, hafðu samt samband."}},
   {"@type":"Question","name":"Þarf ég að koma til Akraness til að hitta þig?","acceptedAnswer":{"@type":"Answer","text":"Nei. Fyrstu samskipti fara oftast fram í síma eða tölvupósti, og mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu."}},
   {"@type":"Question","name":"Hvenær á ég að hafa samband?","acceptedAnswer":{"@type":"Answer","text":"Eins fljótt og hægt er. Því fyrr sem staðan er skoðuð, því betur er málið upplýst. Fyrsta samtalið skuldbindur þig ekki til neins."}},
-  {"@type":"Question","name":"Er stofan bara fyrir fólk á Akranesi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Stofan er á Akranesi og hefur þjónað Akurnesingum og nágrenni frá 2011, en mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu. Fyrstu samskipti fara oftast fram í síma eða tölvupósti."}}]},
+  {"@type":"Question","name":"Er stofan bara fyrir fólk á Akranesi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Stofan er á Akranesi og hefur þjónað Akurnesingum og nágrenni frá 2011, en mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu."}}]},
  {"@type":"WebSite","@id":"https://logak.is/#site","url":"https://logak.is/","name":"Lögfræðiþjónusta Akraness","inLanguage":"is","publisher":{"@id":"https://logak.is/#firm"}}]}
 </script>
 
@@ -88,302 +88,7 @@
   Scroll loop batches EVERY read before EVERY write.
 -->
 
-<style>
-@font-face{font-family:Boska;src:url(fonts/Boska-Medium.woff2) format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:Boska;src:url(fonts/Boska-Regular.woff2) format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'Instrument Sans';src:url(fonts/InstrumentSans-Regular.woff2) format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'Instrument Sans';src:url(fonts/InstrumentSans-Medium.woff2) format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Instrument Sans';src:url(fonts/InstrumentSans-SemiBold.woff2) format('woff2');font-weight:600;font-display:swap}
-/* Instrument Serif Italic — the designed companion to Instrument Sans, so the accent line
-   is a real type pairing rather than a decorative script fighting the Boska display. */
-@font-face{font-family:'Instrument Serif';src:url(fonts/InstrumentSerif-Italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
-
-:root{
-  --stone:#F4F2EE; --stone-2:#EAE7E0;
-  --ink:#1B2027; --ink-2:#525C67; --ink-3:#7C8590;
-  --night:#0C1116; --night-2:#131A21; --night-3:#1A222B;
-  --bronze:#8A5D38; --bronze-lift:#C0895C; --ease:cubic-bezier(.4,0,.2,1);
-  --gut:clamp(20px,4.6vw,76px); --maxw:1240px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
-body{background:var(--night);color:var(--ink);
-  font-family:'Instrument Sans',system-ui,sans-serif;font-size:16px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;overflow-x:clip}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-h1,h2{font-family:Boska,Georgia,serif;font-weight:500;text-transform:uppercase}
-h1{font-size:clamp(31px,4.5vw,64px);line-height:1.08}
-h2{font-size:clamp(25px,3.15vw,44px);line-height:1.1}
-h3{font-size:17px;line-height:1.3;font-weight:500;font-family:'Instrument Sans',sans-serif}
-p{font-size:16px;line-height:1.5}
-.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
-.lead{font-size:clamp(17px,1.3vw,19px);line-height:1.5;color:var(--ink-2)}
-.on-dark{color:#fff}
-.on-dark .lead{color:#AEB6BF}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-:focus-visible{outline:2px solid var(--bronze-lift);outline-offset:3px}
-.eyebrow{font-size:11px;letter-spacing:.19em;text-transform:uppercase;font-weight:600;color:var(--bronze)}
-.on-dark .eyebrow{color:var(--bronze-lift)}
-
-/* Heklusýn drift + mask */
-.frame{position:relative;overflow:hidden;width:100%}
-.frame-in{position:absolute;inset:-9% 0;will-change:transform}
-.frame-in img{width:100%;height:100%;object-fit:cover}
-.frame.deep .frame-in{inset:-15% 0}
-.mask{overflow:hidden;padding-bottom:.22em;margin-bottom:-.22em}
-.js .mask > *{transform:translateY(108%);transition:transform .95s var(--ease)}
-.js .mask.in > *{transform:translateY(0)}
-.js .mask.d1 > *{transition-delay:.07s}
-.js .mask.d2 > *{transition-delay:.14s}
-.js .mask.d3 > *{transition-delay:.21s}
-.js .mask.d4 > *{transition-delay:.28s}
-.drift{will-change:transform}
-
-/* header */
-.hdr{position:fixed;inset:0 0 auto 0;z-index:1111;transition:background-color .3s var(--ease),border-color .3s var(--ease)}
-.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:20px;
-  max-width:var(--maxw);margin-inline:auto;padding:14px var(--gut)}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:38px;height:38px}
-.brand-txt{display:flex;flex-direction:column;line-height:1.05}
-.brand-txt b{font-size:11px;letter-spacing:.15em;font-weight:600;color:#fff;text-transform:uppercase}
-.brand-txt span{font-size:9.5px;letter-spacing:.24em;color:var(--bronze-lift);text-transform:uppercase;margin-top:2px}
-.nav{display:flex;gap:28px;align-items:center}
-.nav a{font-size:14px;color:rgba(255,255,255,.82);transition:color .2s var(--ease);
-  display:inline-flex;align-items:center;min-height:24px;padding:4px 2px}
-.nav a:hover{color:#fff}
-.hdr-cta{font-size:14px;font-weight:500;color:#fff;border:1px solid rgba(255,255,255,.3);
-  padding:9px 17px;min-height:24px;transition:background-color .2s var(--ease),border-color .2s var(--ease)}
-.hdr-cta:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.55)}
-.hdr.scrolled{background:rgba(12,17,22,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09)}
-.burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer;position:relative}
-.burger i{position:absolute;left:11px;width:22px;height:1.5px;background:#fff;transition:transform .34s var(--ease)}
-.burger i:nth-child(1){top:19px}.burger i:nth-child(2){top:25px}
-.burger[aria-expanded=true] i:nth-child(1){transform:translateY(3px) rotate(45deg)}
-.burger[aria-expanded=true] i:nth-child(2){transform:translateY(-3px) rotate(-45deg)}
-.mnav{position:fixed;inset:0;z-index:1110;background:var(--night);display:flex;flex-direction:column;
-  justify-content:center;padding:0 var(--gut);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
-.mnav.open{opacity:1;visibility:visible}
-.mnav a{font-family:Boska,serif;text-transform:uppercase;font-size:clamp(26px,7.6vw,40px);line-height:1.32;
-  color:#fff;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.mnav.open a{opacity:1;transform:none}
-.mnav.open a:nth-child(1){transition-delay:.08s}.mnav.open a:nth-child(2){transition-delay:.13s}
-.mnav.open a:nth-child(3){transition-delay:.18s}.mnav.open a:nth-child(4){transition-delay:.23s}
-.mnav.open a:nth-child(5){transition-delay:.28s}.mnav.open a:nth-child(6){transition-delay:.33s}
-.mnav-foot{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14);
-  display:flex;flex-direction:column;gap:5px;color:#AEB6BF;font-size:15px}
-.mnav-foot b{color:#fff;font-size:22px;font-weight:500;font-family:Boska,serif}
-
-/* hero */
-.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;display:grid;place-items:center}
-.hero .frame{position:absolute;inset:0;height:100%}
-.hero .frame-in{inset:-7.5% 0}
-.hero-scrim{position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(76% 46% at 50% 48%,rgba(6,10,14,.66) 0%,rgba(6,10,14,.34) 55%,transparent 100%),
-    linear-gradient(180deg,rgba(8,12,16,.76) 0%,rgba(8,12,16,.42) 20%,rgba(8,12,16,.5) 46%,rgba(8,12,16,.58) 68%,rgba(8,12,16,.9) 100%)}
-.hero-in{position:relative;z-index:3;text-align:center;padding:0 var(--gut);width:100%;max-width:1080px}
-.hero-mark{width:58px;height:58px;margin:0 auto 16px;mix-blend-mode:lighten}
-.hero-script{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
-  font-size:clamp(20px,1.95vw,27px);letter-spacing:.005em;color:#fff;opacity:.62;
-  mix-blend-mode:lighten;margin-bottom:10px}
-/* Solid ink, NOT background-clip:text. A per-char reveal makes every .ch its own
-   compositing layer, which escapes the parent's text clip; the parent's drop-shadow then
-   rasterizes the transparent child as an opaque white patch. Measured, not guessed:
-   .ch reported background-clip:border-box + color:transparent mid-animation.
-   #F6F2EC was the gradient's mid stop and measured 7.70:1 on the worst backdrop. */
-.hero h1{color:#F6F2EC;mix-blend-mode:lighten;filter:drop-shadow(0 2px 26px rgba(6,9,12,.72))}
-.hero-sub{max-width:610px;margin:18px auto 0;color:#D5DAE0;font-size:clamp(15.5px,1.15vw,17px)}
-.hero-acts{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-.btn{font-size:14.5px;font-weight:500;padding:13px 26px;border:1px solid rgba(255,255,255,.34);color:#fff;
-  transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
-.btn:hover{background:#fff;color:var(--night);border-color:#fff}
-.btn.solid{background:var(--bronze);border-color:var(--bronze)}
-.btn.solid:hover{background:var(--bronze-lift);border-color:var(--bronze-lift);color:#fff}
-.hero-foot{position:absolute;left:0;right:0;bottom:22px;z-index:3;display:flex;justify-content:space-between;
-  align-items:center;gap:16px;padding:0 var(--gut);max-width:var(--maxw);margin-inline:auto;
-  font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);flex-wrap:wrap}
-/* who you're talking to, right on the landing screen — his photo, name and title, sized to
-   what the 636x739 source actually supports (degrades above ~540px display width, so 88px
-   stays sharp) — plus the down-cue right beside it pointing at the fuller #baldvin section. */
-.hero-id-wrap{display:flex;align-items:center;gap:18px}
-.hero-id{display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none}
-.hero-id img{width:clamp(56px,9vw,88px);height:clamp(56px,9vw,88px);border-radius:50%;
-  object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.32);
-  transition:border-color .2s var(--ease)}
-.hero-id:hover img{border-color:rgba(255,255,255,.65)}
-.hero-id span{display:flex;flex-direction:column;gap:3px;text-transform:none;letter-spacing:0}
-.hero-id b{font-family:Boska,serif;font-weight:500;font-size:clamp(15px,1.6vw,18px);
-  color:#fff;line-height:1.2}
-.hero-id i{font-style:normal;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(255,255,255,.66)}
-.scroll-cue{flex:none;color:rgba(255,255,255,.75);transition:color .2s var(--ease);
-  animation:scrollHint 2s ease-in-out infinite}
-.scroll-cue:hover{color:#fff}
-@keyframes scrollHint{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
-
-/* sections */
-.sec{padding:clamp(64px,7.2vw,112px) 0;position:relative;overflow:hidden}
-.sec.light{background:var(--stone);color:var(--ink)}
-.sec.dark{background:var(--night);color:#fff}
-.sec-head{max-width:58ch;margin-bottom:clamp(30px,3.4vw,50px)}
-.sec-head h2{margin-top:10px}
-.sec-head .lead{margin-top:16px}
-
-/* þjónusta — typographic, no photos: the page is about the firm, not the scenery */
-.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(27,32,39,.16)}
-.svc article{padding:26px 0;border-bottom:1px solid rgba(27,32,39,.11)}
-.svc article + article{border-left:1px solid rgba(27,32,39,.11);padding-left:clamp(18px,2.4vw,34px)}
-.svc article:nth-child(1){padding-right:clamp(18px,2.4vw,34px)}
-.svc article:nth-child(2){padding-right:clamp(18px,2.4vw,34px)}
-.svc em{font-style:normal;display:block;font-family:Boska,serif;font-size:13px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--bronze);margin-bottom:12px}
-.svc h3{font-size:clamp(19px,1.6vw,23px);font-family:Boska,serif;text-transform:uppercase;font-weight:500;line-height:1.15}
-.svc p{color:var(--ink-2);margin-top:9px;font-size:15px}
-.svc article{position:relative;transition:color .3s var(--ease)}
-.svc article h3{transition:color .3s var(--ease)}
-.svc article:hover h3{color:var(--bronze)}
-
-/* ---------- aperture intro (Eladio Dieste spec: slit opens from nothing, tears full-bleed,
-     photo counter-scales 1.4 -> 1.2 -> 1, name in by chars, scroll released 0.8s early) ---------- */
-/* scroll lock is a SEPARATE class from the animation class: the lock lifts at 2.2s
-   while the 3s timeline keeps playing. */
-html.is-locked,html.is-locked body{overflow:hidden!important;height:100%}
-html.is-intro .hero .frame{animation:laAperture 3s both}
-html.is-intro .hero .frame img{animation:laApertureScale 3s both}
-@keyframes laAperture{
-  0%{clip-path:inset(100% 100% 100% 100%);animation-timing-function:cubic-bezier(.165,.84,.44,1)}
-  33.34%{clip-path:inset(48% 46% 48% 46%);animation-timing-function:cubic-bezier(.77,0,.175,1)}
-  100%{clip-path:inset(0% 0% 0% 0%)}
-}
-@keyframes laApertureScale{
-  0%{transform:scale(1.4);animation-timing-function:cubic-bezier(.165,.84,.44,1)}
-  33.34%{transform:scale(1.2);animation-timing-function:cubic-bezier(.77,0,.175,1)}
-  100%{transform:scale(1)}
-}
-/* Type is held back until the aperture is ~60% open, then arrives in its own staged
-   order: mark, script line, headline by char, nav, sub, buttons, footer.
-   Timeline runs to ~4.0s; scroll is released at 3.2s (0.8s early, per the spec). */
-html.is-intro .hero-scrim{animation:laFadeTo1 1.6s ease 1.1s both}
-html.is-intro .hero-mark{opacity:0;animation:laMarkIn 1s var(--ease) 1.75s both}
-html.is-intro .hero-script{opacity:0;animation:laScriptIn 1s var(--ease) 2s both}
-html.is-intro .hero-sub,html.is-intro .hero-acts{opacity:0;animation:laRiseIn 1s var(--ease) both}
-html.is-intro .hero-sub{animation-delay:2.95s}
-html.is-intro .hero-acts{animation-delay:3.15s}
-html.is-intro .hero-foot{opacity:0;animation:laFadeTo1 .9s ease 3.4s both}
-html.is-intro .scroll-cue{opacity:0;animation:laFadeTo1 .9s ease 3.55s both}
-html.is-intro .hdr-in > *{opacity:0;animation:laNavIn .7s cubic-bezier(.33,0,0,1) both}
-html.is-intro .hdr-in > *:nth-child(1){animation-delay:2.45s}
-html.is-intro .hdr-in > *:nth-child(2){animation-delay:2.57s}
-html.is-intro .hdr-in > *:nth-child(3){animation-delay:2.69s}
-html.is-intro .hdr-in > *:nth-child(4){animation-delay:2.81s}
-/* chars are inline-block so they can be transformed, so each WORD must be wrapped in a
-   nowrap box or a line break can fall between any two letters (LÖGFRÆÐIÞJÓNUS / TA). */
-.w{display:inline-block;white-space:nowrap}
-.ch{display:inline-block}
-/* rise + settle, NOT an overflow mask: Icelandic Á/Ð/Þ accents clip against a mask edge
-   at display sizes. Transform + opacity only — no filter inside the h1's
-   drop-shadow + mix-blend-mode stack. */
-html.is-intro .hero h1 .ch{opacity:0;transform:translateY(.5em) scale(.97);
-  animation:laChar 1.25s cubic-bezier(.19,1,.22,1) both;
-  animation-delay:calc(2.2s + var(--i) * 15ms)}
-@keyframes laChar{to{opacity:1;transform:none}}
-@keyframes laFadeTo1{from{opacity:0}to{opacity:1}}
-@keyframes laMarkIn{from{opacity:0;transform:scale(.84)}to{opacity:1;transform:none}}
-@keyframes laScriptIn{from{opacity:0;transform:translateY(10px)}to{opacity:.62;transform:none}}
-@keyframes laRiseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes laNavIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
-.more{margin-top:clamp(30px,3.4vw,48px);padding-top:clamp(22px,2.6vw,32px);
-  border-top:1px solid rgba(27,32,39,.14)}
-.more p{color:var(--ink-2);font-size:15px;max-width:64ch}
-
-/* verð */
-.claim{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,3.6vw,60px);align-items:center}
-.claim .frame{aspect-ratio:4/3.4;border-radius:10px}
-.claim p{color:#AEB6BF;margin-top:14px;max-width:52ch}
-.facts{display:flex;gap:clamp(20px,3vw,42px);flex-wrap:wrap;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14)}
-.fact b{display:block;font-family:Boska,serif;font-size:clamp(24px,2.5vw,34px);font-weight:500;line-height:1;color:#fff}
-.fact span{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#7C8590;margin-top:6px;display:block}
-
-/* the one famous-Akranes moment */
-.band{position:relative;height:clamp(300px,42vw,560px);overflow:hidden}
-.band .frame{position:absolute;inset:0;height:100%}
-.band-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,17,22,.5),rgba(12,17,22,.24) 45%,rgba(12,17,22,.7))}
-.band-txt{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 var(--gut)}
-.band-txt p{font-family:Boska,serif;text-transform:uppercase;font-size:clamp(19px,2.3vw,32px);line-height:1.2;color:#fff;max-width:30ch;text-wrap:balance}
-.band-cap{position:absolute;right:var(--gut);bottom:16px;font-size:10.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:rgba(255,255,255,.55)}
-
-/* ferlið */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,34px)}
-.step{padding-top:18px;border-top:1px solid rgba(27,32,39,.2)}
-.step em{font-style:normal;font-size:12px;color:var(--bronze);font-weight:600;letter-spacing:.06em;display:block;margin-bottom:10px}
-.step p{color:var(--ink-2);font-size:15px;margin-top:6px}
-
-/* baldvin */
-.bio{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(28px,4.4vw,68px);align-items:center}
-.bio .frame{aspect-ratio:636/739;border-radius:10px;background:var(--night-3)}
-.bio h2{margin:10px 0 0}
-.bio p{color:#AEB6BF;margin-top:14px;max-width:56ch}
-.cv{margin-top:22px;border-top:1px solid rgba(255,255,255,.14)}
-.cv div{display:flex;gap:18px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.09);font-size:15px}
-.cv b{flex:none;width:66px;color:var(--bronze-lift);font-weight:600;font-size:13px;padding-top:2px}
-.cv span{color:#C4CBD2}
-
-/* FAQ */
-.faq{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(28px,4vw,64px)}
-.faq details{border-top:1px solid rgba(27,32,39,.16)}
-.faq summary{list-style:none;cursor:pointer;padding:18px 34px 18px 0;position:relative;
-  font-size:clamp(16px,1.3vw,18px);font-weight:500;color:var(--ink)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:11px;height:11px;
-  border-right:1.5px solid var(--bronze);border-bottom:1.5px solid var(--bronze);
-  transform:translateY(-70%) rotate(45deg);transition:transform .3s var(--ease)}
-.faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
-.faq summary:hover{color:var(--bronze)}
-.faq p{color:var(--ink-2);padding:0 34px 20px 0;font-size:15.5px;max-width:52ch}
-
-/* samband */
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,64px);align-items:start}
-.lines a,.lines div{display:block;padding:11px 0;border-bottom:1px solid rgba(27,32,39,.13)}
-.lines a{transition:color .2s var(--ease)}
-.lines a:hover{color:var(--bronze)}
-.lines span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:5px}
-.lines b{font-family:Boska,serif;font-size:clamp(20px,2.1vw,29px);font-weight:500;display:block}
-
-footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px;font-size:14px}
-.f-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
-.f-top a{display:inline-flex;align-items:center;min-height:24px}
-.f-top a:hover{color:#fff}
-.f-bot{padding-top:18px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#6C757F}
-.credit{font-size:11.5px;line-height:1.6;color:#5A636D;max-width:74ch;margin-top:10px}
-
-@media (max-width:1000px){
-  .nav,.hdr-cta{display:none}
-  .burger{display:block}
-  .svc,.steps,.faq{grid-template-columns:1fr}
-  .svc article + article{border-left:0;padding-left:0}
-  .svc article{padding-right:0!important}
-  .claim,.bio,.contact,.more{grid-template-columns:1fr}
-  .bio .frame{max-width:300px}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
-  .frame-in{inset:0!important;transform:none!important}
-  .js .mask > *{transform:none!important}
-  .drift{transform:none!important}
-  /* the Dieste original only guards its SCRUB and lets the 3s intro run anyway.
-     Gate the intro too: jump straight to the end state, never scroll-lock. */
-  html.is-locked,html.is-locked body{overflow:auto!important}
-  html.is-intro .hero .frame{animation:none!important;clip-path:none!important}
-  html.is-intro .hero .frame img,html.is-intro .hero h1 .ch,
-  html.is-intro .hdr-in > *,html.is-intro .hero-mark,html.is-intro .hero-script,
-  html.is-intro .hero-sub,html.is-intro .hero-acts,html.is-intro .hero-foot,
-  html.is-intro .hero-scrim{animation:none!important;opacity:1;transform:none!important}
-  html.is-intro .hero-script{opacity:.62}
-}
-</style>
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
@@ -430,7 +135,7 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
       <div class="drift" data-drift="12">
         <div class="mask"><p class="hero-script">Fastur punktur þegar mest á reynir</p></div>
         <div class="mask d1"><h1 id="h1">Lögfræðiþjónusta á Akranesi</h1></div>
-        <div class="mask d3"><p class="hero-sub">Lögfræðiþjónusta Akraness sinnir lögfræðiþjónustu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni — fasteignamálum, erfðamálum, samningum og innheimtu. Baldvin Már Kristjánsson héraðsdómslögmaður rekur stofuna.</p></div>
+        <div class="mask d3"><p class="hero-sub">Lögfræðiþjónusta Akraness sinnir fasteignamálum, erfðamálum, samningum og innheimtu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Baldvin Már Kristjánsson héraðsdómslögmaður rekur stofuna.</p></div>
       </div>
       <div class="hero-acts">
         <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
@@ -461,7 +166,7 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
         <div class="drift" data-drift="12">
           <div class="mask"><p class="eyebrow">Héraðsdómslögmaður</p></div>
           <div class="mask d1"><h2 id="h-bal">Baldvin Már Kristjánsson</h2></div>
-          <div class="mask d2"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness og heldur áfram að byggja á þeim grunni sem stofan hefur mótað frá 2011: lögfræðiþjónustu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni.</p></div>
+          <div class="mask d2"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness, sem hefur starfað á Akranesi frá 2011, og sinnir lögfræðiþjónustu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni.</p></div>
           <div class="mask d3"><p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram og eftir nám starfaði hann hjá Lögheimtunni, Arion banka og hjá NJORD Law Firm í Kaupmannahöfn.</p></div>
           <div class="cv">
             <div><b>2017</b><span>BA í lögfræði, Háskólinn í Reykjavík</span></div>
@@ -486,18 +191,21 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
       <div class="svc" id="svc">
         <article>
           <em>01</em>
-          <div class="mask"><h3>Fasteignamál</h3></div>
+          <div class="mask"><h3><a href="fasteignamal/">Fasteignamál</a></h3></div>
           <div class="mask d1"><p>Kaup, sala og samningagerð vegna fasteigna, fyrir einstaklinga jafnt sem fyrirtæki.</p></div>
+          <div class="mask d1"><a class="svc-more" href="fasteignamal/">Lesa meira</a></div>
         </article>
         <article>
           <em>02</em>
-          <div class="mask d1"><h3>Erfðaréttur og sifjaréttur</h3></div>
-          <div class="mask d2"><p>Skipti dánarbúa, erfðaskrár og fjölskyldumál, unnin af nærgætni og yfirsýn.</p></div>
+          <div class="mask d1"><h3><a href="erfdarettur/">Erfðaréttur og sifjaréttur</a></h3></div>
+          <div class="mask d2"><p>Skipti dánarbúa, erfðaskrár og fjölskyldumál fyrir einstaklinga og fjölskyldur.</p></div>
+          <div class="mask d2"><a class="svc-more" href="erfdarettur/">Lesa meira</a></div>
         </article>
         <article>
           <em>03</em>
-          <div class="mask d2"><h3>Samningaréttur og innheimta</h3></div>
+          <div class="mask d2"><h3><a href="samningar-og-innheimta/">Samningaréttur og innheimta</a></h3></div>
           <div class="mask d3"><p>Samningagerð, ágreiningsmál og innheimta krafna fyrir einstaklinga og fyrirtæki.</p></div>
+          <div class="mask d3"><a class="svc-more" href="samningar-og-innheimta/">Lesa meira</a></div>
         </article>
       </div>
 
@@ -554,7 +262,7 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
           <details><summary>Er fyrsta samtalið skuldbindandi?</summary>
             <p>Nei. Þú færð hreinskilið mat á stöðunni og ræður svo hvort lengra er haldið.</p></details>
           <details><summary>Hvers konar mál tekur stofan að sér?</summary>
-            <p>Fasteignamál, erfðamál, samningagerð, innheimtumál og almenn lögfræðiráðgjöf fyrir einstaklinga og fyrirtæki. Ef þitt mál fellur ekki hreint undir neinn af þessum flokkum skaltu samt hafa samband.</p></details>
+            <p>Fasteignamál, erfðamál, samningagerð, innheimtumál og almenn lögfræðiráðgjöf fyrir einstaklinga og fyrirtæki. Passar málið þitt ekki fullkomlega í einn af þessum flokkum, hafðu samt samband.</p></details>
         </div>
         <div>
           <details><summary>Þarf ég að koma til Akraness til að hitta þig?</summary>
@@ -562,7 +270,7 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
           <details><summary>Hvenær á ég að hafa samband?</summary>
             <p>Eins fljótt og hægt er. Því fyrr sem staðan er skoðuð, því betur er málið upplýst. Fyrsta samtalið skuldbindur þig ekki til neins.</p></details>
           <details><summary>Er stofan bara fyrir fólk á Akranesi?</summary>
-            <p>Nei. Stofan er á Akranesi og hefur þjónað Akurnesingum og nágrenni frá 2011, en mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu. Fyrstu samskipti fara oftast fram í síma eða tölvupósti.</p></details>
+            <p>Nei. Stofan er á Akranesi og hefur þjónað Akurnesingum og nágrenni frá 2011, en mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu.</p></details>
         </div>
       </div>
     </div>
@@ -572,17 +280,60 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
   <section class="sec light" id="samband" aria-labelledby="h-sam" style="padding-top:0">
     <div class="wrap">
       <div class="contact" style="padding-top:clamp(40px,4.4vw,72px);border-top:1px solid rgba(27,32,39,.14)">
-        <div class="drift" data-drift="12">
-          <div class="mask"><p class="eyebrow">Hafa samband</p></div>
-          <div class="mask d1"><h2 id="h-sam">Segðu okkur frá málinu þínu</h2></div>
-          <div class="mask d2"><p class="lead" style="margin-top:16px">Fyrsta samtalið kostar ekkert og skuldbindur þig ekki til neins.</p></div>
+        <div>
+          <div class="drift" data-drift="12">
+            <div class="mask"><p class="eyebrow">Hafa samband</p></div>
+            <div class="mask d1"><h2 id="h-sam">Segðu okkur frá málinu þínu</h2></div>
+            <div class="mask d2"><p class="lead" style="margin-top:16px">Fyrsta samtalið kostar ekkert og skuldbindur þig ekki til neins.</p></div>
+          </div>
+          <div class="lines">
+            <a href="tel:+3548578660"><span>Sími</span><b>857 8660</b></a>
+            <a href="mailto:baldvin@delikt.is"><span>Netfang</span><b>baldvin@delikt.is</b></a>
+            <div><span>Opnunartími</span><b>Virka daga 9 til 16</b></div>
+            <div><span>Heimilisfang</span><b>Garðabraut 33, Akranes</b></div>
+          </div>
         </div>
-        <div class="lines">
-          <a href="tel:+3548578660"><span>Sími</span><b>857 8660</b></a>
-          <a href="mailto:baldvin@delikt.is"><span>Netfang</span><b>baldvin@delikt.is</b></a>
-          <div><span>Opnunartími</span><b>Virka daga 9 til 16</b></div>
-          <div><span>Heimilisfang</span><b>Garðabraut 33, Akranes</b></div>
-        </div>
+
+        <form class="cform" id="cform" action="https://formsubmit.co/ajax/baldvin@delikt.is" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Ný fyrirspurn af logak.is">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="hp" aria-hidden="true">
+            <label for="cf-hp">Ekki fylla út þennan reit</label>
+            <input type="text" id="cf-hp" name="_honey" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="cf-name">Nafn</label>
+              <input type="text" id="cf-name" name="Nafn" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="cf-phone">Sími</label>
+              <input type="tel" id="cf-phone" name="Sími" autocomplete="tel">
+            </div>
+          </div>
+          <div class="field">
+            <label for="cf-email">Netfang</label>
+            <input type="email" id="cf-email" name="Netfang" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="cf-topic">Málaflokkur</label>
+            <select id="cf-topic" name="Málaflokkur">
+              <option>Fasteignamál</option>
+              <option>Erfðaréttur og sifjaréttur</option>
+              <option>Samningaréttur og innheimta</option>
+              <option>Annað</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="cf-msg">Skilaboð</label>
+            <textarea id="cf-msg" name="Skilaboð" required></textarea>
+          </div>
+
+          <button type="submit">Senda fyrirspurn</button>
+          <p class="cform-status" id="cform-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -608,172 +359,6 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script>
-(function(){
-  "use strict";
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce) document.documentElement.classList.add('js');
-
-  var lenis = null;
-  if (!reduce && window.Lenis) {
-    lenis = new Lenis({ duration: 1.1, smoothWheel: true, touchMultiplier: 1.5 });
-    (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
-  }
-
-  /* mask reveal, fires once */
-  var masks = [].slice.call(document.querySelectorAll('.mask'));
-  if (reduce || !('IntersectionObserver' in window)) {
-    masks.forEach(function(m){ m.classList.add('in'); });
-  } else {
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
-    masks.forEach(function(m){ io.observe(m); });
-    requestAnimationFrame(function(){
-      masks.forEach(function(m){
-        if (m.getBoundingClientRect().top < innerHeight * 0.92) m.classList.add('in');
-      });
-    });
-  }
-
-  /* Heklusýn drift — batch ALL reads, then ALL writes */
-  var drifters = [].slice.call(document.querySelectorAll('.frame-in, .drift'));
-  var hdr = document.getElementById('hdr'), lastScrolled = null;
-  /* Ceiling for a text block's drift, in px. A % translate resolves against the element's OWN
-     height, so a long column would otherwise swing many times further than a short one. Cap it:
-     26 on desktop is the largest swing the design actually authors, and 12 on the stacked mobile
-     layout stays comfortably inside the ~28px grid gap a drifting column has to clear. */
-  function driftCap(){ return innerWidth < 1000 ? 12 : 26; }
-
-  function loop(){
-    requestAnimationFrame(loop);
-    if (reduce || !drifters.length) return;
-    var vh = window.innerHeight, cap = driftCap(), i, rects = new Array(drifters.length);
-
-    for (i = 0; i < drifters.length; i++){                       // READS
-      var el = drifters[i];
-      rects[i] = (el.classList.contains('frame-in') ? el.parentElement : el).getBoundingClientRect();
-    }
-    var sy = window.scrollY;
-
-    for (i = 0; i < drifters.length; i++){                       // WRITES
-      var dEl = drifters[i], r = rects[i];
-      if (r.bottom < -200 || r.top > vh + 200) continue;
-      var p = (r.top + r.height/2 - vh/2) / (vh/2 + r.height/2);
-      if (p < -1) p = -1; else if (p > 1) p = 1;
-      var d = parseFloat(dEl.dataset.drift) || 9;
-      if (dEl.classList.contains('frame-in')){
-        /* An image inside an overflow:hidden frame. % of its own box is exactly what we want here
-           (the drift scales with the crop) and it has nothing in flow to collide with. */
-        dEl.style.transform = 'translate3d(0,' + (-p * d).toFixed(3) + '%,0)';
-      } else {
-        /* A text block in normal flow. A % translate is a % of the element's OWN height, so a long
-           stacked column drifts much further than the short heading above it and shears into it —
-           at 375px the #baldvin body swung 62px against the name's 17px and closed a 114px gap to
-           69px mid-scroll. Resolve the % against the height once, then cap it in px so short and
-           long blocks drift by the same order of magnitude. */
-        var t = -p * d / 100 * r.height;
-        if (t > cap) t = cap; else if (t < -cap) t = -cap;
-        dEl.style.transform = 'translate3d(0,' + t.toFixed(2) + 'px,0)';
-      }
-    }
-
-    var scrolled = sy > 40;
-    if (scrolled !== lastScrolled){ hdr.classList.toggle('scrolled', scrolled); lastScrolled = scrolled; }
-  }
-  requestAnimationFrame(loop);
-
-  /* mobile menu */
-  var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
-  function setMenu(open){
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    burger.setAttribute('aria-label', open ? 'Loka valmynd' : 'Opna valmynd');
-    mnav.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-    if (lenis) { open ? lenis.stop() : lenis.start(); }
-  }
-  burger.addEventListener('click', function(){ setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
-  addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true'){ setMenu(false); burger.focus(); }
-  });
-  mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
-
-  /* ---------- aperture intro ----------
-     Gate on real image DECODE, never a timer. Once per session; ?reveal forces it.
-     Scroll is released 0.8s before the timeline ends so the last beat plays under
-     the user's first scroll, with no dead pause. */
-  (function(){
-    var force = /[?&]reveal\b/.test(location.search);
-    if (reduce) return;
-    if (!force && sessionStorage.getItem('la-intro') === '1') return;
-
-    var root = document.documentElement;
-    var hero = document.querySelector('.hero');
-    var h1 = document.getElementById('h1');
-    var heroImg = hero && hero.querySelector('.frame img');
-    if (!hero || !h1 || !heroImg) return;
-
-    // split the h1 into chars WITHOUT destroying its accessible name or textContent
-    var text = h1.textContent;
-    h1.setAttribute('aria-label', text);
-    var frag = document.createDocumentFragment(), n = 0;
-    var words = text.split(' ');
-    words.forEach(function(word, wi){
-      var w = document.createElement('span');
-      w.className = 'w'; w.setAttribute('aria-hidden', 'true');
-      word.split('').forEach(function(c){
-        var s = document.createElement('span');
-        s.className = 'ch'; s.textContent = c;
-        s.style.setProperty('--i', n++);
-        w.appendChild(s);
-      });
-      frag.appendChild(w);
-      // a REAL space text node between words: keeps textContent correct and gives
-      // the line-breaker somewhere legal to break
-      if (wi < words.length - 1) frag.appendChild(document.createTextNode(' '));
-    });
-    h1.textContent = '';
-    h1.appendChild(frag);
-
-    var started = false;
-    function start(){
-      if (started) return; started = true;
-      sessionStorage.setItem('la-intro', '1');
-      // hero copy is driven by the intro, so retire its scroll-mask reveal
-      hero.querySelectorAll('.mask').forEach(function(m){ m.classList.add('in'); });
-      root.classList.add('is-intro');
-      root.classList.add('is-locked');
-      if (lenis) lenis.stop();
-      setTimeout(function(){                       // 4000 - 800: last beat plays under the first scroll
-        if (lenis) lenis.start();
-        root.classList.remove('is-locked');
-      }, 3200);
-      setTimeout(function(){                       // timeline over; base styles already ARE the end state
-        root.classList.remove('is-intro');
-      }, 4400);
-    }
-    // decode gate, with a ceiling so a slow image can never hang the page
-    var done = false;
-    var go = function(){ if (!done){ done = true; start(); } };
-    setTimeout(go, 2500);
-    if (heroImg.decode) heroImg.decode().then(go).catch(go);
-    else if (heroImg.complete) go();
-    else heroImg.addEventListener('load', go), heroImg.addEventListener('error', go);
-  })();
-
-  /* anchors */
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      var id = a.getAttribute('href'); if (id.length < 2) return;
-      var el = document.querySelector(id); if (!el) return;
-      e.preventDefault();
-      requestAnimationFrame(function(){
-        if (lenis) lenis.scrollTo(el, { offset: -64 });
-        else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
-      });
-    });
-  });
-})();
-</script>
+<script src="js/site.js"></script>
 </body>
 </html>
