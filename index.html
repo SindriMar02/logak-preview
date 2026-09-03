@@ -203,13 +203,25 @@ p{font-size:16px;line-height:1.5}
 .btn.solid:hover{background:var(--bronze-lift);border-color:var(--bronze-lift);color:#fff}
 .hero-foot{position:absolute;left:0;right:0;bottom:22px;z-index:3;display:flex;justify-content:space-between;
   align-items:center;gap:16px;padding:0 var(--gut);max-width:var(--maxw);margin-inline:auto;
-  font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-/* points at #baldvin, the very next section — his photo lives there, not on the landing
-   screen itself, so this is the only cue that there's more right below the fold. */
-.scroll-cue{position:absolute;left:50%;bottom:66px;z-index:3;transform:translateX(-50%);
-  color:rgba(255,255,255,.72);transition:color .2s var(--ease);animation:scrollHint 2s ease-in-out infinite}
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);flex-wrap:wrap}
+/* who you're talking to, right on the landing screen — his photo, name and title, sized to
+   what the 636x739 source actually supports (degrades above ~540px display width, so 88px
+   stays sharp) — plus the down-cue right beside it pointing at the fuller #baldvin section. */
+.hero-id-wrap{display:flex;align-items:center;gap:18px}
+.hero-id{display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none}
+.hero-id img{width:clamp(56px,9vw,88px);height:clamp(56px,9vw,88px);border-radius:50%;
+  object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.32);
+  transition:border-color .2s var(--ease)}
+.hero-id:hover img{border-color:rgba(255,255,255,.65)}
+.hero-id span{display:flex;flex-direction:column;gap:3px;text-transform:none;letter-spacing:0}
+.hero-id b{font-family:Boska,serif;font-weight:500;font-size:clamp(15px,1.6vw,18px);
+  color:#fff;line-height:1.2}
+.hero-id i{font-style:normal;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.66)}
+.scroll-cue{flex:none;color:rgba(255,255,255,.75);transition:color .2s var(--ease);
+  animation:scrollHint 2s ease-in-out infinite}
 .scroll-cue:hover{color:#fff}
-@keyframes scrollHint{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+@keyframes scrollHint{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
 
 /* sections */
 .sec{padding:clamp(64px,7.2vw,112px) 0;position:relative;overflow:hidden}
@@ -426,12 +438,16 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
       </div>
     </div>
 
-    <a class="scroll-cue" href="#baldvin" aria-label="Skruna niður til að sjá Baldvin">
-      <svg viewBox="0 0 20 30" width="20" height="30" aria-hidden="true"><path d="M2 10 L10 18 L18 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-
     <div class="hero-foot">
-      <span>Baldvin Már Kristjánsson, hdl.</span>
+      <div class="hero-id-wrap">
+        <a class="hero-id" href="#baldvin">
+          <img src="img/baldvin.webp" alt="" width="88" height="88" loading="lazy" decoding="async">
+          <span><b>Baldvin Már Kristjánsson</b><i>Héraðsdómslögmaður</i></span>
+        </a>
+        <a class="scroll-cue" href="#baldvin" aria-label="Skruna niður til að sjá Baldvin">
+          <svg viewBox="0 0 20 30" width="20" height="30" aria-hidden="true"><path d="M2 10 L10 18 L18 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
       <span>Akranes · Vesturland</span>
     </div>
   </section>
