@@ -146,11 +146,14 @@ p{font-size:16px;line-height:1.5}
 .sec-head .lead{margin-top:16px}
 
 /* þjónusta — typographic, no photos: the page is about the firm, not the scenery */
+/* Generalized for any multiple of 3, not just exactly 3: the homepage grid grew from 3
+   cards to 6 (two rows) once the site broadened past three practice areas, and subpages
+   reuse this same grid at 3. :nth-child(3n+1)/(3n) key off column position, not a fixed
+   item count, so both sizes render correctly from one ruleset. */
 .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(27,32,39,.16)}
 .svc article{padding:26px 0;border-bottom:1px solid rgba(27,32,39,.11)}
-.svc article + article{border-left:1px solid rgba(27,32,39,.11);padding-left:clamp(18px,2.4vw,34px)}
-.svc article:nth-child(1){padding-right:clamp(18px,2.4vw,34px)}
-.svc article:nth-child(2){padding-right:clamp(18px,2.4vw,34px)}
+.svc article:not(:nth-child(3n+1)){border-left:1px solid rgba(27,32,39,.11);padding-left:clamp(18px,2.4vw,34px)}
+.svc article:not(:nth-child(3n)){padding-right:clamp(18px,2.4vw,34px)}
 .svc em{font-style:normal;display:block;font-family:Boska,serif;font-size:13px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--bronze);margin-bottom:12px}
 .svc h3{font-size:clamp(19px,1.6vw,23px);font-family:Boska,serif;text-transform:uppercase;font-weight:500;line-height:1.15}
@@ -305,8 +308,7 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
   .nav,.hdr-cta{display:none}
   .burger{display:block}
   .svc,.steps,.faq{grid-template-columns:1fr}
-  .svc article + article{border-left:0;padding-left:0}
-  .svc article{padding-right:0!important}
+  .svc article{border-left:0!important;padding-left:0!important;padding-right:0!important}
   .claim,.bio,.contact,.more{grid-template-columns:1fr}
   .bio .frame{max-width:300px}
   .cform .row2{grid-template-columns:1fr}
