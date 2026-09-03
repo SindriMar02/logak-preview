@@ -204,15 +204,12 @@ p{font-size:16px;line-height:1.5}
 .hero-foot{position:absolute;left:0;right:0;bottom:22px;z-index:3;display:flex;justify-content:space-between;
   align-items:center;gap:16px;padding:0 var(--gut);max-width:var(--maxw);margin-inline:auto;
   font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-/* the small "who you're talking to" chip: his photo stays legible without a full-bleed
-   portrait — the source maxes at 636x739 and degrades above ~540px display width. */
-.hero-id{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
-.hero-id img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;
-  border:1px solid rgba(255,255,255,.3);transition:border-color .2s var(--ease)}
-.hero-id:hover img{border-color:rgba(255,255,255,.6)}
-.hero-id span{display:flex;flex-direction:column;gap:2px;text-transform:none;letter-spacing:0}
-.hero-id b{font-family:Boska,serif;font-weight:500;font-size:13.5px;color:#fff}
-.hero-id i{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+/* points at #baldvin, the very next section — his photo lives there, not on the landing
+   screen itself, so this is the only cue that there's more right below the fold. */
+.scroll-cue{position:absolute;left:50%;bottom:66px;z-index:3;transform:translateX(-50%);
+  color:rgba(255,255,255,.72);transition:color .2s var(--ease);animation:scrollHint 2s ease-in-out infinite}
+.scroll-cue:hover{color:#fff}
+@keyframes scrollHint{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
 
 /* sections */
 .sec{padding:clamp(64px,7.2vw,112px) 0;position:relative;overflow:hidden}
@@ -263,6 +260,7 @@ html.is-intro .hero-sub,html.is-intro .hero-acts{opacity:0;animation:laRiseIn 1s
 html.is-intro .hero-sub{animation-delay:2.95s}
 html.is-intro .hero-acts{animation-delay:3.15s}
 html.is-intro .hero-foot{opacity:0;animation:laFadeTo1 .9s ease 3.4s both}
+html.is-intro .scroll-cue{opacity:0;animation:laFadeTo1 .9s ease 3.55s both}
 html.is-intro .hdr-in > *{opacity:0;animation:laNavIn .7s cubic-bezier(.33,0,0,1) both}
 html.is-intro .hdr-in > *:nth-child(1){animation-delay:2.45s}
 html.is-intro .hdr-in > *:nth-child(2){animation-delay:2.57s}
@@ -386,9 +384,9 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
       <span class="brand-txt"><b>Lögfræðiþjónusta</b><span>Akraness</span></span>
     </a>
     <nav class="nav" aria-label="Aðalvalmynd">
+      <a href="#baldvin">Baldvin</a>
       <a href="#thjonusta">Þjónusta</a>
       <a href="#ferlid">Ferlið</a>
-      <a href="#baldvin">Baldvin</a>
       <a href="#spurningar">Spurningar</a>
     </nav>
     <a class="hdr-cta" href="#samband">Hafa samband</a>
@@ -397,9 +395,9 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
 </header>
 
 <nav class="mnav" id="mnav" aria-label="Valmynd">
+  <a href="#baldvin">Baldvin</a>
   <a href="#thjonusta">Þjónusta</a>
   <a href="#ferlid">Ferlið</a>
-  <a href="#baldvin">Baldvin</a>
   <a href="#spurningar">Spurningar</a>
   <a href="#samband">Hafa samband</a>
   <div class="mnav-foot"><span>Hringdu beint</span><b>857 8660</b><span>Virka daga 9:00 til 16:00</span></div>
@@ -428,12 +426,35 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
       </div>
     </div>
 
+    <a class="scroll-cue" href="#baldvin" aria-label="Skruna niður til að sjá Baldvin">
+      <svg viewBox="0 0 20 30" width="20" height="30" aria-hidden="true"><path d="M2 10 L10 18 L18 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
     <div class="hero-foot">
-      <a class="hero-id" href="#baldvin">
-        <img src="img/baldvin.webp" alt="" width="72" height="72" loading="lazy" decoding="async">
-        <span><b>Baldvin Már Kristjánsson</b><i>Héraðsdómslögmaður</i></span>
-      </a>
+      <span>Baldvin Már Kristjánsson, hdl.</span>
       <span>Akranes · Vesturland</span>
+    </div>
+  </section>
+
+  <!-- 5 ===== baldvin ===== -->
+  <section class="sec dark on-dark" id="baldvin" aria-labelledby="h-bal">
+    <div class="wrap">
+      <div class="bio">
+        <div class="frame"><div class="frame-in" data-drift="7">
+          <img src="img/baldvin.webp" alt="Baldvin Már Kristjánsson héraðsdómslögmaður" width="636" height="739" loading="lazy" decoding="async"></div></div>
+        <div class="drift" data-drift="12">
+          <div class="mask"><p class="eyebrow">Héraðsdómslögmaður</p></div>
+          <div class="mask d1"><h2 id="h-bal">Baldvin Már Kristjánsson</h2></div>
+          <div class="mask d2"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness og heldur áfram að byggja á þeim grunni sem stofan hefur mótað frá 2011: lögfræðiþjónustu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni.</p></div>
+          <div class="mask d3"><p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram og eftir nám starfaði hann hjá Lögheimtunni, Arion banka og hjá NJORD Law Firm í Kaupmannahöfn.</p></div>
+          <div class="cv">
+            <div><b>2017</b><span>BA í lögfræði, Háskólinn í Reykjavík</span></div>
+            <div><b>2019</b><span>Meistaranám í lögfræði, Háskólinn í Lundi</span></div>
+            <div><b>Reynsla</b><span>Lögheimtan · Arion banki · NJORD Law Firm, Kaupmannahöfn</span></div>
+            <div><b>Svið</b><span>Fasteignamál, erfðaréttur, samningaréttur og innheimta</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -470,7 +491,6 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
     </div>
   </section>
 
-
   <!-- 4 ===== ferlið ===== -->
   <section class="sec light" id="ferlid" aria-labelledby="h-fer">
     <div class="wrap">
@@ -500,28 +520,6 @@ footer{background:var(--night);color:#8C959F;padding:clamp(38px,4vw,58px) 0 26px
     <div class="band-scrim" aria-hidden="true"></div>
     <div class="band-txt"><div class="mask"><p>Lögmannsstofa með rætur á Akranesi síðan 2011</p></div></div>
     <span class="band-cap">Akranesvitar, Breiðin</span>
-  </section>
-
-  <!-- 5 ===== baldvin ===== -->
-  <section class="sec dark on-dark" id="baldvin" aria-labelledby="h-bal">
-    <div class="wrap">
-      <div class="bio">
-        <div class="frame"><div class="frame-in" data-drift="7">
-          <img src="img/baldvin.webp" alt="Baldvin Már Kristjánsson héraðsdómslögmaður" width="636" height="739" loading="lazy" decoding="async"></div></div>
-        <div class="drift" data-drift="12">
-          <div class="mask"><p class="eyebrow">Héraðsdómslögmaður</p></div>
-          <div class="mask d1"><h2 id="h-bal">Baldvin Már Kristjánsson</h2></div>
-          <div class="mask d2"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness og heldur áfram að byggja á þeim grunni sem stofan hefur mótað frá 2011: lögfræðiþjónustu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni.</p></div>
-          <div class="mask d3"><p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram og eftir nám starfaði hann hjá Lögheimtunni, Arion banka og hjá NJORD Law Firm í Kaupmannahöfn.</p></div>
-          <div class="cv">
-            <div><b>2017</b><span>BA í lögfræði, Háskólinn í Reykjavík</span></div>
-            <div><b>2019</b><span>Meistaranám í lögfræði, Háskólinn í Lundi</span></div>
-            <div><b>Reynsla</b><span>Lögheimtan · Arion banki · NJORD Law Firm, Kaupmannahöfn</span></div>
-            <div><b>Svið</b><span>Fasteignamál, erfðaréttur, samningaréttur og innheimta</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- 6 ===== spurningar (FAQ, matches the FAQPage JSON-LD above) ===== -->
