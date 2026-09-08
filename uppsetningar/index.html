@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lögák — uppsetningar á forsíðu</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../css/site.css">
+<style>
+/* Scratch comparison page. Four ways to structure the landing screen, all using the real
+   Akrafjall photo, the real portrait, and the real tokens from css/site.css. Deliberately
+   NOT reusing .hero so nothing here leaks into the live build. Delete once one is chosen. */
+body{background:var(--night);color:#fff}
+/* Each example is exactly one viewport, so snapping start-aligned puts the fixed header
+   over the section top exactly as it sits on the real site. Desktop only: below 900px the
+   sections grow past the viewport and mandatory snapping would fight the user. */
+@media (min-width:901px){
+  html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .opt{scroll-snap-align:start;scroll-snap-stop:always}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.opt{position:relative;height:100svh;min-height:620px;overflow:hidden;isolation:isolate}
+.opt .bg{position:absolute;inset:0;z-index:0}
+.opt .bg img{width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+.opt .veil{position:absolute;inset:0;z-index:1;pointer-events:none}
+/* Header wash. The header is white-on-transparent by design, and this photograph is bright
+   blue sky exactly where it sits, so without this the brand reads 2.0:1. The original build
+   carried the same protection as the .76 top stop of its hero scrim; the per-variant veils
+   below are bottom/side weighted and cannot do this job. */
+.opt::before{content:"";position:absolute;inset:0 0 auto 0;height:26%;z-index:1;
+  pointer-events:none;background:linear-gradient(180deg,rgba(6,10,14,.80) 0%,
+    rgba(6,10,14,.46) 42%,rgba(6,10,14,.16) 74%,transparent 100%)}
+.opt .wrap2{position:relative;z-index:2;height:100%;max-width:var(--maxw);
+  margin-inline:auto;padding:0 var(--gut);display:flex}
+.tag{position:absolute;top:74px;left:0;z-index:6;background:var(--bronze);color:#fff;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px}
+.tag b{font-weight:600}
+.tag i{font-style:normal;opacity:.85;text-transform:none;letter-spacing:.02em;margin-left:8px}
+
+/* shared pieces */
+.kicker{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
+  font-size:clamp(18px,1.6vw,24px);color:#fff;opacity:.72;margin-bottom:10px}
+.head{font-family:Boska,serif;font-weight:500;text-transform:uppercase;line-height:1.04;
+  color:#F6F2EC;filter:drop-shadow(0 2px 26px rgba(6,9,12,.7))}
+.body{color:#DCE1E7;font-size:clamp(15.5px,1.15vw,17px);line-height:1.55;max-width:44ch}
+.acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+
+/* the floating namecard */
+.card{background:rgba(14,19,25,.86);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.card .ph{aspect-ratio:636/739;overflow:hidden;background:var(--night-3)}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .id{padding:18px 20px 20px;border-top:1px solid rgba(255,255,255,.09)}
+.card .nm{font-family:Boska,serif;font-weight:500;font-size:clamp(18px,1.55vw,22px);
+  line-height:1.15;color:#fff}
+.card .rl{margin-top:6px;font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--bronze-lift)}
+
+/* ---------- A: card left, copy right. Mountain reads between and above them. ---------- */
+.optA .veil{background:
+  linear-gradient(270deg,rgba(6,10,14,.74) 0%,rgba(6,10,14,.46) 38%,transparent 62%),
+  linear-gradient(90deg,rgba(6,10,14,.70) 0%,rgba(6,10,14,.24) 30%,transparent 46%),
+  linear-gradient(0deg,rgba(6,10,14,.55) 0%,transparent 42%)}
+.optA .wrap2{align-items:center;justify-content:space-between;gap:clamp(28px,5vw,80px)}
+.optA .card{width:min(34%,340px);flex:none}
+.optA .copy{max-width:47ch}
+.optA .head{font-size:clamp(30px,3.5vw,52px)}
+
+/* ---------- B: editorial offset. Copy left, card dropped low right. ---------- */
+.optB .veil{background:
+  linear-gradient(90deg,rgba(6,10,14,.88) 0%,rgba(6,10,14,.72) 34%,
+    rgba(6,10,14,.34) 56%,transparent 74%),
+  linear-gradient(0deg,rgba(6,10,14,.52) 0%,transparent 38%)}
+.optB .wrap2{align-items:center;justify-content:space-between;gap:clamp(24px,4vw,64px)}
+.optB .copy{max-width:52ch;padding-bottom:clamp(0px,6vh,60px)}
+.optB .head{font-size:clamp(32px,4.4vw,66px)}
+.optB .card{width:min(28%,286px);flex:none;align-self:center}
+.optB .card .ph{aspect-ratio:5/6}
+
+/* ---------- C: cinematic centre. Copy centred, card as a corner signature. ---------- */
+.optC .veil{background:
+  radial-gradient(74% 52% at 50% 46%,rgba(6,10,14,.80) 0%,rgba(6,10,14,.44) 62%,transparent 100%),
+  linear-gradient(0deg,rgba(6,10,14,.72) 0%,transparent 44%)}
+.optC .wrap2{align-items:center;justify-content:center;text-align:center}
+.optC .copy{max-width:62ch}
+.optC .body{margin-inline:auto}
+.optC .acts{justify-content:center}
+.optC .head{font-size:clamp(32px,4.6vw,70px)}
+.optC .card{position:absolute;left:var(--gut);bottom:clamp(24px,5vh,52px);
+  width:min(24%,222px);z-index:3}
+.optC .card .id{padding:14px 16px 15px}
+
+/* ---------- D: base line. Mountain almost untouched, everything on one bottom row. ---------- */
+.optD .veil{background:linear-gradient(0deg,rgba(6,10,14,.94) 0%,rgba(6,10,14,.86) 26%,
+  rgba(6,10,14,.52) 42%,rgba(6,10,14,.12) 58%,transparent 72%)}
+.optD .wrap2{align-items:flex-end;padding-bottom:clamp(36px,6vh,64px);
+  gap:clamp(22px,3.4vw,48px)}
+.optD .card{width:min(26%,248px);flex:none}
+.optD .copy{flex:1;padding-bottom:6px}
+.optD .head{font-size:clamp(28px,3.2vw,46px);max-width:17ch}
+.optD .body{max-width:52ch}
+.optD .card .ph{aspect-ratio:5/6}
+
+@media (max-width:900px){
+  .opt{height:auto;min-height:100svh}
+  .opt .wrap2{flex-direction:column;justify-content:center;align-items:flex-start;
+    gap:26px;padding-top:104px;padding-bottom:44px;text-align:left}
+  .opt .veil{background:linear-gradient(180deg,rgba(6,10,14,.55) 0%,rgba(6,10,14,.68) 45%,
+    rgba(6,10,14,.86) 100%)!important}
+  .opt .card{width:min(72%,260px)!important;align-self:flex-start!important;
+    position:static!important;margin:0!important;order:-1}
+  .optC .wrap2{text-align:left}
+  .optC .body{margin-inline:0}
+  .optC .acts{justify-content:flex-start}
+  .opt .copy{max-width:none}
+}
+</style>
+</head>
+<body>
+
+<!-- the real header, lifted verbatim from index.html so placement is judged in context.
+     No JS here, so it never gains .scrolled: this is the transparent worst case. -->
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="#top" aria-label="Lögfræðiþjónusta Akraness, heim">
+      <img src="../img/la-mark.png" alt="Merki Lögfræðiþjónustu Akraness" width="38" height="38">
+      <span class="brand-txt"><b>Lögfræðiþjónusta</b><span>Akraness</span></span>
+    </a>
+    <nav class="nav" aria-label="Aðalvalmynd">
+      <a href="#">Baldvin</a><a href="#">Þjónusta</a><a href="#">Ferlið</a><a href="#">Spurningar</a>
+    </nav>
+    <a class="hdr-cta" href="#">Hafa samband</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav" aria-label="Opna valmynd"><i></i><i></i></button>
+  </div>
+</header>
+
+<section class="opt optA">
+  <div class="tag"><b>A</b><i>Nafnspjald vinstra megin, texti hægra megin</i></div>
+  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" fetchpriority="high"></div>
+  <div class="veil"></div>
+  <div class="wrap2">
+    <article class="card">
+      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739"></div>
+      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+    </article>
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="opt optB">
+  <div class="tag"><b>B</b><i>Ritstjórnarleg vinstristilling, spjald neðarlega hægra megin</i></div>
+  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></div>
+  <div class="veil"></div>
+  <div class="wrap2">
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
+    </div>
+    <article class="card">
+      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="opt optC">
+  <div class="tag"><b>C</b><i>Miðjusett, spjaldið sem undirskrift í horni</i></div>
+  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></div>
+  <div class="veil"></div>
+  <article class="card">
+    <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+    <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+  </article>
+  <div class="wrap2">
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="opt optD">
+  <div class="tag"><b>D</b><i>Fjallið ósnert, allt á einni línu neðst</i></div>
+  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></div>
+  <div class="veil"></div>
+  <div class="wrap2">
+    <article class="card">
+      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+    </article>
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
