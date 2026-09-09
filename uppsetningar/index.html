@@ -7,373 +7,251 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="../css/site.css">
 <style>
-/* Scratch comparison page. Four ways to structure the landing screen, all using the real
-   Akrafjall photo, the real portrait, and the real tokens from css/site.css. Deliberately
-   NOT reusing .hero so nothing here leaks into the live build. Delete once one is chosen. */
-body{background:var(--night);color:#fff}
-/* Each example is exactly one viewport, so snapping start-aligned puts the fixed header
-   over the section top exactly as it sits on the real site. Desktop only: below 900px the
-   sections grow past the viewport and mandatory snapping would fight the user. */
+/* ==========================================================================================
+   Scratch comparison page. Five ways to structure the landing screen, all built on the same
+   watercolour of Akrafjall. Delete once one is chosen.
+
+   Rebuilt 2026-09-09 from the painting outwards, on Sindri's instruction: "I want it to be
+   on every example, restructure the layouts from this painting."
+
+   The painting changes the architecture, not just the picture. Four of these options used to
+   be exercises in darkening a photograph until white type would survive on it — every scrim,
+   every gradient, every measured alpha existed for that one reason. A watercolour brings its
+   own paper, so the page can simply BE paper: ink on the painting's sky measures about 12:1
+   with no scrim of any kind. All of that machinery is gone, and what is left is a comparison
+   of five structures rather than five ways to tint a photograph.
+
+   The palette follows from the same fact. Paper and ink, bronze for the accents — and the
+   bronze micro-caps that failed AA on every photograph (1.7:1) clear it comfortably here at
+   about 5:1, because they finally have a light ground to sit on. E stays on the night ground
+   as the counter-argument, so the palette is one of the things being judged too.
+   ========================================================================================== */
+:root{--paper:#EFF2F5;--paper-2:#E3E8ED}
+body{background:var(--paper);color:var(--ink)}
+
+/* Each example is exactly one viewport, so snapping start-aligned puts the fixed header over
+   the section top exactly as it sits on the real site. Desktop only: below 900px the sections
+   grow past the viewport and mandatory snapping would fight the user. */
 @media (min-width:901px){
   html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
   .opt{scroll-snap-align:start;scroll-snap-stop:always}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-.opt{position:relative;height:100svh;min-height:620px;overflow:hidden;isolation:isolate}
-.opt .bg{position:absolute;inset:0;z-index:0}
-.opt .bg img{width:100%;height:100%;object-fit:cover;object-position:58% 50%}
-.opt .veil{position:absolute;inset:0;z-index:1;pointer-events:none}
-/* Header wash. The header is white-on-transparent by design, and this photograph is bright
-   blue sky exactly where it sits, so without this the brand reads 2.0:1. The original build
-   carried the same protection as the .76 top stop of its hero scrim; the per-variant veils
-   below are bottom/side weighted and cannot do this job. */
-.opt::before{content:"";position:absolute;inset:0 0 auto 0;height:26%;z-index:1;
-  pointer-events:none;background:linear-gradient(180deg,rgba(6,10,14,.80) 0%,
-    rgba(6,10,14,.46) 42%,rgba(6,10,14,.16) 74%,transparent 100%)}
-.opt .wrap2{position:relative;z-index:2;height:100%;max-width:var(--maxw);
+
+/* ---------- the header, which now has to survive both grounds ----------------------------
+   The real header is white-on-transparent, which was fine when every hero was a dark
+   photograph. Four of these five are light, so it flips to ink over them. This is not a trick
+   for the comparison page: if the painting direction is chosen, the live header needs exactly
+   this, because a white wordmark on watercolour paper is invisible. */
+html.hdr-ink .brand-txt b{color:var(--ink)}
+html.hdr-ink .brand-txt span{color:var(--bronze)}
+html.hdr-ink .nav a{color:rgba(27,32,39,.76)}
+html.hdr-ink .nav a:hover{color:var(--ink)}
+html.hdr-ink .hdr-cta{color:var(--ink);border-color:rgba(27,32,39,.32)}
+html.hdr-ink .hdr-cta:hover{background:rgba(27,32,39,.07);border-color:rgba(27,32,39,.5)}
+html.hdr-ink .burger i{background:var(--ink)}
+/* the menu overlay is night in both directions, so the burger goes back to white while it is
+   open or it becomes an invisible X on its own overlay */
+html.mnav-open .burger i{background:#fff}
+
+.opt{position:relative;height:100svh;min-height:620px;overflow:hidden;isolation:isolate;
+  background:var(--paper)}
+.art{position:absolute;inset:0;z-index:0;overflow:hidden}
+.art img{width:100%;height:100%;object-fit:cover;display:block}
+.wrap2{position:relative;z-index:2;height:100%;max-width:var(--maxw);
   margin-inline:auto;padding:0 var(--gut);display:flex}
 .tag{position:absolute;top:74px;left:0;z-index:6;background:var(--bronze);color:#fff;
   font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:7px 14px}
 .tag b{font-weight:600}
 .tag i{font-style:normal;opacity:.85;text-transform:none;letter-spacing:.02em;margin-left:8px}
 
-/* shared pieces */
+/* ---------- shared type, set for paper ---------- */
 .kicker{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
-  font-size:clamp(18px,1.6vw,24px);color:#fff;opacity:.72;margin-bottom:10px}
+  font-size:clamp(18px,1.6vw,24px);color:var(--ink-2);margin-bottom:10px}
 .head{font-family:Boska,serif;font-weight:500;text-transform:uppercase;line-height:1.04;
-  color:#F6F2EC;filter:drop-shadow(0 2px 26px rgba(6,9,12,.7))}
-.body{color:#DCE1E7;font-size:clamp(15.5px,1.15vw,17px);line-height:1.55;max-width:44ch}
+  color:var(--ink)}
+.body{color:var(--ink-2);font-size:clamp(15.5px,1.15vw,17px);line-height:1.55;max-width:44ch}
 .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+/* site.css styles .btn white-on-transparent for a dark hero; on paper it has to be ink */
+.opt .btn{font-size:14.5px;font-weight:500;padding:13px 26px;color:var(--ink);
+  border:1px solid rgba(27,32,39,.28);
+  transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
+.opt .btn:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.opt .btn.solid{background:var(--bronze);border-color:var(--bronze);color:#fff}
+.opt .btn.solid:hover{background:var(--bronze-lift);border-color:var(--bronze-lift);color:#fff}
 
-/* the floating namecard */
-.card{background:rgba(14,19,25,.86);backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.55)}
-.card .ph{aspect-ratio:636/739;overflow:hidden;background:var(--night-3)}
-.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
-.card .id{padding:18px 20px 20px;border-top:1px solid rgba(255,255,255,.09)}
-.card .nm{font-family:Boska,serif;font-weight:500;font-size:clamp(18px,1.55vw,22px);
-  line-height:1.15;color:#fff}
-.card .rl{margin-top:6px;font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;
-  color:var(--bronze-lift)}
+/* ---------- the identity, a row rather than a boxed card ----------
+   No box anywhere in this rebuild. On paper a card would be a panel on a panel, and over the
+   painting it would be the same pasted-on object the photograph versions kept producing. */
+.card{display:flex;align-items:center;gap:14px}
+.card .ph{flex:none;overflow:hidden;background:var(--paper-2)}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block;object-position:50% 18%}
+.card .nm{font-family:Boska,serif;font-weight:500;line-height:1.15;color:var(--ink);
+  font-size:clamp(16px,1.4vw,20px)}
+.card .rl{margin-top:4px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--bronze)}
 
-/* ---------- A: card left, copy right. Mountain reads between and above them. ---------- */
-.optA .veil{background:
-  linear-gradient(270deg,rgba(6,10,14,.74) 0%,rgba(6,10,14,.46) 38%,transparent 62%),
-  linear-gradient(90deg,rgba(6,10,14,.70) 0%,rgba(6,10,14,.24) 30%,transparent 46%),
-  linear-gradient(0deg,rgba(6,10,14,.55) 0%,transparent 42%)}
-.optA .wrap2{align-items:center;justify-content:space-between;gap:clamp(28px,5vw,80px)}
-.optA .card{width:min(34%,340px);flex:none}
-.optA .copy{max-width:47ch}
-.optA .head{font-size:clamp(30px,3.5vw,52px)}
+/* ==========================================================================================
+   A — the words live inside the painting
+   The picture is the page. Type is set straight into the sky the painter left empty, with no
+   plate, no panel and no scrim, and the name sits down in the field at the foot. This is the
+   option the watercolour makes possible and the photograph never could.
+   ========================================================================================== */
+.optA .art img{object-position:50% 46%}
+.optA .wrap2{flex-direction:column;justify-content:center;align-items:flex-start}
+.optA .copy{max-width:min(48%,540px)}
+.optA .head{font-size:clamp(30px,3.6vw,54px)}
+.optA .card{position:absolute;left:var(--gut);bottom:clamp(26px,5vh,54px);z-index:3}
+.optA .card .ph{width:clamp(48px,4vw,58px);aspect-ratio:1/1;border-radius:50%}
+/* Bronze needs a light, quiet ground. It clears AA on paper (5.0:1) and on the night plate,
+   but this line sits down in the painted field, which measures 0.33 — bronze reads 2.05:1
+   there. Same rule as everywhere else on this page: the colour follows the ground. */
+.optA .card .rl{color:var(--ink)}
 
-/* ---------- B: editorial offset. Copy left, card dropped low right. ---------- */
-.optB .veil{background:
-  linear-gradient(90deg,rgba(6,10,14,.88) 0%,rgba(6,10,14,.72) 34%,
-    rgba(6,10,14,.34) 56%,transparent 74%),
-  linear-gradient(0deg,rgba(6,10,14,.52) 0%,transparent 38%)}
-.optB .wrap2{position:relative;align-items:center;justify-content:flex-start}
-/* Measured to the widest WORD, not to a comfortable line length. LÖGFRÆÐIÞJÓNUSTA at
-   B's 66px display size needs 566px; a 52ch column gives 494 and the headline spilled
-   out of its own box on wide screens. The paragraph keeps its own 44ch measure. */
-.optB .copy{max-width:min(62%,760px);padding-bottom:clamp(0px,6vh,60px)}
-.optB .head{font-size:clamp(32px,4.4vw,66px)}
-.optB .card{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);
-  width:min(28%,286px)}
-.optB .card .ph{aspect-ratio:5/6}
+/* ==========================================================================================
+   B — the painting hung, everything under it
+   A print on a wall with a proper margin around it, then the name, then the words. The most
+   conservative of the five and the one that would age slowest.
+   ========================================================================================== */
+.optB{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,30svh,330px)}
+.optB .art{inset:auto auto auto 50%;transform:translateX(-50%);
+  top:var(--plate-top);height:var(--plate-h);
+  width:min(880px,calc(100% - var(--gut)*2));
+  box-shadow:0 22px 54px rgba(27,32,39,.18)}
+.optB .art img{object-position:50% 44%}
+.optB .wrap2{flex-direction:column;justify-content:flex-start;align-items:stretch;
+  max-width:880px;gap:clamp(13px,2.2vh,20px);
+  padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(18px,3vh,30px));
+  padding-bottom:clamp(26px,5vh,54px)}
+.optB .card{padding-top:clamp(12px,2vh,16px);border-top:1px solid rgba(27,32,39,.16)}
+.optB .card .ph{width:clamp(56px,5vw,72px);aspect-ratio:5/6;border-radius:4px}
+.optB .head{font-size:clamp(28px,3.2vw,48px)}
 
-/* ---------- C: cinematic centre. Copy centred, card as a corner signature. ---------- */
-.optC .veil{background:
-  radial-gradient(74% 52% at 50% 46%,rgba(6,10,14,.80) 0%,rgba(6,10,14,.44) 62%,transparent 100%),
-  linear-gradient(0deg,rgba(6,10,14,.72) 0%,transparent 44%)}
-.optC .wrap2{align-items:center;justify-content:center;text-align:center}
-.optC .copy{max-width:62ch}
-.optC .body{margin-inline:auto}
-.optC .acts{justify-content:center}
-.optC .head{font-size:clamp(32px,4.6vw,70px)}
-.optC .card{position:absolute;left:var(--gut);bottom:clamp(24px,5vh,52px);
-  width:min(24%,222px);z-index:3}
-.optC .card .id{padding:14px 16px 15px}
+/* ==========================================================================================
+   C — the painting takes one side, the words the other
+   The only option where picture and message hold equal ground rather than one sitting under
+   the other. Stacks to a band above the copy on a phone.
+   ========================================================================================== */
+.optC .art{inset:0 auto 0 0;width:52%}
+.optC .art img{object-position:62% 50%}
+.optC .wrap2{flex-direction:column;justify-content:center;align-items:flex-start;
+  max-width:none;padding-left:calc(52% + clamp(28px,4vw,72px));padding-right:var(--gut);
+  gap:clamp(16px,2.6vh,26px)}
+.optC .copy{max-width:46ch}
+.optC .head{font-size:clamp(28px,3.1vw,46px)}
+.optC .card{padding-bottom:clamp(12px,2vh,16px);border-bottom:1px solid rgba(27,32,39,.16)}
+.optC .card .ph{width:clamp(52px,4.4vw,62px);aspect-ratio:1/1;border-radius:50%}
 
-/* ---------- D: base line. Mountain almost untouched, everything on one bottom row. ---------- */
-.sheet{display:contents}
-.optD .veil{background:linear-gradient(0deg,rgba(6,10,14,.94) 0%,rgba(6,10,14,.86) 26%,
-  rgba(6,10,14,.52) 42%,rgba(6,10,14,.12) 58%,transparent 72%)}
-.optD .wrap2{align-items:flex-end;padding-bottom:clamp(36px,6vh,64px);
-  gap:clamp(22px,3.4vw,48px)}
-.optD .card{width:min(26%,248px);flex:none}
-.optD .copy{flex:1;padding-bottom:6px}
-.optD .head{font-size:clamp(28px,3.2vw,46px);max-width:17ch}
+/* ==========================================================================================
+   D — the painting whole, the words on a sheet resting on it
+   The picture is never crossed by type: it keeps the entire frame and the words sit on a
+   paper sheet along the bottom edge.
+   ========================================================================================== */
+.optD .art img{object-position:50% 42%}
+.optD .wrap2{flex-direction:column;justify-content:flex-end;align-items:stretch;padding:0;
+  max-width:none}
+.optD .sheet{background:rgba(239,242,245,.96);border-top:1px solid rgba(27,32,39,.14);
+  box-shadow:0 -22px 54px rgba(27,32,39,.16);
+  padding:clamp(18px,3vh,30px) var(--gut) clamp(22px,4vh,34px);
+  display:flex;align-items:flex-end;gap:clamp(24px,4vw,64px);
+  max-width:var(--maxw);margin-inline:auto;width:100%}
+.optD .sheet .card{flex:none;align-self:center}
+.optD .sheet .copy{flex:1}
+.optD .card .ph{width:clamp(58px,5vw,74px);aspect-ratio:5/6;border-radius:4px}
+.optD .head{font-size:clamp(26px,2.9vw,42px);max-width:18ch}
 .optD .body{max-width:52ch}
-.optD .card .ph{aspect-ratio:5/6}
 
-/* ---------- E: the painting leads. A watercolour plate, then him, then the words. ------
-   The only option that is not a photograph. Akrafjall is painted rather than shot, which
-   is the one treatment a law office can own outright — nobody else in Akranes has this
-   picture. It hangs on the night ground like a plate on a wall rather than bleeding to
-   the edges, and the type sits under it in the order Sindri described: painting, then
-   the man, then what he says. It also happens to be the only option where the header
-   sits on solid ink rather than on sky, so the brand's bronze sub-line finally clears
-   AA there (6.3:1) instead of the 1.7:1 it reads over every photograph. */
-.optE{background:var(--night)}
-.optE .wrap2{flex-direction:column;justify-content:center;align-items:stretch;
-  max-width:880px;gap:clamp(18px,3vh,32px);
-  /* 118 not 96: the preview label ends at 105px and a 720-tall desktop window clamps
-     12vh down to the minimum, which put the label on the painting */
-  padding-top:clamp(118px,12vh,132px);padding-bottom:clamp(28px,5vh,56px)}
-.optE .plate{margin:0;overflow:hidden;background:#EDF1F5;
-  box-shadow:0 26px 64px rgba(0,0,0,.46)}
-.optE .plate img{display:block;width:100%;
-  height:clamp(150px,30svh,340px);object-fit:cover;object-position:50% 44%}
-/* the identity is a row under the painting, not a box on it — a caption line for the
-   plate above, which is what a name under a picture actually is */
-.optE .card{display:flex;align-items:center;gap:clamp(14px,2vw,20px);
-  background:none;border:0;box-shadow:none;border-radius:0;
-  backdrop-filter:none;-webkit-backdrop-filter:none;
-  padding:clamp(13px,2vh,18px) 0 0;border-top:1px solid rgba(255,255,255,.16)}
-.optE .card .ph{width:clamp(62px,7vw,86px);flex:none;aspect-ratio:5/6;border-radius:5px}
-.optE .card .id{padding:0;border-top:0}
-.optE .card .nm{font-size:clamp(17px,1.5vw,21px)}
-.optE .card .rl{margin-top:4px;font-size:10px}
-.optE .head{font-size:clamp(28px,3.4vw,50px)}
-.optE .body{max-width:54ch}
+/* ==========================================================================================
+   E — the same painting on the night ground
+   Kept dark on purpose. This is the counter-argument: the palette is one of the things being
+   compared here, not a given. The plate reads as a print on a dark wall and the header stays
+   white over it.
+   ========================================================================================== */
+.optE{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,30svh,330px);
+  background:var(--night)}
+.optE .art{inset:auto auto auto 50%;transform:translateX(-50%);
+  top:var(--plate-top);height:var(--plate-h);
+  width:min(880px,calc(100% - var(--gut)*2));
+  box-shadow:0 26px 64px rgba(0,0,0,.5)}
+.optE .art img{object-position:50% 44%}
+.optE .wrap2{flex-direction:column;justify-content:flex-start;align-items:stretch;
+  max-width:880px;gap:clamp(13px,2.2vh,20px);
+  padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(18px,3vh,30px));
+  padding-bottom:clamp(26px,5vh,54px)}
+.optE .card{padding-top:clamp(12px,2vh,16px);border-top:1px solid rgba(255,255,255,.16)}
+.optE .card .ph{width:clamp(56px,5vw,72px);aspect-ratio:5/6;border-radius:4px;
+  background:var(--night-3)}
+.optE .head{font-size:clamp(28px,3.2vw,48px);color:#F6F2EC}
+.optE .kicker{color:rgba(255,255,255,.86)}
+.optE .body{color:#DCE1E7}
+.optE .card .nm{color:#fff}
+.optE .card .rl{color:var(--bronze-lift)}
+.optE .btn{color:#fff;border-color:rgba(255,255,255,.34)}
+.optE .btn:hover{background:#fff;border-color:#fff;color:var(--night)}
+.optE .btn.solid{background:var(--bronze);border-color:var(--bronze);color:#fff}
 
-/* Between 901px and ~1160px there is not enough height beside a centred copy block for a
-   360px corner card: at 960x800 the CTAs land on top of it. The block moves up out of the
-   card's column rather than the card shrinking into an illegible stamp. */
-@media (min-width:901px) and (max-width:1160px){
-  .optC .wrap2{padding-bottom:min(46vh,400px)}
-}
-
+/* ==========================================================================================
+   PHONE
+   The landscape painting cannot fill a portrait screen without being destroyed — cover would
+   show a narrow vertical slice of a wide picture — so the two full-bleed options (A and D)
+   switch to an upright painting of the same mountain, composed with the sky at the top for
+   exactly this purpose. The plate and split options keep the landscape one as a band.
+   ========================================================================================== */
 @media (max-width:900px){
-  /* ------------------------------------------------------------------------------
-     PHONE. Rethought as four compositions, not four ways of stacking the same column.
-     The failure the previous pass shared: every option laid a heavy veil across the
-     whole frame so white text would carry, which turned the photograph into a dark
-     texture. A phone shows one thing well, so each option now decides WHAT that one
-     thing is, and only darkens the part of the picture it actually writes on.
-
-       A  the portrait leads   — mountain as a band, big card straddling the seam
-       B  the sentence leads   — full photograph, byline row, copy on the bottom third
-       C  the place leads      — full photograph, small centred copy, signed at the foot
-       D  the panel leads      — mountain untouched, everything inside a sheet
-       E  the painting leads   — a watercolour plate, then him, then the words
-
-     Header protection is a fixed 170px wash, not 26% of the section: on a phone a
-     percentage was darkening a third of the picture to protect a 72px header.
-     ------------------------------------------------------------------------------ */
   .opt{height:auto;min-height:100svh}
-  /* Measured, not eyeballed. The portrait crop reads 0.33 behind the header, which needs
-     .44 to carry the white brand; .68 falling to nothing over 120px gives 4.6:1 with the
-     header still sitting in it. Every pixel this is shortened by is a pixel of mountain
-     given back, which is the whole argument of this page. */
-  .opt::before{height:120px;background:linear-gradient(180deg,rgba(6,10,14,.68) 0%,
-    rgba(6,10,14,.36) 44%,rgba(6,10,14,.08) 82%,transparent 100%)}
-  .opt .wrap2{height:auto;min-height:100svh;flex-direction:column;text-align:left}
+  .wrap2{height:auto;min-height:100svh;flex-direction:column;text-align:left;max-width:none}
   .opt .copy{max-width:none}
-  /* No frosted glass anywhere on a phone. A blur over a dark photograph reads as a
-     smudge, not as a material. */
-  .opt .card{position:static;margin:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+  /* Fit to the widest WORD, not the line: LÖGFRÆÐIÞJÓNUSTA is 16 characters and in Boska
+     caps needs about 9.6em, so a 360px phone with 40px of gutter carries 33px and no more. */
+  .opt .head{font-size:clamp(26px,8.4vw,34px)}
+  .opt .kicker{font-size:clamp(16px,4.4vw,19px);margin-bottom:8px}
+  .opt .body{font-size:15.5px;line-height:1.5}
   .opt .acts{gap:10px;margin-top:20px}
   .opt .acts .btn{flex:1 1 46%;text-align:center;padding:14px 12px}
-  /* Fit to the widest WORD, not to the line. LÖGFRÆÐIÞJÓNUSTA is 16 characters and in
-     Boska caps needs about 9.6em, so a 360px phone with 40px of gutter can carry 33px
-     and no more. 8.4vw hits 30px there and the 34px cap protects the wide phones. */
-  .opt .head{font-size:clamp(26px,8.4vw,34px)}
-  /* .72 is a desktop opacity. On a phone this line sits on the photograph in two of the
-     four options and it is the first thing to fail a contrast check; .86 reads as the
-     same soft italic and costs nothing. */
-  /* Never dim a line that sits on a photograph — opacity is the wrong lever for an
-     accent. The softness comes from the colour, which composites predictably. */
-  .opt .kicker{font-size:clamp(16px,4.4vw,19px);margin-bottom:8px;opacity:1;
-    color:rgba(255,255,255,.95)}
-  /* one step lighter than the desktop body colour: over a photograph #DCE1E7 lands at
-     4.48:1 on the widest phone, which is a fail by 0.02 */
-  .opt .body{font-size:15.5px;line-height:1.5;color:#E4E9EF}
-  /* HÉRAÐSDÓMSLÖGMAÐUR is 18 characters. Easing the tracking on phones buys about 8px;
-     where it sits in a boxed card the box also needs a floor, set below. */
-  .opt .card .rl{letter-spacing:.13em}
-  /* Round crops take the top of a 636x739 portrait, so the head stays in frame. */
-  .opt .card .ph img{object-position:50% 20%}
+  .opt .card .nm{font-size:16px}
+  .opt .card .rl{margin-top:3px;font-size:9.5px;letter-spacing:.13em}
 
-  /* ---------- A — the portrait leads ------------------------------------------
-     Desktop A gives the card equal billing with the copy. A phone cannot put them
-     side by side, so it splits the screen instead: the mountain gets a clean band
-     with no veil on it at all, and the card sits across the seam, half in the
-     photograph and half on solid ground. Nothing is written over the picture. */
-  /* The photograph runs the whole frame. Cutting it at --split and standing a black
-     panel under it threw the picture away below the seam and read as a crop, not as a
-     composition. What was a hard edge between two materials is now a rule DRAWN across
-     one continuous image, and the ground under the copy is the same mountain under a
-     tonal grade that stops at .93 — never flat black, so the rock is still faintly
-     there behind the type. */
-  .optA{--split:clamp(238px,33svh,320px)}
-  .optA .bg img{object-position:50% 34%}
-  .optA .veil{background:linear-gradient(180deg,
-    rgba(6,10,14,0) 0,rgba(6,10,14,0) calc(var(--split) - 96px),
-    rgba(6,10,14,.40) calc(var(--split) - 20px),
-    rgba(6,10,14,.78) calc(var(--split) + 70px),
-    rgba(6,10,14,.86) 100%)}
-  /* the horizon rule: it fades out at both ends so it reads as a line someone drew,
-     not as the edge where the photograph stopped */
-  .optA .veil::after{content:"";position:absolute;left:0;right:0;top:var(--split);
-    height:1px;background:linear-gradient(90deg,transparent,var(--bronze) 16%,
-      var(--bronze) 84%,transparent)}
-  .optA .wrap2{justify-content:flex-start;align-items:flex-start;
-    padding:calc(var(--split) - 118px) var(--gut) 26px;gap:0}
-  /* Floor, not a nudge: the role word measures 161px at this tracking and the id block
-     adds 40px of padding, so a boxed card under ~204px truncates it. Third time. */
-  .optA .card{width:min(58%,212px);min-width:204px;margin:0 0 20px}
-  .optA .body{font-size:15px}
-  .optA .acts{margin-top:16px}
+  /* A — statement in the sky, name in the field, mountain between them. */
+  .optA .art img{object-position:50% 50%}
+  .optA .wrap2{justify-content:flex-start;padding:114px var(--gut) 0}
+  .optA .copy{max-width:none}
+  .optA .card{left:var(--gut);right:var(--gut);bottom:clamp(20px,3.4vh,36px)}
+  .optA .card .ph{width:46px}
 
-  /* A on a short phone. A 204px portrait card plus the full copy needs about 700px of
-     height; below that the CTAs fall off the screen. Rather than shrink the card until
-     HÉRAÐSDÓMSLÖGMAÐUR truncates, the identity turns into a row on the seam — the same
-     idea, laid on its side. Triggered by height, not width, because that is the actual
-     constraint. */
-  @media (max-height:720px){
-    /* the row sits fully below the seam: straddling it put the name and the role on the
-       photograph, where the bronze role line measured 1.2:1 */
-    .optA .wrap2{padding:calc(var(--split) + 24px) var(--gut) 26px}
-    .optA .card{width:auto;min-width:0;display:flex;align-items:center;gap:13px;
-      background:none;border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
-      -webkit-backdrop-filter:none;margin:0 0 18px;padding:0 0 15px;
-      border-bottom:1px solid rgba(255,255,255,.16)}
-    .optA .card .ph{width:64px;flex:none;aspect-ratio:1/1;border-radius:9px}
-    .optA .card .ph img{object-position:50% 18%}
-    .optA .card .id{padding:0;border-top:0}
-    .optA .card .nm{font-size:17px}
-    /* on the graded photograph rather than inside a card, so the same rule as B and C:
-       bronze micro-caps need an opaque ground, over a picture the role line is white */
-    .optA .card .rl{margin-top:3px;font-size:10px;color:rgba(255,255,255,.96)}
-  }
+  /* B — the plate, narrower margins. */
+  .optB{--plate-top:114px;--plate-h:clamp(140px,22svh,220px)}
+  .optB .art{width:calc(100% - var(--gut)*2)}
+  .optB .wrap2{padding-left:var(--gut);padding-right:var(--gut)}
+  .optB .card .ph{width:58px}
 
-  /* ---------- B — the sentence leads ------------------------------------------
-     Desktop B is editorial: the headline at full force, the card as a signature.
-     On a phone the magazine version of that is a cover. The photograph is whole,
-     the type sits on the bottom third where the gradient lives, and the card stops
-     being a card — it becomes the byline that introduces the statement. */
-  .optB .bg img{object-position:50% 42%}
-  /* Clean picture down to 30%, then a single ramp that reaches .86 by the headline.
-     Sampled backdrop under the byline is 0.32, which needs .48 to carry 15px white. */
-  /* Anchored to the BOTTOM in pixels, because the block it protects is bottom-anchored
-     and a fixed pixel height. As a percentage of the frame it slid out from under the
-     copy on a short phone — the kicker measured 2.5:1 at 375x667 and 7.8:1 at 360x740
-     from the same stylesheet. */
-  .optB .veil{background:linear-gradient(to top,rgba(6,10,14,.93) 0,
-    rgba(6,10,14,.90) 170px,rgba(6,10,14,.78) 300px,rgba(6,10,14,.72) 390px,
-    rgba(6,10,14,.30) 470px,transparent 540px)}
-  .optB .wrap2{justify-content:flex-end;align-items:stretch;
-    padding:112px var(--gut) 34px;gap:0}
-  /* the desktop rule sizes this card at 28% of the row; on a phone it is a byline
-     that has to span the measure, so width and self-alignment are both reset. */
-  .optB .card{position:static;transform:none;width:auto;
-    display:flex;align-items:center;gap:12px;background:none;
-    border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
-    -webkit-backdrop-filter:none;padding:15px 0 0;margin:15px 0 17px;
-    border-top:1px solid rgba(255,255,255,.20)}
-  .optB .card .ph{width:46px;flex:none;aspect-ratio:1/1;border-radius:50%}
-  .optB .card .id{padding:0;border-top:0}
-  .optB .card .nm{font-size:15px}
-  /* The bronze micro-caps need an opaque ground to pass AA at 9.5px — it measures
-     1.7:1 on the photograph even under a heavy scrim. Bronze stays where the ground
-     is solid (A's card, D's sheet); over the picture the role line goes white. */
-  .optB .card .rl{margin-top:2px;font-size:9.5px;color:rgba(255,255,255,.96)}
-  /* the desktop rule reserves a 32vw column for the absolutely placed card; on a phone
-     the card is in the flow and that reservation would clip the headline */
-  .optB .copy{padding:0}
-  .optB .head{font-size:clamp(27px,8.6vw,34px)}
+  /* C — the split becomes a band over the words, the same idea laid down. */
+  .optC{--band-h:clamp(170px,27svh,260px)}
+  .optC .art{inset:0 0 auto 0;width:auto;height:var(--band-h)}
+  .optC .art img{object-position:50% 46%}
+  .optC .wrap2{justify-content:flex-start;
+    padding:calc(var(--band-h) + clamp(20px,3vh,30px)) var(--gut) clamp(24px,4vh,34px)}
+  .optC .card .ph{width:48px}
 
-  /* ---------- C — the place leads ---------------------------------------------
-     Desktop C is cinematic and centred with the card as a corner signature. The
-     phone version keeps the photograph almost clean — a soft radial under the type
-     only — and the identity shrinks to a signature at the foot of the frame, the
-     way a name sits under a letter rather than in a box beside it. */
-  .optC .bg img{object-position:50% 46%}
-  /* Nothing on the frame at all. C's grade is carried BY THE CONTENT: each block paints
-     its own full-width band that fades in over 76px of its own padding and out again,
-     so the darkening is exactly as tall as the words and moves with them at every
-     viewport. No ellipse to see, no blur, and the sky above and the field below stay
-     untouched — which is the only reason C exists as a separate option. */
-  .optC .veil{background:none}
-  /* the feather and the frame padding both scale with height, or the 152px the two
-     feathers add pushes the block off a 640px screen */
-  .optC{--feather:clamp(48px,9vh,76px)}
-  .optC .wrap2{justify-content:center;align-items:center;text-align:center;
-    padding:clamp(106px,13vh,112px) 0 clamp(104px,16vh,132px)}
-  /* Narrower measure and content-width buttons, so the vignette that protects them can
-     stay an ellipse inside the frame instead of a full-width band. C is the option whose
-     whole job is showing the mountain; a band across the middle would make it option B. */
-  .optC .copy{max-width:none;width:100%;
-    padding:var(--feather) max(var(--gut),calc(50% - 150px)) var(--feather);
-    background:linear-gradient(180deg,rgba(6,10,14,0) 0,rgba(6,10,14,.74) var(--feather),
-      rgba(6,10,14,.80) calc(100% - var(--feather)),rgba(6,10,14,0) 100%)}
-  .optC .head{font-size:clamp(24px,7.2vw,30px)}
-  .optC .body{margin-inline:auto;max-width:26ch}
-  .optC .acts{justify-content:center}
-  .optC .acts .btn{flex:0 0 auto;padding:13px 17px}
-  .optC .card{position:absolute;left:0;right:0;bottom:0;
-    width:auto;display:flex;flex-direction:column;align-items:center;gap:9px;
-    border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-    padding:40px var(--gut) clamp(26px,4vh,44px);
-    background:linear-gradient(180deg,rgba(6,10,14,0) 0,rgba(6,10,14,.62) 40px,
-      rgba(6,10,14,.78) 100%)}
-  /* the hairline is the signature rule, drawn on the wrapper so it centres itself */
-  .optC .card::before{content:"";width:34px;height:1px;background:var(--bronze-lift);
-    opacity:.75}
-  .optC .card .ph{width:40px;flex:none;aspect-ratio:1/1;border-radius:50%}
-  .optC .card .id{padding:0;border-top:0;text-align:center}
-  .optC .card .nm{font-size:14.5px}
-  .optC .card .rl{margin-top:3px;font-size:9.5px;color:rgba(255,255,255,.97)}
+  /* D — the sheet becomes a column on the bottom edge. */
+  .optD .art img{object-position:50% 50%}
+  .optD .sheet{flex-direction:column;align-items:stretch;gap:14px;
+    border-radius:16px 16px 0 0}
+  .optD .sheet .card{align-self:flex-start}
+  .optD .card .ph{width:56px}
+  .optD .head{max-width:none}
 
-  /* ---------- E — the painting leads -------------------------------------------
-     Same stack on a phone, only tighter: the plate keeps its proportion, the caption
-     row stays a row, and the copy runs under both. Nothing here sits on a picture, so
-     nothing here needs a scrim — the one option on this page where legibility is a
-     non-question rather than something measured back from a photograph. */
-  .optE .wrap2{max-width:none;justify-content:flex-start;
-    padding:114px var(--gut) 30px;gap:clamp(15px,2.2vh,24px)}
-  .optE .plate img{height:clamp(142px,23svh,232px)}
-  .optE .card .ph{width:64px;border-radius:5px}
-  .optE .card .nm{font-size:17px}
-  .optE .card .rl{margin-top:3px;font-size:9.5px}
-
-  /* ---------- D — the panel leads ---------------------------------------------
-     D's whole proposition is that the mountain is left alone, so on a phone it is
-     left alone completely: no gradient above the sheet at all. The sheet is opaque
-     rather than glass, because glass over a dark photograph reads as mud, and it
-     carries the identity as its own header row above a rule. */
-  .optD .bg img{object-position:50% 34%}
-  .optD .veil{background:none}
-  .optD .wrap2{justify-content:flex-end;align-items:stretch;padding:0;gap:0}
-  /* .94 rather than opaque: the sheet still reads as a surface, and the mountain it
-     rests on carries on faintly behind it instead of being cut off by it. */
-  .optD .sheet{background:rgba(8,12,17,.94);border-top:1px solid var(--bronze);
-    border-radius:18px 18px 0 0;padding:18px var(--gut) 26px;
-    box-shadow:0 -30px 60px rgba(6,9,12,.55);
-    display:flex;flex-direction:column;gap:14px}
-  .optD .card{width:auto;align-self:stretch;
-    display:flex;align-items:center;gap:13px;background:none;border:0;
-    box-shadow:none;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;
-    padding:0 0 14px;border-bottom:1px solid rgba(255,255,255,.13)}
-  .optD .card .ph{width:52px;flex:none;aspect-ratio:1/1;border-radius:9px}
-  .optD .card .ph img{object-position:50% 18%}
-  .optD .card .id{padding:0;border-top:0}
-  .optD .card .nm{font-size:16px}
-  .optD .card .rl{margin-top:3px;font-size:9.5px}
-  .optD .copy{padding:0}
-  .optD .head{font-size:clamp(25px,7.4vw,31px);max-width:none}
+  /* E — the night plate, same tightening as B. */
+  .optE{--plate-top:114px;--plate-h:clamp(140px,22svh,220px)}
+  .optE .art{width:calc(100% - var(--gut)*2)}
+  .optE .wrap2{padding-left:var(--gut);padding-right:var(--gut)}
+  .optE .card .ph{width:58px}
 }
-
 </style>
 </head>
 <body>
 
 <!-- the real header, lifted verbatim from index.html so placement is judged in context.
-     No JS here, so it never gains .scrolled: this is the transparent worst case. -->
+     It never gains .scrolled here: this is the transparent worst case. -->
 <header class="hdr" id="hdr">
   <div class="hdr-in">
     <a class="brand" href="#top" aria-label="Lögfræðiþjónusta Akraness, heim">
@@ -394,79 +272,36 @@ body{background:var(--night);color:#fff}
   <div class="mnav-foot"><span>Hringdu beint</span><b>857 8660</b><span>Virka daga 9:00 til 16:00</span></div>
 </nav>
 
-<section class="opt optA">
-  <div class="tag"><b>A</b><i>Nafnspjald vinstra megin, texti hægra megin</i></div>
-  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" fetchpriority="high"></picture></div>
-  <div class="veil"></div>
+<section class="opt optA" data-hdr="ink">
+  <div class="tag"><b>A</b><i>Textinn stendur inni í myndinni</i></div>
+  <div class="art"><picture>
+    <source media="(max-width:900px)" srcset="../img/akrafjall-malverk-p.webp">
+    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" fetchpriority="high">
+  </picture></div>
   <div class="wrap2">
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
+    </div>
     <article class="card">
       <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739"></div>
       <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
     </article>
-    <div class="copy">
-      <p class="kicker">Fastur punktur þegar mest á reynir</p>
-      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
-      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
-      <div class="acts">
-        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
-        <a class="btn" href="#">Skoða þjónustu</a>
-      </div>
-    </div>
   </div>
 </section>
 
-<section class="opt optB">
-  <div class="tag"><b>B</b><i>Ritstjórnarleg vinstristilling, spjald neðarlega hægra megin</i></div>
-  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
-  <div class="veil"></div>
+<section class="opt optB" data-hdr="ink">
+  <div class="tag"><b>B</b><i>Myndin hengd upp, allt undir henni</i></div>
+  <div class="art"><picture>
+    <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
+    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
+  </picture></div>
   <div class="wrap2">
-    <div class="copy">
-      <p class="kicker">Fastur punktur þegar mest á reynir</p>
-      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
-      <!-- inside .copy, and absolutely placed on desktop. On a phone this becomes the
-           byline under the headline, where the scrim is already strong enough to carry
-           it at any viewport height; as a sibling above the headline its protection
-           depended on where the block happened to land. -->
-      <article class="card">
-        <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
-        <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
-      </article>
-      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
-      <div class="acts">
-        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
-        <a class="btn" href="#">Skoða þjónustu</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="opt optC">
-  <div class="tag"><b>C</b><i>Miðjusett, spjaldið sem undirskrift í horni</i></div>
-  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
-  <div class="veil"></div>
-  <article class="card">
-    <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
-    <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
-  </article>
-  <div class="wrap2">
-    <div class="copy">
-      <p class="kicker">Fastur punktur þegar mest á reynir</p>
-      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
-      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
-      <div class="acts">
-        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
-        <a class="btn" href="#">Skoða þjónustu</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="opt optD">
-  <div class="tag"><b>D</b><i>Fjallið ósnert, allt á einni línu neðst</i></div>
-  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
-  <div class="veil"></div>
-  <div class="wrap2">
-    <div class="sheet">
     <article class="card">
       <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
       <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
@@ -480,19 +315,64 @@ body{background:var(--night);color:#fff}
         <a class="btn" href="#">Skoða þjónustu</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="opt optC" data-hdr="ink">
+  <div class="tag"><b>C</b><i>Myndin öðrum megin, textinn hinum megin</i></div>
+  <div class="art"><picture>
+    <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
+    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
+  </picture></div>
+  <div class="wrap2">
+    <article class="card">
+      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+    </article>
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="opt optE">
-  <div class="tag"><b>E</b><i>Málverk efst, portrett og texti undir</i></div>
+<section class="opt optD" data-hdr="ink">
+  <div class="tag"><b>D</b><i>Myndin ósnert, textinn á blaði neðst</i></div>
+  <div class="art"><picture>
+    <source media="(max-width:900px)" srcset="../img/akrafjall-malverk-p.webp">
+    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
+  </picture></div>
   <div class="wrap2">
-    <figure class="plate">
-      <picture>
-        <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
-        <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
-      </picture>
-    </figure>
+    <div class="sheet">
+      <article class="card">
+        <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+        <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+      </article>
+      <div class="copy">
+        <p class="kicker">Fastur punktur þegar mest á reynir</p>
+        <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+        <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+        <div class="acts">
+          <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+          <a class="btn" href="#">Skoða þjónustu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="opt optE" data-hdr="light">
+  <div class="tag"><b>E</b><i>Sama mynd á dökkum grunni</i></div>
+  <div class="art"><picture>
+    <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
+    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
+  </picture></div>
+  <div class="wrap2">
     <article class="card">
       <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
       <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
@@ -510,22 +390,42 @@ body{background:var(--night);color:#fff}
 </section>
 
 <script>
-/* The header is here so the placement can be judged, which means the burger has to work.
-   Same behaviour as js/site.js, inlined because this page deliberately loads no site JS. */
+/* The header is here so its placement can be judged, which means it has to behave. Two jobs:
+   the burger has to open, and the header has to flip to ink over the light sections. Inlined
+   because this page deliberately loads no site JS. */
 (function(){
   var b=document.getElementById('burger'), m=document.getElementById('mnav');
-  if(!b||!m) return;
-  function set(open){
-    b.setAttribute('aria-expanded', open?'true':'false');
-    b.setAttribute('aria-label', open?'Loka valmynd':'Opna valmynd');
-    m.classList.toggle('open', open);
-    document.body.style.overflow = open?'hidden':'';
+  if(b&&m){
+    var set=function(open){
+      b.setAttribute('aria-expanded', open?'true':'false');
+      b.setAttribute('aria-label', open?'Loka valmynd':'Opna valmynd');
+      m.classList.toggle('open', open);
+      document.documentElement.classList.toggle('mnav-open', open);
+      document.body.style.overflow = open?'hidden':'';
+    };
+    b.addEventListener('click', function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+    addEventListener('keydown', function(e){
+      if(e.key==='Escape' && b.getAttribute('aria-expanded')==='true'){ set(false); b.focus(); }
+    });
+    m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
   }
-  b.addEventListener('click', function(){ set(b.getAttribute('aria-expanded')!=='true'); });
-  addEventListener('keydown', function(e){
-    if(e.key==='Escape' && b.getAttribute('aria-expanded')==='true'){ set(false); b.focus(); }
-  });
-  m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+
+  /* Which section is under the header decides the header's colour. Read at the header's own
+     mid-line rather than by intersection ratio, because with scroll-snap two sections are
+     often both "mostly visible" and ratio picks the wrong one right at the boundary. */
+  var secs=[].slice.call(document.querySelectorAll('.opt'));
+  function applyHdr(){
+    var y=38, cur=secs[0];
+    for(var i=0;i<secs.length;i++){
+      var r=secs[i].getBoundingClientRect();
+      if(r.top<=y && r.bottom>y){ cur=secs[i]; break; }
+    }
+    document.documentElement.classList.toggle('hdr-ink', cur.getAttribute('data-hdr')!=='light');
+  }
+  window.__applyHdr=applyHdr;
+  addEventListener('scroll', applyHdr, {passive:true});
+  addEventListener('resize', applyHdr);
+  applyHdr();
 })();
 </script>
 </body>
