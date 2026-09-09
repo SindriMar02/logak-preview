@@ -114,10 +114,25 @@ html.mnav-open .burger i{background:#fff}
 .optA .wrap2{flex-direction:column;justify-content:center;align-items:flex-start}
 .optA .copy{max-width:min(48%,540px)}
 .optA .head{font-size:clamp(30px,3.6vw,54px)}
-/* the card is pinned to the opposite corner from the copy, so the two never negotiate for
-   vertical room no matter how short the window gets — and the painting reads between them */
-.optA .card{position:absolute;right:var(--gut);bottom:clamp(26px,5vh,54px);z-index:3;
-  width:clamp(196px,17vw,236px)}
+/* Centred on its own side, level with the copy on the other, so the two read as a pair with
+   the mountain between them rather than one sitting in a corner. Height-aware width, or a
+   short window turns a vertically-centred 386px-tall photograph into an overlap. */
+.optA .card{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);z-index:3;
+  width:clamp(200px,min(20vw,32svh),284px)}
+/* A's caption is the one piece of type on this page with no ground of its own: it sits on
+   the painting, and once the photograph is centred rather than standing on the pale field it
+   lands on rock. Measured across four desktop sizes it ran 1.65 to 3.63:1 in ink and 2.55:1
+   in bronze — no colour survives paint that swings from 0.05 to 0.6, and the caption moves
+   with the viewport so there is no safe spot to aim at.
+
+   So it moves onto the photograph instead, at its foot, over his suit — which is reliably
+   dark whatever the painting is doing behind it. That is a caption on a picture, not a card
+   returning: no border, no radius, no plate, nothing added to the page. */
+.optA .card .id{position:absolute;left:0;right:0;bottom:0;padding:40px 15px 13px;
+  background:linear-gradient(180deg,rgba(6,10,14,0) 0,rgba(6,10,14,.66) 26%,
+    rgba(6,10,14,.92) 54%,rgba(6,10,14,.95) 100%)}
+.optA .card .nm{color:#fff}
+.optA .card .rl{color:rgba(255,255,255,.94)}
 
 /* ==========================================================================================
    B — the painting hung, everything under it
@@ -246,13 +261,15 @@ html.mnav-open .burger i{background:#fff}
      pushing it back down there. Auto margins on both sides split the leftover evenly, so
      it stays centred at any screen height instead of at one tuned offset.
      176 would be the floor here (145.3px word + 28px of id padding); it sits well above it. */
-  .optA .card{position:static;width:clamp(206px,27svh,244px);display:block;
-    margin-block:auto}
-  /* no card ground under it any more, so the bronze is back on the painted field where it
-     measures 2.05:1 — ink instead, the same rule as everywhere else: colour follows ground */
-  .optA .card .rl{color:var(--ink)}
+  /* position:static alone does not undo the desktop rule's centring transform — it kept
+     applying to the in-flow card and pulled it half its own height up into the copy. Both
+     the offset and the transform have to be reset, the same trap the width leak was. */
+  /* relative, not static: the caption is absolutely placed inside it now. And the desktop
+     centring transform still has to be undone or it pulls the in-flow card up into the copy. */
+  .optA .card{position:relative;top:auto;transform:none;
+    width:clamp(206px,27svh,244px);display:block;margin-block:auto}
   .optA .card .ph{width:auto;aspect-ratio:636/739}
-  .optA .card .id{display:block;padding:12px 0 0}
+  .optA .card .id{display:block;padding:34px 14px 12px}
 
   /* An upright card needs about 700px of screen to stand in. Below that A lies it down
      like the other four rather than shaving paddings until the CTAs skim the fold —
@@ -260,14 +277,18 @@ html.mnav-open .burger i{background:#fff}
   @media (max-height:700px){
     /* the 132px photograph costs B and E their last 14px of fold here */
     .opt .card .ph{width:112px}
-    .optA .card{width:auto;display:flex;align-items:stretch;gap:16px;margin-block:0}
-    .optA .card .ph{width:112px;flex:none;aspect-ratio:636/739}
-    .optA .card .id{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0}
+    /* A keeps its upright photograph even here: overlaying the caption took about 60px off
+       the card, which is the room the sideways version used to be buying. */
+    /* 178 = the 145.3px word + the caption's 30px of padding, rounded up. Sixth time. */
+    .optA .card{width:clamp(178px,26svh,196px)}
   }
 
-  /* B — the plate, narrower margins, card above the words. */
+  /* B — the painting bleeds edge to edge here too. It used to be inset by the gutter, but
+     with left:0 and right:0 both still set a specified width is over-constrained, and CSS
+     resolves that by throwing away `right`: the picture started flush against the left edge
+     and stopped 40px short of the right one. It looked like a crop and it was a cascade
+     accident. Nothing sets its width now, so both insets hold and it spans the screen. */
   .optB{--plate-top:114px;--plate-h:clamp(110px,18svh,196px)}
-  .optB .art{width:calc(100% - var(--gut)*2)}
   .optB .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
     padding-left:var(--gut);padding-right:var(--gut)}
 
@@ -279,16 +300,23 @@ html.mnav-open .burger i{background:#fff}
     padding:calc(var(--band-h) + clamp(18px,2.6vh,26px)) var(--gut) clamp(22px,3.6vh,32px)}
   .optC .copy{max-width:none}
 
-  /* D — the sheet becomes a column on the bottom edge. */
-  .optD .art img{object-position:50% 50%}
+  /* D — the sheet becomes a column on the bottom edge.
+     The painting was full-bleed here and the sheet sat over the bottom half, which is
+     precisely where the mountain is: all that showed above it was the near-white sky, so
+     the picture was invisible. Full-bleed also meant the image had no vertical overflow to
+     position within — an upright painting in an upright viewport crops sideways only, so
+     object-position could not move it. Giving .art a band shorter than the frame restores
+     that overflow, and the crop can then be aimed at the ridge. The band runs deeper than
+     the sheet's top edge so the two overlap and never leave a strip of bare paper. */
+  .optD .art{inset:0 0 auto 0;height:64svh}
+  .optD .art img{object-position:50% 54%}
   .optD .sheet{flex-direction:column;align-items:stretch;gap:14px;
     border-radius:16px 16px 0 0}
   .optD .sheet .card{align-self:stretch;width:auto}
   .optD .head{max-width:none}
 
-  /* E — the night plate, same tightening as B. */
+  /* E — same edge-to-edge treatment as B. */
   .optE{--plate-top:114px;--plate-h:clamp(110px,18svh,196px)}
-  .optE .art{width:calc(100% - var(--gut)*2)}
   .optE .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
     padding-left:var(--gut);padding-right:var(--gut)}
 }
