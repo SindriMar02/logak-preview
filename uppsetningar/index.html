@@ -136,11 +136,22 @@ body{background:var(--night);color:#fff}
      bleeds off the right edge, exactly the offset the desktop version has. */
   .optB .veil{background:linear-gradient(180deg,rgba(6,10,14,.66) 0%,rgba(6,10,14,.52) 40%,
     rgba(6,10,14,.30) 62%,rgba(6,10,14,.72) 100%)}
+  /* The preview label sits at top:74px and is 31px tall, so top padding under 116px puts
+     the kicker underneath it. That is what read as "poorly done" — the label looked like
+     it was covering the design rather than annotating it. */
   .optB .wrap2{justify-content:flex-start;align-items:stretch;
-    padding:112px 0 0 var(--gut);gap:0}
-  .optB .copy{padding:0 var(--gut) 0 0}
-  .optB .head{font-size:clamp(34px,10vw,46px)}
-  .optB .card{width:min(70%,238px);align-self:flex-end;margin:28px -18px 0 0}
+    padding:118px var(--gut) 26px;gap:0}
+  .optB .copy{padding:0}
+  .optB .head{font-size:clamp(32px,9.2vw,42px)}
+  /* Height is the constraint on a phone, not taste. After the copy block there is roughly
+     340px left, and this card is photo(5:6) + name block, so it caps near 200px wide to sit
+     fully on screen. It is right-aligned rather than bled off the edge, which read as
+     overflow rather than as an offset. */
+  .optB .card{width:min(60%,212px);align-self:flex-end;margin:22px 0 0}
+  /* Hard floor for any portrait card: HÉRAÐSDÓMSLÖGMAÐUR measures 161px at this size
+     and the id block adds 40px of padding, so anything under ~202px clips it. This is
+     the third time that single word has broken a card, so it is a rule now, not a nudge. */
+  .optA .card,.optB .card{min-width:204px}
 
   /* C — cinematic. The mountain keeps the screen; copy sits centred in it and the card
      shrinks to a horizontal chip so it signs the frame without occupying it. */
@@ -163,11 +174,13 @@ body{background:var(--night);color:#fff}
      else lives in a panel resting on the bottom edge, which is D's whole proposition. */
   .optD .veil{background:linear-gradient(180deg,rgba(6,10,14,.34) 0%,transparent 26%,
     transparent 40%,rgba(6,10,14,.55) 60%,rgba(6,10,14,.92) 100%)}
-  .optD .wrap2{justify-content:flex-end;align-items:stretch;padding:104px 0 0;gap:0}
-  .optD .sheet{background:rgba(10,14,19,.90);backdrop-filter:blur(18px);
+  .optD .wrap2{justify-content:flex-end;align-items:stretch;padding:0;gap:0}
+  /* The sheet sizes to its own content and the mountain simply takes the rest. Any top
+     padding here is padding the sheet cannot afford: it pushed the CTAs below the fold. */
+  .optD .sheet{background:rgba(10,14,19,.92);backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.12);
-    border-radius:16px 16px 0 0;padding:20px var(--gut) 30px;
-    display:flex;flex-direction:column;gap:16px}
+    border-radius:16px 16px 0 0;padding:18px var(--gut) 24px;
+    display:flex;flex-direction:column;gap:13px}
   .optD .card{width:auto;display:flex;align-items:center;gap:14px;background:none;
     border:0;box-shadow:none;border-radius:0;padding:0}
   .optD .card .ph{width:58px;flex:none;aspect-ratio:1/1;border-radius:8px}
@@ -175,7 +188,8 @@ body{background:var(--night);color:#fff}
   .optD .card .nm{font-size:16px}
   .optD .card .rl{margin-top:3px;font-size:9.5px}
   .optD .copy{padding:0}
-  .optD .head{font-size:clamp(28px,7.6vw,34px);max-width:none}
+  .optD .head{font-size:clamp(26px,7vw,31px);max-width:none}
+  .optD .body{font-size:15.5px}
 }
 
 </style>
