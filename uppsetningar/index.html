@@ -73,10 +73,14 @@ body{background:var(--night);color:#fff}
   linear-gradient(90deg,rgba(6,10,14,.88) 0%,rgba(6,10,14,.72) 34%,
     rgba(6,10,14,.34) 56%,transparent 74%),
   linear-gradient(0deg,rgba(6,10,14,.52) 0%,transparent 38%)}
-.optB .wrap2{align-items:center;justify-content:space-between;gap:clamp(24px,4vw,64px)}
-.optB .copy{max-width:52ch;padding-bottom:clamp(0px,6vh,60px)}
+.optB .wrap2{position:relative;align-items:center;justify-content:flex-start}
+/* Measured to the widest WORD, not to a comfortable line length. LÖGFRÆÐIÞJÓNUSTA at
+   B's 66px display size needs 566px; a 52ch column gives 494 and the headline spilled
+   out of its own box on wide screens. The paragraph keeps its own 44ch measure. */
+.optB .copy{max-width:min(62%,760px);padding-bottom:clamp(0px,6vh,60px)}
 .optB .head{font-size:clamp(32px,4.4vw,66px)}
-.optB .card{width:min(28%,286px);flex:none;align-self:center}
+.optB .card{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);
+  width:min(28%,286px)}
 .optB .card .ph{aspect-ratio:5/6}
 
 /* ---------- C: cinematic centre. Copy centred, card as a corner signature. ---------- */
@@ -104,92 +108,205 @@ body{background:var(--night);color:#fff}
 .optD .body{max-width:52ch}
 .optD .card .ph{aspect-ratio:5/6}
 
+/* Between 901px and ~1160px there is not enough height beside a centred copy block for a
+   360px corner card: at 960x800 the CTAs land on top of it. The block moves up out of the
+   card's column rather than the card shrinking into an illegible stamp. */
+@media (min-width:901px) and (max-width:1160px){
+  .optC .wrap2{padding-bottom:min(46vh,400px)}
+}
+
 @media (max-width:900px){
-  /* Each option gets its OWN phone composition. A shared "stack it and hope" rule made all
-     four look identical on the device this will most often be opened on, which defeats the
-     entire point of a comparison page. Desktop DNA is preserved per option, expressed the
-     way a phone actually wants it. */
+  /* ------------------------------------------------------------------------------
+     PHONE. Rethought as four compositions, not four ways of stacking the same column.
+     The failure the previous pass shared: every option laid a heavy veil across the
+     whole frame so white text would carry, which turned the photograph into a dark
+     texture. A phone shows one thing well, so each option now decides WHAT that one
+     thing is, and only darkens the part of the picture it actually writes on.
+
+       A  the portrait leads   — mountain as a band, big card straddling the seam
+       B  the sentence leads   — full photograph, byline row, copy on the bottom third
+       C  the place leads      — full photograph, small centred copy, signed at the foot
+       D  the panel leads      — mountain untouched, everything inside a sheet
+
+     Header protection is a fixed 170px wash, not 26% of the section: on a phone a
+     percentage was darkening a third of the picture to protect a 72px header.
+     ------------------------------------------------------------------------------ */
   .opt{height:auto;min-height:100svh}
+  /* Measured, not eyeballed: the portrait crop reads 0.25 at the 98th percentile behind
+     the header, so .70 falling to nothing over 155px carries the white brand at 4.9:1.
+     The old 26% wash was darkening 190px of picture to protect a 72px header. */
+  .opt::before{height:155px;background:linear-gradient(180deg,rgba(6,10,14,.70) 0%,
+    rgba(6,10,14,.38) 46%,rgba(6,10,14,.10) 80%,transparent 100%)}
   .opt .wrap2{height:auto;min-height:100svh;flex-direction:column;text-align:left}
   .opt .copy{max-width:none}
   .opt .card{position:static;margin:0}
-  .opt .acts{gap:10px}
+  .opt .acts{gap:10px;margin-top:20px}
   .opt .acts .btn{flex:1 1 46%;text-align:center;padding:14px 12px}
-  .opt .head{font-size:clamp(29px,8.4vw,38px)}
-  /* HÉRAÐSDÓMSLÖGMAÐUR is 18 characters and the card clips. Easing the tracking on phones
-     buys about 8px and stops narrow cards truncating it; widths below are then set with
-     that word's real measured need in mind, not by eye. */
+  /* Fit to the widest WORD, not to the line. LÖGFRÆÐIÞJÓNUSTA is 16 characters and in
+     Boska caps needs about 9.6em, so a 360px phone with 40px of gutter can carry 33px
+     and no more. 8.4vw hits 30px there and the 34px cap protects the wide phones. */
+  .opt .head{font-size:clamp(26px,8.4vw,34px)}
+  /* .72 is a desktop opacity. On a phone this line sits on the photograph in two of the
+     four options and it is the first thing to fail a contrast check; .86 reads as the
+     same soft italic and costs nothing. */
+  .opt .kicker{font-size:clamp(16px,4.4vw,19px);margin-bottom:8px;opacity:.9}
+  /* one step lighter than the desktop body colour: over a photograph #DCE1E7 lands at
+     4.48:1 on the widest phone, which is a fail by 0.02 */
+  .opt .body{font-size:15.5px;line-height:1.5;color:#E4E9EF}
+  /* HÉRAÐSDÓMSLÖGMAÐUR is 18 characters. Easing the tracking on phones buys about 8px;
+     where it sits in a boxed card the box also needs a floor, set below. */
   .opt .card .rl{letter-spacing:.13em}
-  .opt .kicker{font-size:clamp(16px,4.6vw,20px)}
+  /* Round crops take the top of a 636x739 portrait, so the head stays in frame. */
+  .opt .card .ph img{object-position:50% 20%}
 
-  /* A — balanced stack. The desktop idea is card and copy sharing billing side by side,
-     so on a phone they share it vertically: portrait card, then copy, both centred. */
-  .optA .veil{background:linear-gradient(180deg,rgba(6,10,14,.50) 0%,rgba(6,10,14,.62) 46%,
-    rgba(6,10,14,.86) 100%)}
-  .optA .wrap2{justify-content:center;align-items:center;text-align:center;
-    padding:104px var(--gut) 44px;gap:24px}
-  .optA .card{width:min(66%,238px)}
-  .optA .body{margin-inline:auto}
-  .optA .acts{justify-content:center}
+  /* ---------- A — the portrait leads ------------------------------------------
+     Desktop A gives the card equal billing with the copy. A phone cannot put them
+     side by side, so it splits the screen instead: the mountain gets a clean band
+     with no veil on it at all, and the card sits across the seam, half in the
+     photograph and half on solid ground. Nothing is written over the picture. */
+  .optA{--split:clamp(238px,33svh,320px);background:#0B1015}
+  /* The photo panel is genuinely --split tall rather than a gradient painted to look
+     like one. Same picture, but the seam is a real edge and the ground below it is
+     opaque by construction, not by a colour stop that has to be kept in sync. */
+  .optA .bg{inset:0 0 auto 0;height:var(--split);
+    border-bottom:1px solid var(--bronze)}
+  .optA .bg img{object-position:50% 30%}
+  .optA .veil{background:none}
+  .optA .wrap2{justify-content:flex-start;align-items:flex-start;
+    padding:calc(var(--split) - 118px) var(--gut) 26px;gap:0}
+  /* Floor, not a nudge: the role word measures 161px at this tracking and the id block
+     adds 40px of padding, so a boxed card under ~204px truncates it. Third time. */
+  .optA .card{width:min(58%,212px);min-width:204px;margin:0 0 20px}
+  .optA .body{font-size:15px}
+  .optA .acts{margin-top:16px}
 
-  /* B — editorial. Headline leads at full force, the card follows as a signature that
-     bleeds off the right edge, exactly the offset the desktop version has. */
-  .optB .veil{background:linear-gradient(180deg,rgba(6,10,14,.66) 0%,rgba(6,10,14,.52) 40%,
-    rgba(6,10,14,.30) 62%,rgba(6,10,14,.72) 100%)}
-  /* The preview label sits at top:74px and is 31px tall, so top padding under 116px puts
-     the kicker underneath it. That is what read as "poorly done" — the label looked like
-     it was covering the design rather than annotating it. */
-  .optB .wrap2{justify-content:flex-start;align-items:stretch;
-    padding:118px var(--gut) 26px;gap:0}
+  /* A on a short phone. A 204px portrait card plus the full copy needs about 700px of
+     height; below that the CTAs fall off the screen. Rather than shrink the card until
+     HÉRAÐSDÓMSLÖGMAÐUR truncates, the identity turns into a row on the seam — the same
+     idea, laid on its side. Triggered by height, not width, because that is the actual
+     constraint. */
+  @media (max-height:720px){
+    /* the row sits fully below the seam: straddling it put the name and the role on the
+       photograph, where the bronze role line measured 1.2:1 */
+    .optA .wrap2{padding:calc(var(--split) + 16px) var(--gut) 26px}
+    .optA .card{width:auto;min-width:0;display:flex;align-items:center;gap:13px;
+      background:none;border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
+      -webkit-backdrop-filter:none;margin:0 0 18px;padding:0 0 15px;
+      border-bottom:1px solid rgba(255,255,255,.16)}
+    .optA .card .ph{width:64px;flex:none;aspect-ratio:1/1;border-radius:9px}
+    .optA .card .ph img{object-position:50% 18%}
+    .optA .card .id{padding:0;border-top:0}
+    .optA .card .nm{font-size:17px}
+    .optA .card .rl{margin-top:3px;font-size:10px}
+  }
+
+  /* ---------- B — the sentence leads ------------------------------------------
+     Desktop B is editorial: the headline at full force, the card as a signature.
+     On a phone the magazine version of that is a cover. The photograph is whole,
+     the type sits on the bottom third where the gradient lives, and the card stops
+     being a card — it becomes the byline that introduces the statement. */
+  .optB .bg img{object-position:50% 42%}
+  /* Clean picture down to 30%, then a single ramp that reaches .86 by the headline.
+     Sampled backdrop under the byline is 0.32, which needs .48 to carry 15px white. */
+  /* Anchored to the BOTTOM in pixels, because the block it protects is bottom-anchored
+     and a fixed pixel height. As a percentage of the frame it slid out from under the
+     copy on a short phone — the kicker measured 2.5:1 at 375x667 and 7.8:1 at 360x740
+     from the same stylesheet. */
+  .optB .veil{background:linear-gradient(to top,rgba(6,10,14,.96) 0,
+    rgba(6,10,14,.92) 170px,rgba(6,10,14,.78) 300px,rgba(6,10,14,.72) 390px,
+    rgba(6,10,14,.30) 470px,transparent 540px)}
+  .optB .wrap2{justify-content:flex-end;align-items:stretch;
+    padding:112px var(--gut) 34px;gap:0}
+  /* the desktop rule sizes this card at 28% of the row; on a phone it is a byline
+     that has to span the measure, so width and self-alignment are both reset. */
+  .optB .card{position:static;transform:none;width:auto;
+    display:flex;align-items:center;gap:12px;background:none;
+    border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
+    -webkit-backdrop-filter:none;padding:15px 0 0;margin:15px 0 17px;
+    border-top:1px solid rgba(255,255,255,.20)}
+  .optB .card .ph{width:46px;flex:none;aspect-ratio:1/1;border-radius:50%}
+  .optB .card .id{padding:0;border-top:0}
+  .optB .card .nm{font-size:15px}
+  /* The bronze micro-caps need an opaque ground to pass AA at 9.5px — it measures
+     1.7:1 on the photograph even under a heavy scrim. Bronze stays where the ground
+     is solid (A's card, D's sheet); over the picture the role line goes white. */
+  .optB .card .rl{margin-top:2px;font-size:9.5px;color:rgba(255,255,255,.96)}
+  /* the desktop rule reserves a 32vw column for the absolutely placed card; on a phone
+     the card is in the flow and that reservation would clip the headline */
   .optB .copy{padding:0}
-  .optB .head{font-size:clamp(32px,9.2vw,42px)}
-  /* Height is the constraint on a phone, not taste. After the copy block there is roughly
-     340px left, and this card is photo(5:6) + name block, so it caps near 200px wide to sit
-     fully on screen. It is right-aligned rather than bled off the edge, which read as
-     overflow rather than as an offset. */
-  .optB .card{width:min(60%,212px);align-self:flex-end;margin:22px 0 0}
-  /* Hard floor for any portrait card: HÉRAÐSDÓMSLÖGMAÐUR measures 161px at this size
-     and the id block adds 40px of padding, so anything under ~202px clips it. This is
-     the third time that single word has broken a card, so it is a rule now, not a nudge. */
-  .optA .card,.optB .card{min-width:204px}
+  .optB .head{font-size:clamp(27px,8.6vw,34px)}
 
-  /* C — cinematic. The mountain keeps the screen; copy sits centred in it and the card
-     shrinks to a horizontal chip so it signs the frame without occupying it. */
-  .optC .veil{background:radial-gradient(120% 46% at 50% 44%,rgba(6,10,14,.72) 0%,
-    rgba(6,10,14,.40) 62%,rgba(6,10,14,.30) 100%),
-    linear-gradient(180deg,rgba(6,10,14,.30) 0%,transparent 30%,rgba(6,10,14,.80) 100%)}
+  /* ---------- C — the place leads ---------------------------------------------
+     Desktop C is cinematic and centred with the card as a corner signature. The
+     phone version keeps the photograph almost clean — a soft radial under the type
+     only — and the identity shrinks to a signature at the foot of the frame, the
+     way a name sits under a letter rather than in a box beside it. */
+  .optC .bg img{object-position:50% 46%}
+  /* Two local ellipses, no bottom wash. A full-width gradient strong enough to carry the
+     signature at the foot was darkening the frame from 62% down, which left C with 3% of
+     the picture clean — the least of the four, when showing the mountain is its entire
+     reason to exist. One ellipse sits under the copy, one under the signature, and the
+     photograph keeps everything between and around them. */
+  /* Both ellipses are sized in PIXELS, not in percentages of the frame. The copy block
+     is a fixed pixel height, so a percentage vignette shrinks away from it on a short
+     phone — that is exactly how the buttons fell to 3.6:1 at 360x640 while passing at
+     360x740. A fixed ellipse covers the same block on every device. */
+  .optC .veil{background:
+    radial-gradient(300px 255px at 50% 47%,rgba(6,10,14,.90) 0%,rgba(6,10,14,.70) 60%,
+      rgba(6,10,14,.12) 92%,transparent 100%),
+    radial-gradient(210px 82px at 50% calc(100% - 68px),rgba(6,10,14,.86) 0%,
+      rgba(6,10,14,.44) 60%,transparent 100%)}
   .optC .wrap2{justify-content:center;align-items:center;text-align:center;
-    padding:104px var(--gut) 132px}
-  .optC .body{margin-inline:auto}
+    padding:120px var(--gut) 128px}
+  /* Narrower measure and content-width buttons, so the vignette that protects them can
+     stay an ellipse inside the frame instead of a full-width band. C is the option whose
+     whole job is showing the mountain; a band across the middle would make it option B. */
+  .optC .copy{max-width:300px;margin-inline:auto}
+  .optC .head{font-size:clamp(24px,7.2vw,30px)}
+  .optC .body{margin-inline:auto;max-width:26ch}
   .optC .acts{justify-content:center}
-  .optC .card{position:absolute;left:var(--gut);right:var(--gut);
-    bottom:clamp(22px,4vh,40px);width:auto;display:flex;align-items:center;gap:14px;
-    padding:10px 14px 10px 10px}
-  .optC .card .ph{width:52px;flex:none;aspect-ratio:1/1;border-radius:7px}
-  .optC .card .id{padding:0;border-top:0}
-  .optC .card .nm{font-size:15px}
-  .optC .card .rl{margin-top:3px;font-size:9.5px}
+  /* The outline button carries its own ground. Darkening a further slice of the
+     photograph to make one control legible is the wrong trade on the option whose
+     job is showing the photograph. */
+  .optC .acts .btn{flex:0 0 auto;padding:13px 17px;background:rgba(9,13,18,.46);
+    backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+  .optC .acts .btn.solid{background:var(--bronze);backdrop-filter:none;
+    -webkit-backdrop-filter:none}
+  .optC .card{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(26px,4vh,44px);
+    width:auto;display:flex;flex-direction:column;align-items:center;gap:9px;
+    background:none;border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
+    -webkit-backdrop-filter:none;padding:0}
+  /* the hairline is the signature rule, drawn on the wrapper so it centres itself */
+  .optC .card::before{content:"";width:34px;height:1px;background:var(--bronze-lift);
+    opacity:.75}
+  .optC .card .ph{width:40px;flex:none;aspect-ratio:1/1;border-radius:50%}
+  .optC .card .id{padding:0;border-top:0;text-align:center}
+  .optC .card .nm{font-size:14.5px}
+  .optC .card .rl{margin-top:3px;font-size:9.5px;color:rgba(255,255,255,.97)}
 
-  /* D — base sheet. The mountain owns the top of the screen untouched and everything
-     else lives in a panel resting on the bottom edge, which is D's whole proposition. */
-  .optD .veil{background:linear-gradient(180deg,rgba(6,10,14,.34) 0%,transparent 26%,
-    transparent 40%,rgba(6,10,14,.55) 60%,rgba(6,10,14,.92) 100%)}
+  /* ---------- D — the panel leads ---------------------------------------------
+     D's whole proposition is that the mountain is left alone, so on a phone it is
+     left alone completely: no gradient above the sheet at all. The sheet is opaque
+     rather than glass, because glass over a dark photograph reads as mud, and it
+     carries the identity as its own header row above a rule. */
+  .optD .bg img{object-position:50% 34%}
+  .optD .veil{background:none}
   .optD .wrap2{justify-content:flex-end;align-items:stretch;padding:0;gap:0}
-  /* The sheet sizes to its own content and the mountain simply takes the rest. Any top
-     padding here is padding the sheet cannot afford: it pushed the CTAs below the fold. */
-  .optD .sheet{background:rgba(10,14,19,.92);backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.12);
-    border-radius:16px 16px 0 0;padding:18px var(--gut) 24px;
-    display:flex;flex-direction:column;gap:13px}
-  .optD .card{width:auto;display:flex;align-items:center;gap:14px;background:none;
-    border:0;box-shadow:none;border-radius:0;padding:0}
-  .optD .card .ph{width:58px;flex:none;aspect-ratio:1/1;border-radius:8px}
+  .optD .sheet{background:#0B1015;border-top:1px solid var(--bronze);
+    border-radius:18px 18px 0 0;padding:18px var(--gut) 26px;
+    box-shadow:0 -30px 60px rgba(6,9,12,.55);
+    display:flex;flex-direction:column;gap:14px}
+  .optD .card{width:auto;align-self:stretch;
+    display:flex;align-items:center;gap:13px;background:none;border:0;
+    box-shadow:none;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;
+    padding:0 0 14px;border-bottom:1px solid rgba(255,255,255,.13)}
+  .optD .card .ph{width:52px;flex:none;aspect-ratio:1/1;border-radius:9px}
+  .optD .card .ph img{object-position:50% 18%}
   .optD .card .id{padding:0;border-top:0}
   .optD .card .nm{font-size:16px}
   .optD .card .rl{margin-top:3px;font-size:9.5px}
   .optD .copy{padding:0}
-  .optD .head{font-size:clamp(26px,7vw,31px);max-width:none}
-  .optD .body{font-size:15.5px}
+  .optD .head{font-size:clamp(25px,7.4vw,31px);max-width:none}
 }
 
 </style>
@@ -247,16 +364,20 @@ body{background:var(--night);color:#fff}
     <div class="copy">
       <p class="kicker">Fastur punktur þegar mest á reynir</p>
       <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <!-- inside .copy, and absolutely placed on desktop. On a phone this becomes the
+           byline under the headline, where the scrim is already strong enough to carry
+           it at any viewport height; as a sibling above the headline its protection
+           depended on where the block happened to land. -->
+      <article class="card">
+        <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+        <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+      </article>
       <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
       <div class="acts">
         <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
         <a class="btn" href="#">Skoða þjónustu</a>
       </div>
     </div>
-    <article class="card">
-      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
-      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
-    </article>
   </div>
 </section>
 
