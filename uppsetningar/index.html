@@ -232,19 +232,38 @@ html.mnav-open .burger i{background:#fff}
     padding:12px 16px;border-top:0;border-left:1px solid rgba(27,32,39,.08)}
   .optE .card .id{border-left-color:rgba(255,255,255,.09)}
 
-  /* A — statement in the sky, the card standing on the field below it. Here there is no
-     plate competing for room, so his photograph stays upright and large. */
+  /* A — statement in the sky at the top, card standing on the low left shoulder of the
+     mountain at the foot, the painting reading between and around them.
+
+     Two things were wrong with this and only the second one was what it looked like.
+     Stacking the card straight under the copy closed the gap but buried the mountain and
+     left a dead strip of pale field along the bottom instead — the empty space had only
+     moved. The gap was never the fault: that band IS the painting. What was actually wrong
+     is that the card sat 30px off the bottom edge, so it read as sliding off the screen
+     rather than standing on the field. It now keeps a proper margin of painting beneath it,
+     and is bigger, which also shortens the run of bare mountain above it. */
   .optA .art img{object-position:50% 50%}
-  .optA .wrap2{justify-content:space-between;padding:114px var(--gut) clamp(22px,3.6vh,34px)}
+  .optA .wrap2{justify-content:space-between;
+    padding:114px var(--gut) clamp(46px,7.5vh,76px)}
   .optA .copy{max-width:none;flex:none}
   /* 176 = the 145.3px word plus this card's 28px of id padding, plus a hair. */
-  .optA .card{position:static;width:clamp(176px,21svh,198px);display:block}
+  .optA .card{position:static;width:clamp(186px,24svh,212px);display:block}
   .optA .card .ph{width:auto;aspect-ratio:636/739}
   .optA .card .id{display:block;padding:12px 14px 13px;border-left:0;
     border-top:1px solid rgba(27,32,39,.08)}
 
+  /* An upright card needs about 700px of screen to stand in. Below that A lies it down
+     like the other four rather than shaving paddings until the CTAs skim the fold —
+     at 360x640 the upright version ran 6px past it. */
+  @media (max-height:700px){
+    .optA .card{width:auto;display:flex;align-items:stretch}
+    .optA .card .ph{width:104px;flex:none;aspect-ratio:636/739}
+    .optA .card .id{flex:1;display:flex;flex-direction:column;justify-content:center;
+      padding:12px 16px;border-top:0;border-left:1px solid rgba(27,32,39,.08)}
+  }
+
   /* B — the plate, narrower margins, card above the words. */
-  .optB{--plate-top:114px;--plate-h:clamp(132px,20svh,200px)}
+  .optB{--plate-top:114px;--plate-h:clamp(110px,18svh,196px)}
   .optB .art{width:calc(100% - var(--gut)*2)}
   .optB .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
     padding-left:var(--gut);padding-right:var(--gut)}
@@ -265,7 +284,7 @@ html.mnav-open .burger i{background:#fff}
   .optD .head{max-width:none}
 
   /* E — the night plate, same tightening as B. */
-  .optE{--plate-top:114px;--plate-h:clamp(132px,20svh,200px)}
+  .optE{--plate-top:114px;--plate-h:clamp(110px,18svh,196px)}
   .optE .art{width:calc(100% - var(--gut)*2)}
   .optE .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
     padding-left:var(--gut);padding-right:var(--gut)}
