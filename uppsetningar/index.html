@@ -93,6 +93,7 @@ body{background:var(--night);color:#fff}
 .optC .card .id{padding:14px 16px 15px}
 
 /* ---------- D: base line. Mountain almost untouched, everything on one bottom row. ---------- */
+.sheet{display:contents}
 .optD .veil{background:linear-gradient(0deg,rgba(6,10,14,.94) 0%,rgba(6,10,14,.86) 26%,
   rgba(6,10,14,.52) 42%,rgba(6,10,14,.12) 58%,transparent 72%)}
 .optD .wrap2{align-items:flex-end;padding-bottom:clamp(36px,6vh,64px);
@@ -104,28 +105,79 @@ body{background:var(--night);color:#fff}
 .optD .card .ph{aspect-ratio:5/6}
 
 @media (max-width:900px){
+  /* Each option gets its OWN phone composition. A shared "stack it and hope" rule made all
+     four look identical on the device this will most often be opened on, which defeats the
+     entire point of a comparison page. Desktop DNA is preserved per option, expressed the
+     way a phone actually wants it. */
   .opt{height:auto;min-height:100svh}
-  .opt .wrap2{flex-direction:column;justify-content:center;align-items:flex-start;
-    gap:26px;padding-top:104px;padding-bottom:44px;text-align:left}
-  .opt .veil{background:linear-gradient(180deg,rgba(6,10,14,.55) 0%,rgba(6,10,14,.68) 45%,
-    rgba(6,10,14,.86) 100%)!important}
-  .opt .card{width:min(72%,260px)!important;align-self:flex-start!important;
-    position:static!important;margin:0!important;order:-1}
-  .optC .wrap2{text-align:left;padding-bottom:clamp(150px,24vh,210px)}
-  .optC .body{margin-inline:0}
-  .optC .acts{justify-content:flex-start}
+  .opt .wrap2{height:auto;min-height:100svh;flex-direction:column;text-align:left}
   .opt .copy{max-width:none}
-  /* C's card is a sibling of .wrap2, not a child, so forcing it into flow drops it behind
-     the fixed header. Keep it anchored bottom-left on phones too, which is also C's whole
-     idea, and reserve room for it above. */
-  /* width is set by the WIDEST WORD, not by taste: HÉRAÐSDÓMSLÖGMAÐUR at .17em tracking
-     needs ~146px of content box and was being clipped by the card's overflow:hidden. */
-  .optC .card{position:absolute!important;left:var(--gut);bottom:clamp(20px,4vh,40px);
-    width:min(62%,212px)!important;margin:0!important;order:0}
-  /* B carried desktop bottom padding into the phone layout and pushed the section 13px
-     past the viewport, which showed up as a scroll jog. */
-  .optB .copy{padding-bottom:0}
+  .opt .card{position:static;margin:0}
+  .opt .acts{gap:10px}
+  .opt .acts .btn{flex:1 1 46%;text-align:center;padding:14px 12px}
+  .opt .head{font-size:clamp(29px,8.4vw,38px)}
+  /* HÉRAÐSDÓMSLÖGMAÐUR is 18 characters and the card clips. Easing the tracking on phones
+     buys about 8px and stops narrow cards truncating it; widths below are then set with
+     that word's real measured need in mind, not by eye. */
+  .opt .card .rl{letter-spacing:.13em}
+  .opt .kicker{font-size:clamp(16px,4.6vw,20px)}
+
+  /* A — balanced stack. The desktop idea is card and copy sharing billing side by side,
+     so on a phone they share it vertically: portrait card, then copy, both centred. */
+  .optA .veil{background:linear-gradient(180deg,rgba(6,10,14,.50) 0%,rgba(6,10,14,.62) 46%,
+    rgba(6,10,14,.86) 100%)}
+  .optA .wrap2{justify-content:center;align-items:center;text-align:center;
+    padding:104px var(--gut) 44px;gap:24px}
+  .optA .card{width:min(66%,238px)}
+  .optA .body{margin-inline:auto}
+  .optA .acts{justify-content:center}
+
+  /* B — editorial. Headline leads at full force, the card follows as a signature that
+     bleeds off the right edge, exactly the offset the desktop version has. */
+  .optB .veil{background:linear-gradient(180deg,rgba(6,10,14,.66) 0%,rgba(6,10,14,.52) 40%,
+    rgba(6,10,14,.30) 62%,rgba(6,10,14,.72) 100%)}
+  .optB .wrap2{justify-content:flex-start;align-items:stretch;
+    padding:112px 0 0 var(--gut);gap:0}
+  .optB .copy{padding:0 var(--gut) 0 0}
+  .optB .head{font-size:clamp(34px,10vw,46px)}
+  .optB .card{width:min(70%,238px);align-self:flex-end;margin:28px -18px 0 0}
+
+  /* C — cinematic. The mountain keeps the screen; copy sits centred in it and the card
+     shrinks to a horizontal chip so it signs the frame without occupying it. */
+  .optC .veil{background:radial-gradient(120% 46% at 50% 44%,rgba(6,10,14,.72) 0%,
+    rgba(6,10,14,.40) 62%,rgba(6,10,14,.30) 100%),
+    linear-gradient(180deg,rgba(6,10,14,.30) 0%,transparent 30%,rgba(6,10,14,.80) 100%)}
+  .optC .wrap2{justify-content:center;align-items:center;text-align:center;
+    padding:104px var(--gut) 132px}
+  .optC .body{margin-inline:auto}
+  .optC .acts{justify-content:center}
+  .optC .card{position:absolute;left:var(--gut);right:var(--gut);
+    bottom:clamp(22px,4vh,40px);width:auto;display:flex;align-items:center;gap:14px;
+    padding:10px 14px 10px 10px}
+  .optC .card .ph{width:52px;flex:none;aspect-ratio:1/1;border-radius:7px}
+  .optC .card .id{padding:0;border-top:0}
+  .optC .card .nm{font-size:15px}
+  .optC .card .rl{margin-top:3px;font-size:9.5px}
+
+  /* D — base sheet. The mountain owns the top of the screen untouched and everything
+     else lives in a panel resting on the bottom edge, which is D's whole proposition. */
+  .optD .veil{background:linear-gradient(180deg,rgba(6,10,14,.34) 0%,transparent 26%,
+    transparent 40%,rgba(6,10,14,.55) 60%,rgba(6,10,14,.92) 100%)}
+  .optD .wrap2{justify-content:flex-end;align-items:stretch;padding:104px 0 0;gap:0}
+  .optD .sheet{background:rgba(10,14,19,.90);backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.12);
+    border-radius:16px 16px 0 0;padding:20px var(--gut) 30px;
+    display:flex;flex-direction:column;gap:16px}
+  .optD .card{width:auto;display:flex;align-items:center;gap:14px;background:none;
+    border:0;box-shadow:none;border-radius:0;padding:0}
+  .optD .card .ph{width:58px;flex:none;aspect-ratio:1/1;border-radius:8px}
+  .optD .card .id{padding:0;border-top:0}
+  .optD .card .nm{font-size:16px}
+  .optD .card .rl{margin-top:3px;font-size:9.5px}
+  .optD .copy{padding:0}
+  .optD .head{font-size:clamp(28px,7.6vw,34px);max-width:none}
 }
+
 </style>
 </head>
 <body>
@@ -220,6 +272,7 @@ body{background:var(--night);color:#fff}
   <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
   <div class="veil"></div>
   <div class="wrap2">
+    <div class="sheet">
     <article class="card">
       <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
       <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
@@ -232,6 +285,7 @@ body{background:var(--night);color:#fff}
         <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
         <a class="btn" href="#">Skoða þjónustu</a>
       </div>
+    </div>
     </div>
   </div>
 </section>
