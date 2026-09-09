@@ -132,14 +132,17 @@ body{background:var(--night);color:#fff}
      percentage was darkening a third of the picture to protect a 72px header.
      ------------------------------------------------------------------------------ */
   .opt{height:auto;min-height:100svh}
-  /* Measured, not eyeballed: the portrait crop reads 0.25 at the 98th percentile behind
-     the header, so .70 falling to nothing over 155px carries the white brand at 4.9:1.
-     The old 26% wash was darkening 190px of picture to protect a 72px header. */
-  .opt::before{height:155px;background:linear-gradient(180deg,rgba(6,10,14,.70) 0%,
-    rgba(6,10,14,.38) 46%,rgba(6,10,14,.10) 80%,transparent 100%)}
+  /* Measured, not eyeballed. The portrait crop reads 0.33 behind the header, which needs
+     .44 to carry the white brand; .68 falling to nothing over 120px gives 4.6:1 with the
+     header still sitting in it. Every pixel this is shortened by is a pixel of mountain
+     given back, which is the whole argument of this page. */
+  .opt::before{height:120px;background:linear-gradient(180deg,rgba(6,10,14,.68) 0%,
+    rgba(6,10,14,.36) 44%,rgba(6,10,14,.08) 82%,transparent 100%)}
   .opt .wrap2{height:auto;min-height:100svh;flex-direction:column;text-align:left}
   .opt .copy{max-width:none}
-  .opt .card{position:static;margin:0}
+  /* No frosted glass anywhere on a phone. A blur over a dark photograph reads as a
+     smudge, not as a material. */
+  .opt .card{position:static;margin:0;backdrop-filter:none;-webkit-backdrop-filter:none}
   .opt .acts{gap:10px;margin-top:20px}
   .opt .acts .btn{flex:1 1 46%;text-align:center;padding:14px 12px}
   /* Fit to the widest WORD, not to the line. LÖGFRÆÐIÞJÓNUSTA is 16 characters and in
@@ -149,7 +152,10 @@ body{background:var(--night);color:#fff}
   /* .72 is a desktop opacity. On a phone this line sits on the photograph in two of the
      four options and it is the first thing to fail a contrast check; .86 reads as the
      same soft italic and costs nothing. */
-  .opt .kicker{font-size:clamp(16px,4.4vw,19px);margin-bottom:8px;opacity:.9}
+  /* Never dim a line that sits on a photograph — opacity is the wrong lever for an
+     accent. The softness comes from the colour, which composites predictably. */
+  .opt .kicker{font-size:clamp(16px,4.4vw,19px);margin-bottom:8px;opacity:1;
+    color:rgba(255,255,255,.95)}
   /* one step lighter than the desktop body colour: over a photograph #DCE1E7 lands at
      4.48:1 on the widest phone, which is a fail by 0.02 */
   .opt .body{font-size:15.5px;line-height:1.5;color:#E4E9EF}
@@ -164,14 +170,24 @@ body{background:var(--night);color:#fff}
      side by side, so it splits the screen instead: the mountain gets a clean band
      with no veil on it at all, and the card sits across the seam, half in the
      photograph and half on solid ground. Nothing is written over the picture. */
-  .optA{--split:clamp(238px,33svh,320px);background:#0B1015}
-  /* The photo panel is genuinely --split tall rather than a gradient painted to look
-     like one. Same picture, but the seam is a real edge and the ground below it is
-     opaque by construction, not by a colour stop that has to be kept in sync. */
-  .optA .bg{inset:0 0 auto 0;height:var(--split);
-    border-bottom:1px solid var(--bronze)}
-  .optA .bg img{object-position:50% 30%}
-  .optA .veil{background:none}
+  /* The photograph runs the whole frame. Cutting it at --split and standing a black
+     panel under it threw the picture away below the seam and read as a crop, not as a
+     composition. What was a hard edge between two materials is now a rule DRAWN across
+     one continuous image, and the ground under the copy is the same mountain under a
+     tonal grade that stops at .93 — never flat black, so the rock is still faintly
+     there behind the type. */
+  .optA{--split:clamp(238px,33svh,320px)}
+  .optA .bg img{object-position:50% 34%}
+  .optA .veil{background:linear-gradient(180deg,
+    rgba(6,10,14,0) 0,rgba(6,10,14,0) calc(var(--split) - 96px),
+    rgba(6,10,14,.40) calc(var(--split) - 20px),
+    rgba(6,10,14,.78) calc(var(--split) + 70px),
+    rgba(6,10,14,.86) 100%)}
+  /* the horizon rule: it fades out at both ends so it reads as a line someone drew,
+     not as the edge where the photograph stopped */
+  .optA .veil::after{content:"";position:absolute;left:0;right:0;top:var(--split);
+    height:1px;background:linear-gradient(90deg,transparent,var(--bronze) 16%,
+      var(--bronze) 84%,transparent)}
   .optA .wrap2{justify-content:flex-start;align-items:flex-start;
     padding:calc(var(--split) - 118px) var(--gut) 26px;gap:0}
   /* Floor, not a nudge: the role word measures 161px at this tracking and the id block
@@ -188,7 +204,7 @@ body{background:var(--night);color:#fff}
   @media (max-height:720px){
     /* the row sits fully below the seam: straddling it put the name and the role on the
        photograph, where the bronze role line measured 1.2:1 */
-    .optA .wrap2{padding:calc(var(--split) + 16px) var(--gut) 26px}
+    .optA .wrap2{padding:calc(var(--split) + 24px) var(--gut) 26px}
     .optA .card{width:auto;min-width:0;display:flex;align-items:center;gap:13px;
       background:none;border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
       -webkit-backdrop-filter:none;margin:0 0 18px;padding:0 0 15px;
@@ -197,7 +213,9 @@ body{background:var(--night);color:#fff}
     .optA .card .ph img{object-position:50% 18%}
     .optA .card .id{padding:0;border-top:0}
     .optA .card .nm{font-size:17px}
-    .optA .card .rl{margin-top:3px;font-size:10px}
+    /* on the graded photograph rather than inside a card, so the same rule as B and C:
+       bronze micro-caps need an opaque ground, over a picture the role line is white */
+    .optA .card .rl{margin-top:3px;font-size:10px;color:rgba(255,255,255,.96)}
   }
 
   /* ---------- B — the sentence leads ------------------------------------------
@@ -212,8 +230,8 @@ body{background:var(--night);color:#fff}
      and a fixed pixel height. As a percentage of the frame it slid out from under the
      copy on a short phone — the kicker measured 2.5:1 at 375x667 and 7.8:1 at 360x740
      from the same stylesheet. */
-  .optB .veil{background:linear-gradient(to top,rgba(6,10,14,.96) 0,
-    rgba(6,10,14,.92) 170px,rgba(6,10,14,.78) 300px,rgba(6,10,14,.72) 390px,
+  .optB .veil{background:linear-gradient(to top,rgba(6,10,14,.93) 0,
+    rgba(6,10,14,.90) 170px,rgba(6,10,14,.78) 300px,rgba(6,10,14,.72) 390px,
     rgba(6,10,14,.30) 470px,transparent 540px)}
   .optB .wrap2{justify-content:flex-end;align-items:stretch;
     padding:112px var(--gut) 34px;gap:0}
@@ -242,40 +260,35 @@ body{background:var(--night);color:#fff}
      only — and the identity shrinks to a signature at the foot of the frame, the
      way a name sits under a letter rather than in a box beside it. */
   .optC .bg img{object-position:50% 46%}
-  /* Two local ellipses, no bottom wash. A full-width gradient strong enough to carry the
-     signature at the foot was darkening the frame from 62% down, which left C with 3% of
-     the picture clean — the least of the four, when showing the mountain is its entire
-     reason to exist. One ellipse sits under the copy, one under the signature, and the
-     photograph keeps everything between and around them. */
-  /* Both ellipses are sized in PIXELS, not in percentages of the frame. The copy block
-     is a fixed pixel height, so a percentage vignette shrinks away from it on a short
-     phone — that is exactly how the buttons fell to 3.6:1 at 360x640 while passing at
-     360x740. A fixed ellipse covers the same block on every device. */
-  .optC .veil{background:
-    radial-gradient(300px 255px at 50% 47%,rgba(6,10,14,.90) 0%,rgba(6,10,14,.70) 60%,
-      rgba(6,10,14,.12) 92%,transparent 100%),
-    radial-gradient(210px 82px at 50% calc(100% - 68px),rgba(6,10,14,.86) 0%,
-      rgba(6,10,14,.44) 60%,transparent 100%)}
+  /* Nothing on the frame at all. C's grade is carried BY THE CONTENT: each block paints
+     its own full-width band that fades in over 76px of its own padding and out again,
+     so the darkening is exactly as tall as the words and moves with them at every
+     viewport. No ellipse to see, no blur, and the sky above and the field below stay
+     untouched — which is the only reason C exists as a separate option. */
+  .optC .veil{background:none}
+  /* the feather and the frame padding both scale with height, or the 152px the two
+     feathers add pushes the block off a 640px screen */
+  .optC{--feather:clamp(48px,9vh,76px)}
   .optC .wrap2{justify-content:center;align-items:center;text-align:center;
-    padding:120px var(--gut) 128px}
+    padding:clamp(106px,13vh,112px) 0 clamp(104px,16vh,132px)}
   /* Narrower measure and content-width buttons, so the vignette that protects them can
      stay an ellipse inside the frame instead of a full-width band. C is the option whose
      whole job is showing the mountain; a band across the middle would make it option B. */
-  .optC .copy{max-width:300px;margin-inline:auto}
+  .optC .copy{max-width:none;width:100%;
+    padding:var(--feather) max(var(--gut),calc(50% - 150px)) var(--feather);
+    background:linear-gradient(180deg,rgba(6,10,14,0) 0,rgba(6,10,14,.74) var(--feather),
+      rgba(6,10,14,.80) calc(100% - var(--feather)),rgba(6,10,14,0) 100%)}
   .optC .head{font-size:clamp(24px,7.2vw,30px)}
   .optC .body{margin-inline:auto;max-width:26ch}
   .optC .acts{justify-content:center}
-  /* The outline button carries its own ground. Darkening a further slice of the
-     photograph to make one control legible is the wrong trade on the option whose
-     job is showing the photograph. */
-  .optC .acts .btn{flex:0 0 auto;padding:13px 17px;background:rgba(9,13,18,.46);
-    backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-  .optC .acts .btn.solid{background:var(--bronze);backdrop-filter:none;
-    -webkit-backdrop-filter:none}
-  .optC .card{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(26px,4vh,44px);
+  .optC .acts .btn{flex:0 0 auto;padding:13px 17px}
+  .optC .card{position:absolute;left:0;right:0;bottom:0;
     width:auto;display:flex;flex-direction:column;align-items:center;gap:9px;
-    background:none;border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
-    -webkit-backdrop-filter:none;padding:0}
+    border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    padding:40px var(--gut) clamp(26px,4vh,44px);
+    background:linear-gradient(180deg,rgba(6,10,14,0) 0,rgba(6,10,14,.62) 40px,
+      rgba(6,10,14,.78) 100%)}
   /* the hairline is the signature rule, drawn on the wrapper so it centres itself */
   .optC .card::before{content:"";width:34px;height:1px;background:var(--bronze-lift);
     opacity:.75}
@@ -292,7 +305,9 @@ body{background:var(--night);color:#fff}
   .optD .bg img{object-position:50% 34%}
   .optD .veil{background:none}
   .optD .wrap2{justify-content:flex-end;align-items:stretch;padding:0;gap:0}
-  .optD .sheet{background:#0B1015;border-top:1px solid var(--bronze);
+  /* .94 rather than opaque: the sheet still reads as a surface, and the mountain it
+     rests on carries on faintly behind it instead of being cut off by it. */
+  .optD .sheet{background:rgba(8,12,17,.94);border-top:1px solid var(--bronze);
     border-radius:18px 18px 0 0;padding:18px var(--gut) 26px;
     box-shadow:0 -30px 60px rgba(6,9,12,.55);
     display:flex;flex-direction:column;gap:14px}
