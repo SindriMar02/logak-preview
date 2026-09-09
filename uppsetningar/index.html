@@ -80,15 +80,26 @@ html.mnav-open .burger i{background:#fff}
 .opt .btn.solid{background:var(--bronze);border-color:var(--bronze);color:#fff}
 .opt .btn.solid:hover{background:var(--bronze-lift);border-color:var(--bronze-lift);color:#fff}
 
-/* ---------- the identity, a row rather than a boxed card ----------
-   No box anywhere in this rebuild. On paper a card would be a panel on a panel, and over the
-   painting it would be the same pasted-on object the photograph versions kept producing. */
-.card{display:flex;align-items:center;gap:14px}
-.card .ph{flex:none;overflow:hidden;background:var(--paper-2)}
-.card .ph img{width:100%;height:100%;object-fit:cover;display:block;object-position:50% 18%}
+/* ---------- the namecard ------------------------------------------------------------------
+   A real card with a real photograph of him, which is what was asked for from the first
+   brief onwards and what I let erode into a byline and then into a 46px avatar. The
+   objection that killed it was that a hard-edged box looks pasted onto a PHOTOGRAPH — true,
+   and it does not apply here: a printed card lying on paper is the most natural object in
+   the world. So it comes back, at a size where his face actually reads.
+
+   The floor is measured, not estimated. HÉRAÐSDÓMSLÖGMAÐUR renders at 145.3px at 9.5px and
+   .13em, and about 158px at the desktop 10px/.15em; the id block spends 32px on padding. So
+   196px is the narrowest a vertical card can be. That word has now truncated a card five
+   times in this build, every time because the width was reasoned about instead of measured. */
+.card{width:clamp(196px,20vw,268px);flex:none;background:#fff;
+  border:1px solid rgba(27,32,39,.10);border-radius:6px;overflow:hidden;
+  box-shadow:0 16px 38px rgba(27,32,39,.13)}
+.card .ph{aspect-ratio:636/739;overflow:hidden;background:var(--paper-2)}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block;object-position:50% 16%}
+.card .id{padding:14px 16px 16px;border-top:1px solid rgba(27,32,39,.08)}
 .card .nm{font-family:Boska,serif;font-weight:500;line-height:1.15;color:var(--ink);
-  font-size:clamp(16px,1.4vw,20px)}
-.card .rl{margin-top:4px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  font-size:clamp(16px,1.35vw,19px)}
+.card .rl{margin-top:5px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--bronze)}
 
 /* ==========================================================================================
@@ -101,31 +112,28 @@ html.mnav-open .burger i{background:#fff}
 .optA .wrap2{flex-direction:column;justify-content:center;align-items:flex-start}
 .optA .copy{max-width:min(48%,540px)}
 .optA .head{font-size:clamp(30px,3.6vw,54px)}
-.optA .card{position:absolute;left:var(--gut);bottom:clamp(26px,5vh,54px);z-index:3}
-.optA .card .ph{width:clamp(48px,4vw,58px);aspect-ratio:1/1;border-radius:50%}
-/* Bronze needs a light, quiet ground. It clears AA on paper (5.0:1) and on the night plate,
-   but this line sits down in the painted field, which measures 0.33 — bronze reads 2.05:1
-   there. Same rule as everywhere else on this page: the colour follows the ground. */
-.optA .card .rl{color:var(--ink)}
+/* the card is pinned to the opposite corner from the copy, so the two never negotiate for
+   vertical room no matter how short the window gets — and the painting reads between them */
+.optA .card{position:absolute;right:var(--gut);bottom:clamp(26px,5vh,54px);z-index:3;
+  width:clamp(196px,17vw,236px)}
 
 /* ==========================================================================================
    B — the painting hung, everything under it
    A print on a wall with a proper margin around it, then the name, then the words. The most
    conservative of the five and the one that would age slowest.
    ========================================================================================== */
-.optB{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,30svh,330px)}
+.optB{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,26svh,280px)}
 .optB .art{inset:auto auto auto 50%;transform:translateX(-50%);
   top:var(--plate-top);height:var(--plate-h);
   width:min(880px,calc(100% - var(--gut)*2));
   box-shadow:0 22px 54px rgba(27,32,39,.18)}
 .optB .art img{object-position:50% 44%}
-.optB .wrap2{flex-direction:column;justify-content:flex-start;align-items:stretch;
-  max-width:880px;gap:clamp(13px,2.2vh,20px);
-  padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(18px,3vh,30px));
+.optB .wrap2{flex-direction:row;justify-content:flex-start;align-items:flex-start;
+  max-width:880px;gap:clamp(24px,3.4vw,46px);
+  padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(20px,3.2vh,34px));
   padding-bottom:clamp(26px,5vh,54px)}
-.optB .card{padding-top:clamp(12px,2vh,16px);border-top:1px solid rgba(27,32,39,.16)}
-.optB .card .ph{width:clamp(56px,5vw,72px);aspect-ratio:5/6;border-radius:4px}
-.optB .head{font-size:clamp(28px,3.2vw,48px)}
+.optB .copy{flex:1}
+.optB .head{font-size:clamp(26px,2.7vw,40px)}
 
 /* ==========================================================================================
    C — the painting takes one side, the words the other
@@ -134,13 +142,12 @@ html.mnav-open .burger i{background:#fff}
    ========================================================================================== */
 .optC .art{inset:0 auto 0 0;width:52%}
 .optC .art img{object-position:62% 50%}
-.optC .wrap2{flex-direction:column;justify-content:center;align-items:flex-start;
-  max-width:none;padding-left:calc(52% + clamp(28px,4vw,72px));padding-right:var(--gut);
-  gap:clamp(16px,2.6vh,26px)}
-.optC .copy{max-width:46ch}
-.optC .head{font-size:clamp(28px,3.1vw,46px)}
-.optC .card{padding-bottom:clamp(12px,2vh,16px);border-bottom:1px solid rgba(27,32,39,.16)}
-.optC .card .ph{width:clamp(52px,4.4vw,62px);aspect-ratio:1/1;border-radius:50%}
+.optC .wrap2{flex-direction:row;justify-content:flex-start;align-items:center;
+  max-width:none;padding-left:calc(52% + clamp(28px,3.4vw,56px));padding-right:var(--gut);
+  gap:clamp(22px,2.6vw,40px)}
+.optC .copy{flex:1;max-width:42ch}
+.optC .head{font-size:clamp(25px,2.5vw,38px)}
+.optC .card{width:clamp(196px,15vw,224px)}
 
 /* ==========================================================================================
    D — the painting whole, the words on a sheet resting on it
@@ -157,7 +164,7 @@ html.mnav-open .burger i{background:#fff}
   max-width:var(--maxw);margin-inline:auto;width:100%}
 .optD .sheet .card{flex:none;align-self:center}
 .optD .sheet .copy{flex:1}
-.optD .card .ph{width:clamp(58px,5vw,74px);aspect-ratio:5/6;border-radius:4px}
+.optD .card{width:clamp(196px,15vw,214px)}
 .optD .head{font-size:clamp(26px,2.9vw,42px);max-width:18ch}
 .optD .body{max-width:52ch}
 
@@ -167,21 +174,23 @@ html.mnav-open .burger i{background:#fff}
    compared here, not a given. The plate reads as a print on a dark wall and the header stays
    white over it.
    ========================================================================================== */
-.optE{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,30svh,330px);
+.optE{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,26svh,280px);
   background:var(--night)}
 .optE .art{inset:auto auto auto 50%;transform:translateX(-50%);
   top:var(--plate-top);height:var(--plate-h);
   width:min(880px,calc(100% - var(--gut)*2));
   box-shadow:0 26px 64px rgba(0,0,0,.5)}
 .optE .art img{object-position:50% 44%}
-.optE .wrap2{flex-direction:column;justify-content:flex-start;align-items:stretch;
-  max-width:880px;gap:clamp(13px,2.2vh,20px);
-  padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(18px,3vh,30px));
+.optE .wrap2{flex-direction:row;justify-content:flex-start;align-items:flex-start;
+  max-width:880px;gap:clamp(24px,3.4vw,46px);
+  padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(20px,3.2vh,34px));
   padding-bottom:clamp(26px,5vh,54px)}
-.optE .card{padding-top:clamp(12px,2vh,16px);border-top:1px solid rgba(255,255,255,.16)}
-.optE .card .ph{width:clamp(56px,5vw,72px);aspect-ratio:5/6;border-radius:4px;
-  background:var(--night-3)}
-.optE .head{font-size:clamp(28px,3.2vw,48px);color:#F6F2EC}
+.optE .copy{flex:1}
+.optE .card{background:var(--night-2);border-color:rgba(255,255,255,.12);
+  box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.optE .card .ph{background:var(--night-3)}
+.optE .card .id{border-top-color:rgba(255,255,255,.09)}
+.optE .head{font-size:clamp(26px,2.7vw,40px);color:#F6F2EC}
 .optE .kicker{color:rgba(255,255,255,.86)}
 .optE .body{color:#DCE1E7}
 .optE .card .nm{color:#fff}
@@ -211,40 +220,55 @@ html.mnav-open .burger i{background:#fff}
   .opt .card .nm{font-size:16px}
   .opt .card .rl{margin-top:3px;font-size:9.5px;letter-spacing:.13em}
 
-  /* A — statement in the sky, name in the field, mountain between them. */
-  .optA .art img{object-position:50% 50%}
-  .optA .wrap2{justify-content:flex-start;padding:114px var(--gut) 0}
-  .optA .copy{max-width:none}
-  .optA .card{left:var(--gut);right:var(--gut);bottom:clamp(20px,3.4vh,36px)}
-  .optA .card .ph{width:46px}
+  /* The namecard turns on its side on a phone. A portrait card deep enough to show his face
+     properly is ~230px tall, and a painting plus that plus a headline plus a paragraph plus
+     two buttons does not fit one phone screen — something had to give, and shrinking his
+     photograph back to a stamp is the thing I already got wrong once. Laid on its side the
+     picture is still 104px across, six times the avatar it replaces, and the whole card
+     costs about 120px of height instead of 230. */
+  .opt .card{width:auto;display:flex;align-items:stretch}
+  .opt .card .ph{width:104px;flex:none;aspect-ratio:636/739}
+  .opt .card .id{flex:1;display:flex;flex-direction:column;justify-content:center;
+    padding:12px 16px;border-top:0;border-left:1px solid rgba(27,32,39,.08)}
+  .optE .card .id{border-left-color:rgba(255,255,255,.09)}
 
-  /* B — the plate, narrower margins. */
-  .optB{--plate-top:114px;--plate-h:clamp(140px,22svh,220px)}
+  /* A — statement in the sky, the card standing on the field below it. Here there is no
+     plate competing for room, so his photograph stays upright and large. */
+  .optA .art img{object-position:50% 50%}
+  .optA .wrap2{justify-content:space-between;padding:114px var(--gut) clamp(22px,3.6vh,34px)}
+  .optA .copy{max-width:none;flex:none}
+  /* 176 = the 145.3px word plus this card's 28px of id padding, plus a hair. */
+  .optA .card{position:static;width:clamp(176px,21svh,198px);display:block}
+  .optA .card .ph{width:auto;aspect-ratio:636/739}
+  .optA .card .id{display:block;padding:12px 14px 13px;border-left:0;
+    border-top:1px solid rgba(27,32,39,.08)}
+
+  /* B — the plate, narrower margins, card above the words. */
+  .optB{--plate-top:114px;--plate-h:clamp(132px,20svh,200px)}
   .optB .art{width:calc(100% - var(--gut)*2)}
-  .optB .wrap2{padding-left:var(--gut);padding-right:var(--gut)}
-  .optB .card .ph{width:58px}
+  .optB .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
+    padding-left:var(--gut);padding-right:var(--gut)}
 
   /* C — the split becomes a band over the words, the same idea laid down. */
-  .optC{--band-h:clamp(170px,27svh,260px)}
+  .optC{--band-h:clamp(160px,25svh,240px)}
   .optC .art{inset:0 0 auto 0;width:auto;height:var(--band-h)}
   .optC .art img{object-position:50% 46%}
-  .optC .wrap2{justify-content:flex-start;
-    padding:calc(var(--band-h) + clamp(20px,3vh,30px)) var(--gut) clamp(24px,4vh,34px)}
-  .optC .card .ph{width:48px}
+  .optC .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
+    padding:calc(var(--band-h) + clamp(18px,2.6vh,26px)) var(--gut) clamp(22px,3.6vh,32px)}
+  .optC .copy{max-width:none}
 
   /* D — the sheet becomes a column on the bottom edge. */
   .optD .art img{object-position:50% 50%}
   .optD .sheet{flex-direction:column;align-items:stretch;gap:14px;
     border-radius:16px 16px 0 0}
-  .optD .sheet .card{align-self:flex-start}
-  .optD .card .ph{width:56px}
+  .optD .card{align-self:stretch}
   .optD .head{max-width:none}
 
   /* E — the night plate, same tightening as B. */
-  .optE{--plate-top:114px;--plate-h:clamp(140px,22svh,220px)}
+  .optE{--plate-top:114px;--plate-h:clamp(132px,20svh,200px)}
   .optE .art{width:calc(100% - var(--gut)*2)}
-  .optE .wrap2{padding-left:var(--gut);padding-right:var(--gut)}
-  .optE .card .ph{width:58px}
+  .optE .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
+    padding-left:var(--gut);padding-right:var(--gut)}
 }
 </style>
 </head>
