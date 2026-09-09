@@ -108,6 +108,37 @@ body{background:var(--night);color:#fff}
 .optD .body{max-width:52ch}
 .optD .card .ph{aspect-ratio:5/6}
 
+/* ---------- E: the painting leads. A watercolour plate, then him, then the words. ------
+   The only option that is not a photograph. Akrafjall is painted rather than shot, which
+   is the one treatment a law office can own outright — nobody else in Akranes has this
+   picture. It hangs on the night ground like a plate on a wall rather than bleeding to
+   the edges, and the type sits under it in the order Sindri described: painting, then
+   the man, then what he says. It also happens to be the only option where the header
+   sits on solid ink rather than on sky, so the brand's bronze sub-line finally clears
+   AA there (6.3:1) instead of the 1.7:1 it reads over every photograph. */
+.optE{background:var(--night)}
+.optE .wrap2{flex-direction:column;justify-content:center;align-items:stretch;
+  max-width:880px;gap:clamp(18px,3vh,32px);
+  /* 118 not 96: the preview label ends at 105px and a 720-tall desktop window clamps
+     12vh down to the minimum, which put the label on the painting */
+  padding-top:clamp(118px,12vh,132px);padding-bottom:clamp(28px,5vh,56px)}
+.optE .plate{margin:0;overflow:hidden;background:#EDF1F5;
+  box-shadow:0 26px 64px rgba(0,0,0,.46)}
+.optE .plate img{display:block;width:100%;
+  height:clamp(150px,30svh,340px);object-fit:cover;object-position:50% 44%}
+/* the identity is a row under the painting, not a box on it — a caption line for the
+   plate above, which is what a name under a picture actually is */
+.optE .card{display:flex;align-items:center;gap:clamp(14px,2vw,20px);
+  background:none;border:0;box-shadow:none;border-radius:0;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  padding:clamp(13px,2vh,18px) 0 0;border-top:1px solid rgba(255,255,255,.16)}
+.optE .card .ph{width:clamp(62px,7vw,86px);flex:none;aspect-ratio:5/6;border-radius:5px}
+.optE .card .id{padding:0;border-top:0}
+.optE .card .nm{font-size:clamp(17px,1.5vw,21px)}
+.optE .card .rl{margin-top:4px;font-size:10px}
+.optE .head{font-size:clamp(28px,3.4vw,50px)}
+.optE .body{max-width:54ch}
+
 /* Between 901px and ~1160px there is not enough height beside a centred copy block for a
    360px corner card: at 960x800 the CTAs land on top of it. The block moves up out of the
    card's column rather than the card shrinking into an illegible stamp. */
@@ -127,6 +158,7 @@ body{background:var(--night);color:#fff}
        B  the sentence leads   — full photograph, byline row, copy on the bottom third
        C  the place leads      — full photograph, small centred copy, signed at the foot
        D  the panel leads      — mountain untouched, everything inside a sheet
+       E  the painting leads   — a watercolour plate, then him, then the words
 
      Header protection is a fixed 170px wash, not 26% of the section: on a phone a
      percentage was darkening a third of the picture to protect a 72px header.
@@ -297,6 +329,18 @@ body{background:var(--night);color:#fff}
   .optC .card .nm{font-size:14.5px}
   .optC .card .rl{margin-top:3px;font-size:9.5px;color:rgba(255,255,255,.97)}
 
+  /* ---------- E — the painting leads -------------------------------------------
+     Same stack on a phone, only tighter: the plate keeps its proportion, the caption
+     row stays a row, and the copy runs under both. Nothing here sits on a picture, so
+     nothing here needs a scrim — the one option on this page where legibility is a
+     non-question rather than something measured back from a photograph. */
+  .optE .wrap2{max-width:none;justify-content:flex-start;
+    padding:114px var(--gut) 30px;gap:clamp(15px,2.2vh,24px)}
+  .optE .plate img{height:clamp(142px,23svh,232px)}
+  .optE .card .ph{width:64px;border-radius:5px}
+  .optE .card .nm{font-size:17px}
+  .optE .card .rl{margin-top:3px;font-size:9.5px}
+
   /* ---------- D — the panel leads ---------------------------------------------
      D's whole proposition is that the mountain is left alone, so on a phone it is
      left alone completely: no gradient above the sheet at all. The sheet is opaque
@@ -436,6 +480,31 @@ body{background:var(--night);color:#fff}
         <a class="btn" href="#">Skoða þjónustu</a>
       </div>
     </div>
+    </div>
+  </div>
+</section>
+
+<section class="opt optE">
+  <div class="tag"><b>E</b><i>Málverk efst, portrett og texti undir</i></div>
+  <div class="wrap2">
+    <figure class="plate">
+      <picture>
+        <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
+        <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
+      </picture>
+    </figure>
+    <article class="card">
+      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
+    </article>
+    <div class="copy">
+      <p class="kicker">Fastur punktur þegar mest á reynir</p>
+      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
+      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
+      <div class="acts">
+        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+        <a class="btn" href="#">Skoða þjónustu</a>
+      </div>
     </div>
   </div>
 </section>
