@@ -167,60 +167,56 @@ body{background:var(--night);color:#fff}
 
   /* ---------- A — the portrait leads ------------------------------------------
      Desktop A gives the card equal billing with the copy. A phone cannot put them
-     side by side, so it splits the screen instead: two photographs, his and the
-     mountain's, divided by a drawn rule.
-
-     Restructured 2026-09-09 — Sindri, looking at the built page: not happy with this
-     still. The card up to this point was a boxed portrait (background, border,
-     shadow, rounded corners) floated over the top band, which left the mountain
-     showing empty and unused for the ~40% of the width the card did not cover, and
-     put a hard-edged object on the picture — exactly the thing we had just spent this
-     session removing from the SCRIM. The card was never fixed along with it.
-
-     Now the portrait fills the entire band, edge to edge — a second full-bleed
-     photograph, not a card placed on one. His photo and the mountain read as a
-     considered pairing (the man, then the place) rather than a headshot floating in
-     a mostly-empty sky. The name and role sit directly on the portrait as a caption
-     with its own short scrim, the same device used everywhere else on this page for
-     text over a picture — no box anywhere in this composition. */
-  .optA{--split:clamp(240px,34svh,320px)}
+     side by side, so it splits the screen instead: the mountain gets a clean band
+     with no veil on it at all, and the card sits across the seam, half in the
+     photograph and half on solid ground. Nothing is written over the picture. */
+  /* The photograph runs the whole frame. Cutting it at --split and standing a black
+     panel under it threw the picture away below the seam and read as a crop, not as a
+     composition. What was a hard edge between two materials is now a rule DRAWN across
+     one continuous image, and the ground under the copy is the same mountain under a
+     tonal grade that stops at .93 — never flat black, so the rock is still faintly
+     there behind the type. */
+  .optA{--split:clamp(238px,33svh,320px)}
   .optA .bg img{object-position:50% 34%}
   .optA .veil{background:linear-gradient(180deg,
-    rgba(6,10,14,0) 0,rgba(6,10,14,0) calc(var(--split) - 40px),
-    rgba(6,10,14,.50) var(--split),
-    rgba(6,10,14,.80) calc(var(--split) + 90px),
+    rgba(6,10,14,0) 0,rgba(6,10,14,0) calc(var(--split) - 96px),
+    rgba(6,10,14,.40) calc(var(--split) - 20px),
+    rgba(6,10,14,.78) calc(var(--split) + 70px),
     rgba(6,10,14,.86) 100%)}
-  /* the horizon rule: it fades out at both ends so it reads as a line someone drew
-     between two photographs, not as the edge where either one stopped */
+  /* the horizon rule: it fades out at both ends so it reads as a line someone drew,
+     not as the edge where the photograph stopped */
   .optA .veil::after{content:"";position:absolute;left:0;right:0;top:var(--split);
     height:1px;background:linear-gradient(90deg,transparent,var(--bronze) 16%,
       var(--bronze) 84%,transparent)}
-  /* Measured, not assumed: the light studio backdrop behind his head reads 0.81 at
-     the 98th percentile, three times brighter than the mountain's sky the shared wash
-     was tuned against, and needed a genuinely stronger curve, not just a taller one. */
-  .optA::before{content:"";position:absolute;inset:0 0 auto 0;height:150px;z-index:1;
-    pointer-events:none;background:linear-gradient(180deg,rgba(6,10,14,.90) 0%,
-      rgba(6,10,14,.80) 30%,rgba(6,10,14,.34) 70%,transparent 100%)}
   .optA .wrap2{justify-content:flex-start;align-items:flex-start;
-    padding:calc(var(--split) + 24px) var(--gut) 26px;gap:0}
+    padding:calc(var(--split) - 118px) var(--gut) 26px;gap:0}
+  /* Floor, not a nudge: the role word measures 161px at this tracking and the id block
+     adds 40px of padding, so a boxed card under ~204px truncates it. Third time. */
+  .optA .card{width:min(58%,212px);min-width:204px;margin:0 0 20px}
   .optA .body{font-size:15px}
   .optA .acts{margin-top:16px}
-  /* the portrait: full width, full --split height, no card chrome at all */
-  /* width:auto is load-bearing: the desktop rule (line 67) sets width:min(34%,340px)
-     and is unscoped, so without resetting it here the card stayed 34vw wide on a phone
-     — 'inset:0 0 auto 0' cannot stretch it while a specific width wins the constraint. */
-  .optA .card{position:absolute;inset:0 0 auto 0;width:auto;height:var(--split);z-index:2;
-    margin:0;background:none;border:0;box-shadow:none;border-radius:0;overflow:hidden}
-  .optA .card .ph{width:100%;height:100%;aspect-ratio:auto}
-  .optA .card .ph img{object-position:50% 22%}
-  /* the caption is painted ON the portrait, not held below it in a box. His shirt
-     collar reads 0.89 right where the name sits, so the ramp has to be doing real
-     work well before the name's own line box, not just under the role beneath it. */
-  .optA .card .id{position:absolute;left:0;right:0;bottom:0;padding:46px var(--gut) 18px;
-    border-top:0;background:linear-gradient(180deg,rgba(6,10,14,0) 0,
-      rgba(6,10,14,.60) 26%,rgba(6,10,14,.90) 62%,rgba(6,10,14,.94) 100%)}
-  .optA .card .nm{font-size:18px}
-  .optA .card .rl{color:rgba(255,255,255,.96)}
+
+  /* A on a short phone. A 204px portrait card plus the full copy needs about 700px of
+     height; below that the CTAs fall off the screen. Rather than shrink the card until
+     HÉRAÐSDÓMSLÖGMAÐUR truncates, the identity turns into a row on the seam — the same
+     idea, laid on its side. Triggered by height, not width, because that is the actual
+     constraint. */
+  @media (max-height:720px){
+    /* the row sits fully below the seam: straddling it put the name and the role on the
+       photograph, where the bronze role line measured 1.2:1 */
+    .optA .wrap2{padding:calc(var(--split) + 24px) var(--gut) 26px}
+    .optA .card{width:auto;min-width:0;display:flex;align-items:center;gap:13px;
+      background:none;border:0;box-shadow:none;border-radius:0;backdrop-filter:none;
+      -webkit-backdrop-filter:none;margin:0 0 18px;padding:0 0 15px;
+      border-bottom:1px solid rgba(255,255,255,.16)}
+    .optA .card .ph{width:64px;flex:none;aspect-ratio:1/1;border-radius:9px}
+    .optA .card .ph img{object-position:50% 18%}
+    .optA .card .id{padding:0;border-top:0}
+    .optA .card .nm{font-size:17px}
+    /* on the graded photograph rather than inside a card, so the same rule as B and C:
+       bronze micro-caps need an opaque ground, over a picture the role line is white */
+    .optA .card .rl{margin-top:3px;font-size:10px;color:rgba(255,255,255,.96)}
+  }
 
   /* ---------- B — the sentence leads ------------------------------------------
      Desktop B is editorial: the headline at full force, the card as a signature.
