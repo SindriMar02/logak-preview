@@ -111,10 +111,20 @@ body{background:var(--night);color:#fff}
     rgba(6,10,14,.86) 100%)!important}
   .opt .card{width:min(72%,260px)!important;align-self:flex-start!important;
     position:static!important;margin:0!important;order:-1}
-  .optC .wrap2{text-align:left}
+  .optC .wrap2{text-align:left;padding-bottom:clamp(150px,24vh,210px)}
   .optC .body{margin-inline:0}
   .optC .acts{justify-content:flex-start}
   .opt .copy{max-width:none}
+  /* C's card is a sibling of .wrap2, not a child, so forcing it into flow drops it behind
+     the fixed header. Keep it anchored bottom-left on phones too, which is also C's whole
+     idea, and reserve room for it above. */
+  /* width is set by the WIDEST WORD, not by taste: HÉRAÐSDÓMSLÖGMAÐUR at .17em tracking
+     needs ~146px of content box and was being clipped by the card's overflow:hidden. */
+  .optC .card{position:absolute!important;left:var(--gut);bottom:clamp(20px,4vh,40px);
+    width:min(62%,212px)!important;margin:0!important;order:0}
+  /* B carried desktop bottom padding into the phone layout and pushed the section 13px
+     past the viewport, which showed up as a scroll jog. */
+  .optB .copy{padding-bottom:0}
 }
 </style>
 </head>
@@ -136,9 +146,15 @@ body{background:var(--night);color:#fff}
   </div>
 </header>
 
+<nav class="mnav" id="mnav" aria-label="Valmynd">
+  <a href="#">Baldvin</a><a href="#">Þjónusta</a><a href="#">Ferlið</a><a href="#">Spurningar</a>
+  <a href="#">Hafa samband</a>
+  <div class="mnav-foot"><span>Hringdu beint</span><b>857 8660</b><span>Virka daga 9:00 til 16:00</span></div>
+</nav>
+
 <section class="opt optA">
   <div class="tag"><b>A</b><i>Nafnspjald vinstra megin, texti hægra megin</i></div>
-  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" fetchpriority="high"></div>
+  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" fetchpriority="high"></picture></div>
   <div class="veil"></div>
   <div class="wrap2">
     <article class="card">
@@ -159,7 +175,7 @@ body{background:var(--night);color:#fff}
 
 <section class="opt optB">
   <div class="tag"><b>B</b><i>Ritstjórnarleg vinstristilling, spjald neðarlega hægra megin</i></div>
-  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></div>
+  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
   <div class="veil"></div>
   <div class="wrap2">
     <div class="copy">
@@ -180,7 +196,7 @@ body{background:var(--night);color:#fff}
 
 <section class="opt optC">
   <div class="tag"><b>C</b><i>Miðjusett, spjaldið sem undirskrift í horni</i></div>
-  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></div>
+  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
   <div class="veil"></div>
   <article class="card">
     <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
@@ -201,7 +217,7 @@ body{background:var(--night);color:#fff}
 
 <section class="opt optD">
   <div class="tag"><b>D</b><i>Fjallið ósnert, allt á einni línu neðst</i></div>
-  <div class="bg"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></div>
+  <div class="bg"><picture><source media="(max-width:900px)" srcset="../img/akrafjall-hero-wide.webp"><img src="../img/akrafjall-hero.webp" alt="Akrafjall séð frá þjóðveginum við Akranes" width="2560" height="1506" loading="lazy"></picture></div>
   <div class="veil"></div>
   <div class="wrap2">
     <article class="card">
@@ -220,5 +236,24 @@ body{background:var(--night);color:#fff}
   </div>
 </section>
 
+<script>
+/* The header is here so the placement can be judged, which means the burger has to work.
+   Same behaviour as js/site.js, inlined because this page deliberately loads no site JS. */
+(function(){
+  var b=document.getElementById('burger'), m=document.getElementById('mnav');
+  if(!b||!m) return;
+  function set(open){
+    b.setAttribute('aria-expanded', open?'true':'false');
+    b.setAttribute('aria-label', open?'Loka valmynd':'Opna valmynd');
+    m.classList.toggle('open', open);
+    document.body.style.overflow = open?'hidden':'';
+  }
+  b.addEventListener('click', function(){ set(b.getAttribute('aria-expanded')!=='true'); });
+  addEventListener('keydown', function(e){
+    if(e.key==='Escape' && b.getAttribute('aria-expanded')==='true'){ set(false); b.focus(); }
+  });
+  m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+})();
+</script>
 </body>
 </html>
