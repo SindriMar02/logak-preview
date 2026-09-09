@@ -8,18 +8,23 @@
 <link rel="stylesheet" href="../css/site.css">
 <style>
 /* ==========================================================================================
-   Scratch comparison page. Five ways to structure the landing screen, all built on the same
+   Scratch comparison page. Four ways to structure the landing screen, all built on the same
    watercolour of Akrafjall. Delete once one is chosen.
+
+   A was removed 2026-09-09 at Sindri's request. It was the one that set type directly into
+   the painting's sky, and it was also the only option whose caption had no ground of its own —
+   it had to be re-measured and re-solved every time anything moved. Its letter is deliberately
+   NOT reused: B to E keep the names they have been discussed under all session, so nothing
+   said about "C" earlier now means a different layout.
 
    Rebuilt 2026-09-09 from the painting outwards, on Sindri's instruction: "I want it to be
    on every example, restructure the layouts from this painting."
 
-   The painting changes the architecture, not just the picture. Four of these options used to
-   be exercises in darkening a photograph until white type would survive on it — every scrim,
+   The painting changes the architecture, not just the picture. These options used to be
+   exercises in darkening a photograph until white type would survive on it — every scrim,
    every gradient, every measured alpha existed for that one reason. A watercolour brings its
-   own paper, so the page can simply BE paper: ink on the painting's sky measures about 12:1
-   with no scrim of any kind. All of that machinery is gone, and what is left is a comparison
-   of five structures rather than five ways to tint a photograph.
+   own paper, so the page can simply BE paper. All of that machinery is gone, and what is left
+   is a comparison of structures rather than of ways to tint a photograph.
 
    The palette follows from the same fact. Paper and ink, bronze for the accents — and the
    bronze micro-caps that failed AA on every photograph (1.7:1) clear it comfortably here at
@@ -40,7 +45,7 @@ body{background:var(--paper);color:var(--ink)}
 
 /* ---------- the header, which now has to survive both grounds ----------------------------
    The real header is white-on-transparent, which was fine when every hero was a dark
-   photograph. Four of these five are light, so it flips to ink over them. This is not a trick
+   photograph. Three of these four are light, so it flips to ink over them. This is not a trick
    for the comparison page: if the painting direction is chosen, the live header needs exactly
    this, because a white wordmark on watercolour paper is invisible. */
 html.hdr-ink .brand-txt b{color:var(--ink)}
@@ -105,39 +110,9 @@ html.mnav-open .burger i{background:#fff}
   color:var(--bronze)}
 
 /* ==========================================================================================
-   A — the words live inside the painting
-   The picture is the page. Type is set straight into the sky the painter left empty, with no
-   plate, no panel and no scrim, and the name sits down in the field at the foot. This is the
-   option the watercolour makes possible and the photograph never could.
-   ========================================================================================== */
-.optA .art img{object-position:50% 46%}
-.optA .wrap2{flex-direction:column;justify-content:center;align-items:flex-start}
-.optA .copy{max-width:min(48%,540px)}
-.optA .head{font-size:clamp(30px,3.6vw,54px)}
-/* Centred on its own side, level with the copy on the other, so the two read as a pair with
-   the mountain between them rather than one sitting in a corner. Height-aware width, or a
-   short window turns a vertically-centred 386px-tall photograph into an overlap. */
-.optA .card{position:absolute;right:var(--gut);top:50%;transform:translateY(-50%);z-index:3;
-  width:clamp(200px,min(20vw,32svh),284px)}
-/* A's caption is the one piece of type on this page with no ground of its own: it sits on
-   the painting, and once the photograph is centred rather than standing on the pale field it
-   lands on rock. Measured across four desktop sizes it ran 1.65 to 3.63:1 in ink and 2.55:1
-   in bronze — no colour survives paint that swings from 0.05 to 0.6, and the caption moves
-   with the viewport so there is no safe spot to aim at.
-
-   So it moves onto the photograph instead, at its foot, over his suit — which is reliably
-   dark whatever the painting is doing behind it. That is a caption on a picture, not a card
-   returning: no border, no radius, no plate, nothing added to the page. */
-.optA .card .id{position:absolute;left:0;right:0;bottom:0;padding:40px 15px 13px;
-  background:linear-gradient(180deg,rgba(6,10,14,0) 0,rgba(6,10,14,.66) 26%,
-    rgba(6,10,14,.92) 54%,rgba(6,10,14,.95) 100%)}
-.optA .card .nm{color:#fff}
-.optA .card .rl{color:rgba(255,255,255,.94)}
-
-/* ==========================================================================================
    B — the painting hung, everything under it
    A print on a wall with a proper margin around it, then the name, then the words. The most
-   conservative of the five and the one that would age slowest.
+   conservative of the four and the one that would age slowest.
    ========================================================================================== */
 .optB{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,26svh,280px)}
 .optB .art{inset:auto 0 auto 0;top:var(--plate-top);height:var(--plate-h);width:auto}
@@ -211,9 +186,9 @@ html.mnav-open .burger i{background:#fff}
 /* ==========================================================================================
    PHONE
    The landscape painting cannot fill a portrait screen without being destroyed — cover would
-   show a narrow vertical slice of a wide picture — so the two full-bleed options (A and D)
-   switch to an upright painting of the same mountain, composed with the sky at the top for
-   exactly this purpose. The plate and split options keep the landscape one as a band.
+   show a narrow vertical slice of a wide picture — so D, the one full-bleed option left,
+   switches to an upright painting of the same mountain. The plate and split options keep the
+   landscape one as a band.
    ========================================================================================== */
 @media (max-width:900px){
   .opt{height:auto;min-height:100svh}
@@ -242,47 +217,6 @@ html.mnav-open .burger i{background:#fff}
   .opt .card .id{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0}
   .opt .card .nm{font-size:15.5px}
 
-  /* A — statement in the sky at the top, card standing on the low left shoulder of the
-     mountain at the foot, the painting reading between and around them.
-
-     Two things were wrong with this and only the second one was what it looked like.
-     Stacking the card straight under the copy closed the gap but buried the mountain and
-     left a dead strip of pale field along the bottom instead — the empty space had only
-     moved. The gap was never the fault: that band IS the painting. What was actually wrong
-     is that the card sat 30px off the bottom edge, so it read as sliding off the screen
-     rather than standing on the field. It now keeps a proper margin of painting beneath it,
-     and is bigger, which also shortens the run of bare mountain above it. */
-  .optA .art img{object-position:50% 50%}
-  .optA .wrap2{justify-content:flex-start;
-    padding:114px var(--gut) clamp(40px,6vh,64px)}
-  .optA .copy{max-width:none;flex:none}
-  /* Centred in the space under the copy rather than pinned to the foot — the second time
-     that note has been given ("centre not more bottom"), because space-between keeps
-     pushing it back down there. Auto margins on both sides split the leftover evenly, so
-     it stays centred at any screen height instead of at one tuned offset.
-     176 would be the floor here (145.3px word + 28px of id padding); it sits well above it. */
-  /* position:static alone does not undo the desktop rule's centring transform — it kept
-     applying to the in-flow card and pulled it half its own height up into the copy. Both
-     the offset and the transform have to be reset, the same trap the width leak was. */
-  /* relative, not static: the caption is absolutely placed inside it now. And the desktop
-     centring transform still has to be undone or it pulls the in-flow card up into the copy. */
-  .optA .card{position:relative;top:auto;transform:none;
-    width:clamp(206px,27svh,244px);display:block;margin-block:auto}
-  .optA .card .ph{width:auto;aspect-ratio:636/739}
-  .optA .card .id{display:block;padding:34px 14px 12px}
-
-  /* An upright card needs about 700px of screen to stand in. Below that A lies it down
-     like the other four rather than shaving paddings until the CTAs skim the fold —
-     at 360x640 the upright version ran 6px past it. */
-  @media (max-height:700px){
-    /* the 132px photograph costs B and E their last 14px of fold here */
-    .opt .card .ph{width:112px}
-    /* A keeps its upright photograph even here: overlaying the caption took about 60px off
-       the card, which is the room the sideways version used to be buying. */
-    /* 178 = the 145.3px word + the caption's 30px of padding, rounded up. Sixth time. */
-    .optA .card{width:clamp(178px,26svh,196px)}
-  }
-
   /* B — the painting bleeds edge to edge here too. It used to be inset by the gutter, but
      with left:0 and right:0 both still set a specified width is over-constrained, and CSS
      resolves that by throwing away `right`: the picture started flush against the left edge
@@ -292,13 +226,29 @@ html.mnav-open .burger i{background:#fff}
   .optB .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
     padding-left:var(--gut);padding-right:var(--gut)}
 
-  /* C — the split becomes a band over the words, the same idea laid down. */
-  .optC{--band-h:clamp(160px,25svh,240px)}
+  /* C — the painting bands the top, he anchors the foot.
+     B and C had converged on a phone: both were a band, then the copy, then the same small
+     sideways namecard, and there was no reason to look at two of them. C's desktop idea is
+     that the picture and the message hold equal ground, so here the portrait comes up to
+     meet the painting instead of trailing after the words — upright, large, at the foot,
+     with his name set bigger under it. Two pictures bracketing the copy, which is C's
+     proposition laid down rather than a second copy of B.
+
+     The band gives up height to pay for it: 25svh to 20svh, which is the room the upright
+     photograph needs. */
+  .optC{--band-h:clamp(140px,20svh,224px)}
   .optC .art{inset:0 0 auto 0;width:auto;height:var(--band-h)}
   .optC .art img{object-position:50% 46%}
-  .optC .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
+  .optC .wrap2{flex-direction:column;align-items:flex-start;gap:clamp(15px,2.3vh,22px);
     padding:calc(var(--band-h) + clamp(18px,2.6vh,26px)) var(--gut) clamp(22px,3.6vh,32px)}
-  .optC .copy{max-width:none}
+  .optC .copy{max-width:none;align-self:stretch}
+  /* upright rather than on its side, and it is the only card on this page that leads with
+     the picture at this size */
+  .optC .card{display:block;width:auto;align-self:center;text-align:center}
+  .optC .card .ph{width:clamp(164px,25svh,208px);aspect-ratio:636/739;margin-inline:auto}
+  .optC .card .id{display:block;padding:13px 0 0}
+  .optC .card .nm{font-size:clamp(17px,4.9vw,20px)}
+  .optC .card .rl{margin-top:5px;font-size:10px}
 
   /* D — the sheet becomes a column on the bottom edge.
      The painting was full-bleed here and the sheet sat over the bottom half, which is
@@ -319,6 +269,28 @@ html.mnav-open .burger i{background:#fff}
   .optE{--plate-top:114px;--plate-h:clamp(110px,18svh,196px)}
   .optE .wrap2{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);
     padding-left:var(--gut);padding-right:var(--gut)}
+
+  /* ---------- short screens -------------------------------------------------------------
+     Last in the block on purpose. These are the same selectors the options above use, so
+     with equal specificity the only thing deciding the winner is source order — declared
+     before them it lost silently, and C kept its 164px upright photograph at 360x640 and
+     ran 13px past the fold. */
+  @media (max-height:700px){
+    /* the 132px photograph costs B and E their last 14px of fold at 640 */
+    .opt .card .ph{width:112px}
+    /* A band, the full copy and an upright portrait do not all fit in 640-700px, so C lies
+       its photograph down rather than pushing the CTAs off the screen. It must not simply
+       become B again though — that was the whole complaint — so it keeps the larger picture
+       and the larger name, and buys the height back from its own band. 375x667 is an iPhone
+       SE and too common to let the two options collapse into each other on it. */
+    .optC{--band-h:clamp(96px,15svh,150px)}
+    /* the sideways version keeps its text beside the picture, so it reads left */
+    .optC .card{display:flex;text-align:left;align-self:center}
+    .optC .card .ph{width:150px;margin-inline:0}
+    .optC .card .id{display:flex;padding:0}
+    .optC .card .nm{font-size:18px}
+    .optC .card .rl{margin-top:4px;font-size:9.5px}
+  }
 }
 </style>
 </head>
@@ -346,38 +318,15 @@ html.mnav-open .burger i{background:#fff}
   <div class="mnav-foot"><span>Hringdu beint</span><b>857 8660</b><span>Virka daga 9:00 til 16:00</span></div>
 </nav>
 
-<section class="opt optA" data-hdr="ink">
-  <div class="tag"><b>A</b><i>Textinn stendur inni í myndinni</i></div>
-  <div class="art"><picture>
-    <source media="(max-width:900px)" srcset="../img/akrafjall-malverk-p.webp">
-    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" fetchpriority="high">
-  </picture></div>
-  <div class="wrap2">
-    <div class="copy">
-      <p class="kicker">Fastur punktur þegar mest á reynir</p>
-      <h1 class="head">Lögfræðiþjónusta á Akranesi</h1>
-      <p class="body">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtalið kostar ekkert.</p>
-      <div class="acts">
-        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
-        <a class="btn" href="#">Skoða þjónustu</a>
-      </div>
-    </div>
-    <article class="card">
-      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739"></div>
-      <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
-    </article>
-  </div>
-</section>
-
 <section class="opt optB" data-hdr="ink">
   <div class="tag"><b>B</b><i>Myndin hengd upp, allt undir henni</i></div>
   <div class="art"><picture>
     <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
-    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" loading="lazy">
+    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" fetchpriority="high">
   </picture></div>
   <div class="wrap2">
     <article class="card">
-      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739" loading="lazy"></div>
+      <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739"></div>
       <div class="id"><p class="nm">Baldvin Már Kristjánsson</p><p class="rl">Héraðsdómslögmaður</p></div>
     </article>
     <div class="copy">
