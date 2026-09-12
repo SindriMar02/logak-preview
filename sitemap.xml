@@ -3,12 +3,12 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://logak.is/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://logak.is/img/akranesviti.webp</image:loc>
-      <image:title>Akranesvitar á Breiðinni</image:title>
+      <image:loc>https://logak.is/img/akrafjall-akranes-2400.webp</image:loc>
+      <image:title>Vatnslitamynd af Akrafjalli séð frá Akranesi</image:title>
     </image:image>
     <image:image>
       <image:loc>https://logak.is/img/baldvin.webp</image:loc>
@@ -17,37 +17,37 @@
   </url>
   <url>
     <loc>https://logak.is/fasteignamal/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://logak.is/erfdarettur/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://logak.is/samningar-og-innheimta/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://logak.is/skadabotarettur/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://logak.is/vinnurettur/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://logak.is/felagarettur/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

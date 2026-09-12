@@ -6,12 +6,9 @@
 
 <!-- ============ SEO ============
   Target: LOCAL, general-practice terms. "lögmaður á Akranesi", "lögfræðingur Akranes",
-  "lögmannsstofa Vesturland" have effectively no local competition — that is where this
-  firm should rank first. Repositioned 2026-09-03 from an accident-claims specialism to
-  an all-around local practice, per Sindri's direct instruction after the 2026-09-03
-  build call with Baldvin (see _hq/data/calls/2026-09-03-logak-seo-redesign-call.md). -->
+  "lögmannsstofa Vesturland". Title, H1 and the first paragraph each carry the place name. -->
 <title>Lögmaður á Akranesi | Lögfræðiþjónusta Akraness</title>
-<meta name="description" content="Lögmannsstofa á Akranesi sem sinnir lögfræðiþjónustu fyrir einstaklinga og fyrirtæki: fasteignamálum, fjölskyldumálum, samningum, skaðabótum, vinnurétti og fyrirtækjarekstri. Fyrsta samtal án endurgjalds. Sími 857 8660.">
+<meta name="description" content="Lögmaður á Akranesi. Fasteignamál, erfðamál, samningar og innheimta, skaðabætur, vinnuréttur og félagaréttur fyrir einstaklinga og fyrirtæki. Sími 857 8660.">
 <link rel="canonical" href="https://logak.is/">
 <meta name="robots" content="noindex,nofollow"><!-- PROTOTYPE ONLY. Remove this line at launch. -->
 <meta name="geo.region" content="IS-1"><meta name="geo.placename" content="Akranes">
@@ -20,21 +17,35 @@
 <meta property="og:locale" content="is_IS">
 <meta property="og:site_name" content="Lögfræðiþjónusta Akraness">
 <meta property="og:title" content="Lögmaður á Akranesi | Lögfræðiþjónusta Akraness">
-<meta property="og:description" content="Lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtal er þér að kostnaðarlausu.">
+<meta property="og:description" content="Lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtal er án endurgjalds.">
 <meta property="og:url" content="https://logak.is/">
-<meta property="og:image" content="https://logak.is/img/akranesviti.webp">
-<meta property="og:image:alt" content="Akranesvitar á Breiðinni">
+<meta property="og:image" content="https://logak.is/img/akrafjall-akranes-1200.webp">
+<meta property="og:image:alt" content="Vatnslitamynd af Akrafjalli séð frá Akranesi">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lögmaður á Akranesi | Lögfræðiþjónusta Akraness">
-<meta name="twitter:description" content="Lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtal er þér að kostnaðarlausu.">
-<meta name="twitter:image" content="https://logak.is/img/akranesviti.webp">
+<meta name="twitter:description" content="Lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtal er án endurgjalds.">
+<meta name="twitter:image" content="https://logak.is/img/akrafjall-akranes-1200.webp">
 
 <link rel="icon" href="img/la-mark.png">
-<link rel="preload" as="image" href="img/hero-akrafjall.webp" fetchpriority="high">
-<link rel="preload" as="font" type="font/woff2" href="fonts/Boska-Medium.woff2" crossorigin>
+<link rel="preload" as="image" href="img/akrafjall-akranes-1200.webp" media="(max-width:900px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/akrafjall-akranes-2400.webp" media="(min-width:901px)" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="fonts/ZalandoSansSemiExpanded-Medium.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/InstrumentSans-Regular.woff2" crossorigin>
 <link rel="stylesheet" href="vendor/lenis.css">
-<meta name="theme-color" content="#0C1116">
+<link rel="stylesheet" href="css/site.css">
+<meta name="theme-color" content="#EFF2F5">
+
+<!-- intro gate: set before first paint so the hero never flashes and then hides. Once per
+     session, never under reduced motion, ?reveal forces it. The timeouts are the failsafe
+     if site.js never runs: nothing can stay hidden longer than 2.5s / 6s. -->
+<script>
+(function(){try{var h=document.documentElement,f=/[?&]reveal\b/.test(location.search);
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+if(!f&&sessionStorage.getItem('la-intro')==='1')return;
+h.classList.add('is-intro','is-hold');
+setTimeout(function(){h.classList.remove('is-hold')},2500);
+setTimeout(function(){h.classList.remove('is-intro')},6000);}catch(e){}})();
+</script>
 
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -42,22 +53,23 @@
   "@id":"https://logak.is/#firm",
   "name":"Lögfræðiþjónusta Akraness",
   "alternateName":"Lögák",
-  "description":"Lögmannsstofa á Akranesi sem sinnir lögfræðiþjónustu fyrir einstaklinga og fyrirtæki: fasteignamálum, fjölskyldumálum, samningum, skaðabótum, vinnurétti og fyrirtækjarekstri.",
+  "description":"Lögfræðiþjónusta á Akranesi fyrir einstaklinga og fyrirtæki: fasteignamál, erfðamál og fjölskyldumál, samningar og innheimta, skaðabætur, vinnuréttur og félagaréttur.",
   "url":"https://logak.is/",
   "telephone":"+354-857-8660",
   "email":"baldvin@delikt.is",
   "foundingDate":"2011",
-  "priceRange":"16.000 kr./klst.",
-  "image":"https://logak.is/img/akranesviti.webp",
+  "priceRange":"16.000 kr. á klst. auk vsk.",
+  "image":"https://logak.is/img/akrafjall-akranes-1200.webp",
   "logo":"https://logak.is/img/la-mark.png",
   "address":{"@type":"PostalAddress","streetAddress":"Garðabraut 33","addressLocality":"Akranes","postalCode":"300","addressRegion":"Vesturland","addressCountry":"IS"},
   "geo":{"@type":"GeoCoordinates","latitude":64.3213,"longitude":-22.0748},
   "areaServed":[{"@type":"City","name":"Akranes"},{"@type":"AdministrativeArea","name":"Vesturland"},{"@type":"AdministrativeArea","name":"Hvalfjarðarsveit"},{"@type":"Country","name":"Ísland"}],
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"16:00"}],
-  "knowsLanguage":["is","en","da"],
+  "knowsLanguage":["is","en"],
   "employee":{"@type":"Person","@id":"https://logak.is/#baldvin","name":"Baldvin Már Kristjánsson","jobTitle":"Héraðsdómslögmaður","worksFor":{"@id":"https://logak.is/#firm"},
+    "image":"https://logak.is/img/baldvin.webp",
     "alumniOf":[{"@type":"CollegeOrUniversity","name":"Háskólinn í Reykjavík"},{"@type":"CollegeOrUniversity","name":"Háskólinn í Lundi"}],
-    "knowsAbout":["Fasteignaréttur","Erfðaréttur","Sifjaréttur","Samningaréttur","Innheimtumál","Skaðabótaréttur","Vinnuréttur","Félagaréttur"]},
+    "knowsAbout":["Fasteignaréttur","Erfðaréttur","Sifjaréttur","Samningaréttur","Innheimta","Skaðabótaréttur","Vinnuréttur","Félagaréttur"]},
   "hasOfferCatalog":{"@type":"OfferCatalog","name":"Þjónusta","itemListElement":[
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Fasteignamál","url":"https://logak.is/fasteignamal/"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Erfðaréttur og sifjaréttur","url":"https://logak.is/erfdarettur/"}},
@@ -67,31 +79,14 @@
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Félagaréttur","url":"https://logak.is/felagarettur/"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Almenn lögfræðiráðgjöf"}}]}},
  {"@type":"FAQPage","@id":"https://logak.is/#faq","mainEntity":[
-  {"@type":"Question","name":"Hvað kostar að fá lögmann í mitt mál?","acceptedAnswer":{"@type":"Answer","text":"Fyrsta samtalið er alltaf endurgjaldslaust, hvert sem málið er. Eftir það er unnið samkvæmt tímagjaldi, 16.000 kr. án virðisaukaskatts."}},
-  {"@type":"Question","name":"Er fyrsta samtalið skuldbindandi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Þú færð hreinskilið mat á stöðunni og ræður svo hvort lengra er haldið."}},
-  {"@type":"Question","name":"Hvers konar mál tekur stofan að sér?","acceptedAnswer":{"@type":"Answer","text":"Fasteignamál, fjölskyldumál, samningagerð, skaðabótamál, vinnuréttarmál, félagaréttarmál og almenn lögfræðiráðgjöf fyrir einstaklinga og fyrirtæki. Passar málið þitt ekki fullkomlega í einn af þessum flokkum, hafðu samt samband."}},
-  {"@type":"Question","name":"Þarf ég að koma til Akraness til að hitta þig?","acceptedAnswer":{"@type":"Answer","text":"Nei. Fyrstu samskipti fara oftast fram í síma eða tölvupósti, og mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu."}},
-  {"@type":"Question","name":"Hvenær á ég að hafa samband?","acceptedAnswer":{"@type":"Answer","text":"Eins fljótt og hægt er. Því fyrr sem staðan er skoðuð, því betur er málið upplýst. Fyrsta samtalið skuldbindur þig ekki til neins."}},
-  {"@type":"Question","name":"Er stofan bara fyrir fólk á Akranesi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Stofan er á Akranesi og hefur þjónað Akurnesingum og nágrenni frá 2011, en mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu."}}]},
+  {"@type":"Question","name":"Hvað kostar að fá lögmann í mitt mál?","acceptedAnswer":{"@type":"Answer","text":"Fyrsta samtal er án endurgjalds. Eftir það er unnið eftir tímagjaldi, sem er 16.000 kr. auk virðisaukaskatts, eða 19.840 kr. með virðisaukaskatti."}},
+  {"@type":"Question","name":"Er fyrsta samtalið skuldbindandi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Farið er yfir stöðuna og mögulegar leiðir, og þú ákveður svo hvort haldið er áfram."}},
+  {"@type":"Question","name":"Hvers konar mál tekur stofan að sér?","acceptedAnswer":{"@type":"Answer","text":"Stofan tekur að sér fasteignamál, erfðamál og fjölskyldumál, samningagerð og innheimtu, skaðabótamál, vinnuréttarmál og félagaréttarmál, auk almennrar lögfræðiráðgjafar. Sé málið annars eðlis er best að hafa samband og spyrja."}},
+  {"@type":"Question","name":"Hvað þarf ég að hafa tilbúið fyrir fyrsta samtal?","acceptedAnswer":{"@type":"Answer","text":"Stutta lýsingu á málinu og þau gögn sem tengjast því, til dæmis samninga, bréf eða tölvupósta. Ekkert þarf að vera fullfrágengið."}},
+  {"@type":"Question","name":"Hvenær á ég að hafa samband?","acceptedAnswer":{"@type":"Answer","text":"Sem fyrst. Í mörgum málum gilda frestir, til dæmis til að gera kröfu eða bregðast við bréfi, og því fyrr sem staðan er skoðuð, því fleiri leiðir eru yfirleitt færar."}},
+  {"@type":"Question","name":"Er þjónustan bara fyrir fólk á Akranesi?","acceptedAnswer":{"@type":"Answer","text":"Nei. Stofan er á Akranesi en tekur að sér mál fyrir fólk og fyrirtæki hvar sem er á landinu, og fyrstu samskipti geta farið fram í síma eða tölvupósti."}}]},
  {"@type":"WebSite","@id":"https://logak.is/#site","url":"https://logak.is/","name":"Lögfræðiþjónusta Akraness","inLanguage":"is","publisher":{"@id":"https://logak.is/#firm"}}]}
 </script>
-
-<!--
-  LÖGFRÆÐIÞJÓNUSTA AKRANESS — design prototype, v3
-  Scroll: the Heklusyn / kononenkogroup effect (memory heklusyn-scroll-effect).
-    images DRIFT inside a fixed frame; .frame{overflow:hidden} + .frame-in{position:absolute;inset:-9% 0}
-    p = (r.top + r.height/2 - vh/2) / (vh/2 + r.height/2)  ->  translate3d(0,-p*drift%,0)
-    drift 6 hero · 9 content · 12 full-bleed band
-    TEXT: two layers on SEPARATE elements — mask reveal (translateY(108%)->0, IO once)
-    plus a gentler continuous drift wrapper. Mask headroom .22em is load-bearing:
-    Icelandic descenders (g j p þ) clip against the mask edge below that.
-    Resting state is VISIBLE; the hidden start only exists while html.js is present.
-  v3 changes: photography cut right back (hero Akrafjall + ONE Akranesviti moment),
-    service blocks are typographic not photo cards, added an FAQ section, full SEO stack.
-  Scroll loop batches EVERY read before EVERY write.
--->
-
-<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 
@@ -100,7 +95,7 @@
 <header class="hdr" id="hdr">
   <div class="hdr-in">
     <a class="brand" href="#top" aria-label="Lögfræðiþjónusta Akraness, heim">
-      <img src="img/la-mark.png" alt="Merki Lögfræðiþjónustu Akraness" width="38" height="38">
+      <img src="img/la-mark.png" alt="" width="38" height="38">
       <span class="brand-txt"><b>Lögfræðiþjónusta</b><span>Akraness</span></span>
     </a>
     <nav class="nav" aria-label="Aðalvalmynd">
@@ -120,60 +115,52 @@
   <a href="#ferlid">Ferlið</a>
   <a href="#spurningar">Spurningar</a>
   <a href="#samband">Hafa samband</a>
-  <div class="mnav-foot"><span>Hringdu beint</span><b>857 8660</b><span>Virka daga 9:00 til 16:00</span></div>
+  <div class="mnav-foot"><span>Hringdu beint</span><b>857 8660</b><span>Virka daga kl. 9 til 16</span></div>
 </nav>
 
 <main id="main">
   <div id="top"></div>
 
-  <!-- 1 ===== hero ===== -->
+  <!-- ===== hero: option B ===== -->
   <section class="hero" aria-labelledby="h1">
-    <div class="frame"><div class="frame-in" data-drift="6">
-      <img src="img/hero-akrafjall.webp" alt="Akrafjall séð yfir fjörðinn frá Akranesi" width="2400" height="1008" fetchpriority="high" decoding="async">
-    </div></div>
-    <div class="hero-scrim" aria-hidden="true"></div>
-
-    <div class="hero-in">
-      <img class="hero-mark" src="img/la-mark.png" alt="" width="58" height="58" aria-hidden="true">
-      <div class="drift" data-drift="12">
-        <div class="mask"><p class="hero-script">Fastur punktur þegar mest á reynir</p></div>
-        <div class="mask d1"><h1 id="h1">Lögfræðiþjónusta á Akranesi</h1></div>
-        <div class="mask d3"><p class="hero-sub">Lögfræðiþjónusta Akraness sinnir fasteignamálum, fjölskyldumálum, samningum, skaðabótum, vinnurétti og fyrirtækjarekstri fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Baldvin Már Kristjánsson héraðsdómslögmaður rekur stofuna.</p></div>
-      </div>
-      <div class="hero-acts">
-        <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
-        <a class="btn" href="#thjonusta">Skoða þjónustu</a>
-      </div>
+    <div class="hero-art">
+      <picture>
+        <source media="(max-width:900px)" srcset="img/akrafjall-akranes-1200.webp">
+        <img src="img/akrafjall-akranes-2400.webp" alt="Vatnslitamynd af Akrafjalli séð frá Akranesi" width="2400" height="1018" fetchpriority="high">
+      </picture>
+      <img class="hero-seal" src="img/la-mark.png" alt="" width="512" height="512">
     </div>
-
-    <div class="hero-foot">
-      <div class="hero-id-wrap">
-        <a class="hero-id" href="#baldvin">
-          <img src="img/baldvin.webp" alt="" width="88" height="88" loading="lazy" decoding="async">
-          <span><b>Baldvin Már Kristjánsson</b><i>Héraðsdómslögmaður</i></span>
-        </a>
-        <a class="scroll-cue" href="#baldvin" aria-label="Skruna niður til að sjá Baldvin">
-          <svg viewBox="0 0 20 30" width="20" height="30" aria-hidden="true"><path d="M2 10 L10 18 L18 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+    <div class="hero-row">
+      <div class="hero-copy">
+        <p class="hero-kicker">Fastur punktur þegar mest á reynir</p>
+        <h1 id="h1">Lögfræðiþjónusta á Akranesi</h1>
+        <p class="hero-sub">Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni. Fyrsta samtal er án endurgjalds.</p>
+        <div class="hero-acts">
+          <a class="btn solid" href="tel:+3548578660">Hringja í 857 8660</a>
+          <a class="btn" href="#thjonusta">Skoða þjónustu</a>
+        </div>
       </div>
-      <span>Akranes · Vesturland</span>
+      <a class="hero-card" href="#baldvin">
+        <span class="ph"><img src="img/baldvin.webp" alt="" width="636" height="739" decoding="async"></span>
+        <span class="id"><b>Baldvin Már Kristjánsson</b><i>Héraðsdómslögmaður</i></span>
+      </a>
     </div>
   </section>
 
-  <!-- 5 ===== baldvin ===== -->
+  <!-- ===== baldvin ===== -->
   <section class="sec dark on-dark" id="baldvin" aria-labelledby="h-bal">
     <div class="wrap">
       <div class="bio">
-        <div class="frame"><div class="frame-in" data-drift="7">
-          <img src="img/baldvin.webp" alt="Baldvin Már Kristjánsson héraðsdómslögmaður" width="636" height="739" loading="lazy" decoding="async"></div></div>
-        <div class="drift" data-drift="12">
+        <div class="bio-head drift" data-drift="12">
           <div class="mask"><p class="eyebrow">Héraðsdómslögmaður</p></div>
           <div class="mask d1"><h2 id="h-bal">Baldvin Már Kristjánsson</h2></div>
-          <div class="mask d2"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness, sem hefur starfað á Akranesi frá 2011, og sinnir lögfræðiþjónustu fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni.</p></div>
-          <div class="mask d3"><p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram og eftir nám starfaði hann hjá Lögheimtunni, Arion banka og hjá NJORD Law Firm í Kaupmannahöfn.</p></div>
+        </div>
+        <div class="bio-body">
+          <div class="mask d1"><p>Baldvin hefur tekið við rekstri Lögfræðiþjónustu Akraness, sem hefur veitt lögfræðiþjónustu á Akranesi frá árinu 2011. Hann sinnir málum einstaklinga og fyrirtækja á Akranesi og nágrenni.</p></div>
+          <div class="mask d2"><p>Hann lauk grunnnámi í lögfræði við Háskólann í Reykjavík árið 2017 og meistaranámi (LL.M.) við Háskólann í Lundi í Svíþjóð árið 2019. Meðfram námi og að því loknu starfaði hann hjá Lögheimtunni, Arion banka og NJORD Law Firm í Kaupmannahöfn.</p></div>
           <div class="cv">
             <div><b>2017</b><span>BA í lögfræði, Háskólinn í Reykjavík</span></div>
-            <div><b>2019</b><span>Meistaranám í lögfræði, Háskólinn í Lundi</span></div>
+            <div><b>2019</b><span>LL.M., Háskólinn í Lundi</span></div>
             <div><b>Reynsla</b><span>Lögheimtan · Arion banki · NJORD Law Firm, Kaupmannahöfn</span></div>
             <div><b>Svið</b><span>Alhliða lögfræðiþjónusta fyrir einstaklinga og fyrirtæki</span></div>
           </div>
@@ -182,78 +169,74 @@
     </div>
   </section>
 
-  <!-- 2 ===== þjónusta ===== -->
+  <!-- ===== þjónusta ===== -->
   <section class="sec light" id="thjonusta" aria-labelledby="h-thj">
     <div class="wrap">
       <div class="drift sec-head" data-drift="12">
         <div class="mask"><p class="eyebrow">Þjónusta</p></div>
         <div class="mask d1"><h2 id="h-thj">Alhliða lögfræðiþjónusta</h2></div>
-        <div class="mask d2"><p class="lead">Stofan tekur að sér mál einstaklinga og fyrirtækja á Akranesi og nágrenni. Hvert sem málið er byrjar það á sama stað: samtali sem kostar ekkert.</p></div>
+        <div class="mask d2"><p class="lead">Stofan tekur að sér mál einstaklinga og fyrirtækja á Akranesi og nágrenni. Hvert mál hefst á samtali, og fyrsta samtal er án endurgjalds.</p></div>
       </div>
 
       <div class="svc" id="svc">
         <article>
-          <em>01</em>
           <div class="mask"><h3><a href="fasteignamal/">Fasteignamál</a></h3></div>
-          <div class="mask d1"><p>Kaup, sala, leiga og samningagerð vegna fasteigna, fyrir einstaklinga jafnt sem fyrirtæki.</p></div>
-          <div class="mask d1"><a class="svc-more" href="fasteignamal/">Lesa meira</a></div>
+          <div class="mask d1"><p>Kauptilboð, kaupsamningar, leigusamningar og ágreiningur um fasteignir, fyrir einstaklinga og fyrirtæki.</p></div>
+          <div class="mask d1"><a class="svc-more" href="fasteignamal/">Nánar<span class="sr"> um fasteignamál</span></a></div>
         </article>
         <article>
-          <em>02</em>
           <div class="mask d1"><h3><a href="erfdarettur/">Erfðaréttur og sifjaréttur</a></h3></div>
-          <div class="mask d2"><p>Skipti dánarbúa, erfðaskrár og fjölskyldumál fyrir einstaklinga og fjölskyldur.</p></div>
-          <div class="mask d2"><a class="svc-more" href="erfdarettur/">Lesa meira</a></div>
+          <div class="mask d2"><p>Skipti dánarbúa, erfðaskrár, kaupmálar og önnur fjölskyldumál.</p></div>
+          <div class="mask d2"><a class="svc-more" href="erfdarettur/">Nánar<span class="sr"> um erfðarétt og sifjarétt</span></a></div>
         </article>
         <article>
-          <em>03</em>
           <div class="mask d2"><h3><a href="samningar-og-innheimta/">Samningaréttur og innheimta</a></h3></div>
           <div class="mask d3"><p>Samningagerð, ágreiningsmál og innheimta krafna fyrir einstaklinga og fyrirtæki.</p></div>
-          <div class="mask d3"><a class="svc-more" href="samningar-og-innheimta/">Lesa meira</a></div>
+          <div class="mask d3"><a class="svc-more" href="samningar-og-innheimta/">Nánar<span class="sr"> um samningarétt og innheimtu</span></a></div>
         </article>
         <article>
-          <em>04</em>
           <div class="mask d2"><h3><a href="skadabotarettur/">Skaðabótaréttur</a></h3></div>
           <div class="mask d3"><p>Mat á bótarétti og ágreiningur um tjón og vátryggingar.</p></div>
-          <div class="mask d3"><a class="svc-more" href="skadabotarettur/">Lesa meira</a></div>
+          <div class="mask d3"><a class="svc-more" href="skadabotarettur/">Nánar<span class="sr"> um skaðabótarétt</span></a></div>
         </article>
         <article>
-          <em>05</em>
           <div class="mask d3"><h3><a href="vinnurettur/">Vinnuréttur</a></h3></div>
-          <div class="mask d4"><p>Ráðningarsamningar, uppsagnir og ágreiningur á vinnumarkaði.</p></div>
-          <div class="mask d4"><a class="svc-more" href="vinnurettur/">Lesa meira</a></div>
+          <div class="mask d4"><p>Ráðningarsamningar, uppsagnir og ágreiningur á vinnustað.</p></div>
+          <div class="mask d4"><a class="svc-more" href="vinnurettur/">Nánar<span class="sr"> um vinnurétt</span></a></div>
         </article>
         <article>
-          <em>06</em>
           <div class="mask d3"><h3><a href="felagarettur/">Félagaréttur</a></h3></div>
-          <div class="mask d4"><p>Stofnun félaga, hluthafasamningar og lögfræðileg ráðgjöf fyrir fyrirtæki.</p></div>
-          <div class="mask d4"><a class="svc-more" href="felagarettur/">Lesa meira</a></div>
+          <div class="mask d4"><p>Stofnun félaga, hluthafasamningar og lögfræðiráðgjöf í rekstri.</p></div>
+          <div class="mask d4"><a class="svc-more" href="felagarettur/">Nánar<span class="sr"> um félagarétt</span></a></div>
         </article>
       </div>
 
       <div class="more">
-        <div class="mask"><p>Auk þess almenn lögfræðiráðgjöf fyrir einstaklinga og minni fyrirtæki. Ef málið þitt fellur ekki hreint undir neinn af þessum flokkum skaltu samt hafa samband.</p></div>
+        <div class="mask"><p>Auk þess er veitt almenn lögfræðiráðgjöf fyrir einstaklinga og minni fyrirtæki. Ef málið fellur ekki undir neinn þessara flokka er samt velkomið að hafa samband.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 4 ===== ferlið ===== -->
-  <section class="sec light" id="ferlid" aria-labelledby="h-fer">
+  <!-- ===== ferlið ===== -->
+  <section class="sec light flush" id="ferlid" aria-labelledby="h-fer">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="drift" data-drift="24">
-          <div class="mask"><p class="eyebrow">Ferlið</p></div>
-          <div class="mask d1"><h2 id="h-fer">Við sjáum um flækjuna</h2></div>
+      <div class="rule-top">
+        <div class="sec-head">
+          <div class="drift" data-drift="24">
+            <div class="mask"><p class="eyebrow">Ferlið</p></div>
+            <div class="mask d1"><h2 id="h-fer">Svona gengur málið fyrir sig</h2></div>
+          </div>
         </div>
-      </div>
-      <div class="steps">
-        <div class="step"><em>01</em><div class="mask"><h3>Fyrsta samtal</h3></div>
-          <div class="mask d1"><p>Þú lýsir málinu. Við metum stöðuna og næstu skref saman. Samtalið kostar ekkert.</p></div></div>
-        <div class="step"><em>02</em><div class="mask d1"><h3>Gagnaöflun</h3></div>
-          <div class="mask d2"><p>Við öflum þeirra gagna sem málið krefst og förum yfir réttarstöðuna í hverju tilviki.</p></div></div>
-        <div class="step"><em>03</em><div class="mask d2"><h3>Málið unnið</h3></div>
-          <div class="mask d3"><p>Samið, sótt eða varið, eftir því hvað málið krefst, og fylgt eftir þar til niðurstaða liggur fyrir.</p></div></div>
-        <div class="step"><em>04</em><div class="mask d3"><h3>Niðurstaða</h3></div>
-          <div class="mask d4"><p>Farið er yfir niðurstöðuna með þér áður en gengið er frá málinu, svo þú vitir nákvæmlega hvað þú ert að samþykkja.</p></div></div>
+        <ol class="steps" role="list">
+          <li class="step"><em>01</em><div class="mask"><h3>Fyrsta samtal</h3></div>
+            <div class="mask d1"><p>Þú lýsir málinu og færð mat á stöðunni og mögulegum leiðum. Samtalið er án endurgjalds.</p></div></li>
+          <li class="step"><em>02</em><div class="mask d1"><h3>Gagnaöflun</h3></div>
+            <div class="mask d2"><p>Aflað er þeirra gagna sem málið krefst og réttarstaðan metin út frá þeim.</p></div></li>
+          <li class="step"><em>03</em><div class="mask d2"><h3>Málið unnið</h3></div>
+            <div class="mask d3"><p>Málinu er fylgt eftir með samningum eða fyrir dómi, eftir því sem við á, þar til niðurstaða liggur fyrir.</p></div></li>
+          <li class="step"><em>04</em><div class="mask d3"><h3>Niðurstaða</h3></div>
+            <div class="mask d4"><p>Farið er yfir niðurstöðuna með þér áður en gengið er frá málinu, svo að þú vitir hvað þú samþykkir.</p></div></li>
+        </ol>
       </div>
     </div>
   </section>
@@ -263,11 +246,11 @@
     <div class="frame deep"><div class="frame-in" data-drift="12">
       <img src="img/akranesviti.webp" alt="Akranesvitar á Breiðinni við Akranes" width="2200" height="1455" loading="lazy" decoding="async"></div></div>
     <div class="band-scrim" aria-hidden="true"></div>
-    <div class="band-txt"><div class="mask"><p>Lögmannsstofa með rætur á Akranesi síðan 2011</p></div></div>
-    <span class="band-cap">Akranesvitar, Breiðin</span>
+    <div class="band-txt"><div class="mask"><p>Lögfræðiþjónusta á Akranesi frá 2011</p></div></div>
+    <span class="band-cap">Akranesvitar á Breiðinni</span>
   </section>
 
-  <!-- 6 ===== spurningar (FAQ, matches the FAQPage JSON-LD above) ===== -->
+  <!-- ===== spurningar (FAQ, matches the FAQPage JSON-LD above word for word) ===== -->
   <section class="sec light" id="spurningar" aria-labelledby="h-spu">
     <div class="wrap">
       <div class="sec-head">
@@ -279,39 +262,39 @@
       <div class="faq">
         <div>
           <details open><summary>Hvað kostar að fá lögmann í mitt mál?</summary>
-            <p>Fyrsta samtalið er alltaf endurgjaldslaust, hvert sem málið er. Eftir það er unnið samkvæmt tímagjaldi, 16.000 kr. án virðisaukaskatts.</p></details>
+            <p>Fyrsta samtal er án endurgjalds. Eftir það er unnið eftir tímagjaldi, sem er 16.000 kr. auk virðisaukaskatts, eða 19.840 kr. með virðisaukaskatti.</p></details>
           <details><summary>Er fyrsta samtalið skuldbindandi?</summary>
-            <p>Nei. Þú færð hreinskilið mat á stöðunni og ræður svo hvort lengra er haldið.</p></details>
+            <p>Nei. Farið er yfir stöðuna og mögulegar leiðir, og þú ákveður svo hvort haldið er áfram.</p></details>
           <details><summary>Hvers konar mál tekur stofan að sér?</summary>
-            <p>Fasteignamál, fjölskyldumál, samningagerð, skaðabótamál, vinnuréttarmál, félagaréttarmál og almenn lögfræðiráðgjöf fyrir einstaklinga og fyrirtæki. Passar málið þitt ekki fullkomlega í einn af þessum flokkum, hafðu samt samband.</p></details>
+            <p>Stofan tekur að sér fasteignamál, erfðamál og fjölskyldumál, samningagerð og innheimtu, skaðabótamál, vinnuréttarmál og félagaréttarmál, auk almennrar lögfræðiráðgjafar. Sé málið annars eðlis er best að hafa samband og spyrja.</p></details>
         </div>
         <div>
-          <details><summary>Þarf ég að koma til Akraness til að hitta þig?</summary>
-            <p>Nei. Fyrstu samskipti fara oftast fram í síma eða tölvupósti, og mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu.</p></details>
+          <details><summary>Hvað þarf ég að hafa tilbúið fyrir fyrsta samtal?</summary>
+            <p>Stutta lýsingu á málinu og þau gögn sem tengjast því, til dæmis samninga, bréf eða tölvupósta. Ekkert þarf að vera fullfrágengið.</p></details>
           <details><summary>Hvenær á ég að hafa samband?</summary>
-            <p>Eins fljótt og hægt er. Því fyrr sem staðan er skoðuð, því betur er málið upplýst. Fyrsta samtalið skuldbindur þig ekki til neins.</p></details>
-          <details><summary>Er stofan bara fyrir fólk á Akranesi?</summary>
-            <p>Nei. Stofan er á Akranesi og hefur þjónað Akurnesingum og nágrenni frá 2011, en mál eru unnin fyrir fólk og fyrirtæki hvar sem er á landinu.</p></details>
+            <p>Sem fyrst. Í mörgum málum gilda frestir, til dæmis til að gera kröfu eða bregðast við bréfi, og því fyrr sem staðan er skoðuð, því fleiri leiðir eru yfirleitt færar.</p></details>
+          <details><summary>Er þjónustan bara fyrir fólk á Akranesi?</summary>
+            <p>Nei. Stofan er á Akranesi en tekur að sér mál fyrir fólk og fyrirtæki hvar sem er á landinu, og fyrstu samskipti geta farið fram í síma eða tölvupósti.</p></details>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 7 ===== samband ===== -->
-  <section class="sec light" id="samband" aria-labelledby="h-sam" style="padding-top:0">
+  <!-- ===== samband ===== -->
+  <section class="sec light flush" id="samband" aria-labelledby="h-sam">
     <div class="wrap">
-      <div class="contact" style="padding-top:clamp(40px,4.4vw,72px);border-top:1px solid rgba(27,32,39,.14)">
+      <div class="contact rule-top">
         <div>
           <div class="drift" data-drift="12">
             <div class="mask"><p class="eyebrow">Hafa samband</p></div>
-            <div class="mask d1"><h2 id="h-sam">Segðu okkur frá málinu þínu</h2></div>
-            <div class="mask d2"><p class="lead" style="margin-top:16px">Fyrsta samtalið kostar ekkert og skuldbindur þig ekki til neins.</p></div>
+            <div class="mask d1"><h2 id="h-sam">Fyrsta samtal er án endurgjalds</h2></div>
+            <div class="mask d2"><p class="lead" style="margin-top:16px">Hringdu, sendu tölvupóst eða lýstu erindinu í forminu. Fyrirspurn skuldbindur þig ekki til neins.</p></div>
           </div>
           <div class="lines">
             <a href="tel:+3548578660"><span>Sími</span><b>857 8660</b></a>
             <a href="mailto:baldvin@delikt.is"><span>Netfang</span><b>baldvin@delikt.is</b></a>
-            <div><span>Opnunartími</span><b>Virka daga 9 til 16</b></div>
-            <div><span>Heimilisfang</span><b>Garðabraut 33, Akranes</b></div>
+            <div><span>Opnunartími</span><b>Virka daga kl. 9 til 16</b></div>
+            <div><span>Heimilisfang</span><b>Garðabraut 33, 300 Akranes</b></div>
           </div>
         </div>
 
@@ -336,7 +319,7 @@
           </div>
           <div class="field">
             <label for="cf-email">Netfang</label>
-            <input type="email" id="cf-email" name="Netfang" autocomplete="email" required>
+            <input type="email" id="cf-email" name="Netfang" autocomplete="email" spellcheck="false" required>
           </div>
           <div class="field">
             <label for="cf-topic">Málaflokkur</label>
@@ -351,11 +334,12 @@
             </select>
           </div>
           <div class="field">
-            <label for="cf-msg">Skilaboð</label>
-            <textarea id="cf-msg" name="Skilaboð" required></textarea>
+            <label for="cf-msg">Lýsing á erindinu</label>
+            <textarea id="cf-msg" name="Erindi" required></textarea>
           </div>
 
           <button type="submit">Senda fyrirspurn</button>
+          <p class="cform-note">Sendu ekki viðkvæmar persónuupplýsingar í gegnum formið. Fyrirspurn felur ekki í sér að mál hafi verið tekið að sér.</p>
           <p class="cform-status" id="cform-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -366,19 +350,32 @@
 <footer>
   <div class="wrap">
     <div class="f-top">
-      <div>
-        <b style="color:#fff;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase">Lögfræðiþjónusta Akraness</b>
-        <p style="margin-top:8px;max-width:46ch">Lögmannsstofa á Akranesi sem sinnir lögfræðiþjónustu fyrir einstaklinga og fyrirtæki: fasteignamálum, fjölskyldumálum, samningum, vinnurétti og fyrirtækjarekstri.</p>
+      <div class="f-about">
+        <b class="f-name">Lögfræðiþjónusta Akraness</b>
+        <p>Lögfræðiþjónusta fyrir einstaklinga og fyrirtæki á Akranesi og nágrenni frá árinu 2011.</p>
       </div>
-      <div>
-        <p><a href="tel:+3548578660">857 8660</a><br><a href="mailto:baldvin@delikt.is">baldvin@delikt.is</a><br>Garðabraut 33, 300 Akranes</p>
+      <nav class="f-nav" aria-label="Þjónusta">
+        <b class="f-h">Þjónusta</b>
+        <a href="fasteignamal/">Fasteignamál</a>
+        <a href="erfdarettur/">Erfðaréttur og sifjaréttur</a>
+        <a href="samningar-og-innheimta/">Samningaréttur og innheimta</a>
+        <a href="skadabotarettur/">Skaðabótaréttur</a>
+        <a href="vinnurettur/">Vinnuréttur</a>
+        <a href="felagarettur/">Félagaréttur</a>
+      </nav>
+      <div class="f-contact">
+        <b class="f-h">Hafa samband</b>
+        <a href="tel:+3548578660">857 8660</a>
+        <a href="mailto:baldvin@delikt.is">baldvin@delikt.is</a>
+        <span>Garðabraut 33, 300 Akranes</span>
+        <span>Virka daga kl. 9 til 16</span>
       </div>
     </div>
     <div class="f-bot">
-      <span>Hönnunartillaga · SNDR Studio</span>
-      <span>Baldvin Már Kristjánsson, héraðsdómslögmaður</span>
+      <span>Baldvin Már Kristjánsson héraðsdómslögmaður</span>
+      <span class="f-credit"><span aria-hidden="true">Hannað af</span><a class="sndr" href="https://sndrstudio.is" target="_blank" rel="noopener" aria-label="Hannað af SNDR Studio" data-logotype translate="no"><span class="sndr__mark">SN<i>✦</i>DR</span><span class="sndr__studio">STUDIO</span></a></span>
     </div>
-    <p class="credit">Ljósmyndir af Akranesi og Akrafjalli: Wikimedia Commons, birtar undir CC BY-SA 4.0 og CC BY 2.0. Ljósmynd af Baldvin: delikt.is. Þetta er hönnunartillaga og ekki endanleg vefsíða.</p>
+    <p class="credit">Efni síðunnar er almenns eðlis og kemur ekki í stað lögfræðiráðgjafar í einstöku máli. Ljósmynd af Akranesvitum: <a href="https://commons.wikimedia.org/wiki/File:Faros_de_Akranes,_Vesturland,_Islandia,_2014-08-14,_DD_009.JPG" target="_blank" rel="noopener">Diego Delso</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.is" target="_blank" rel="noopener license">CC BY-SA 4.0</a>, skorin til. Ljósmynd af Baldvin: delikt.is. Þetta er hönnunartillaga og ekki endanleg vefsíða.</p>
   </div>
 </footer>
 

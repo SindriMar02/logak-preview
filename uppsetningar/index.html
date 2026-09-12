@@ -6,6 +6,7 @@
 <title>Lögák — uppsetningar á forsíðu</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../fonts/cabinet-grotesk/css/cabinet-grotesk.css">
 <style>
 /* ==========================================================================================
    Scratch comparison page. Four ways to structure the landing screen, all built on the same
@@ -73,7 +74,15 @@ html.mnav-open .burger i{background:#fff}
 /* ---------- shared type, set for paper ---------- */
 .kicker{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
   font-size:clamp(18px,1.6vw,24px);color:var(--ink-2);margin-bottom:10px}
-.head{font-family:Boska,serif;font-weight:500;text-transform:uppercase;line-height:1.04;
+/* Headline face: Cabinet Grotesk Medium, replacing Boska. Asked for on the call on
+   2026-09-12 ("finna eitthvað betra font") and again by Sindri: minimal and modern, from
+   the font library. Picked over the rest of the library by setting the real headline in
+   each: Clash Display reads startup, Panchang needs 16.6em for LÖGFRÆÐIÞJÓNUSTA and cannot
+   fit a phone, Telma is decorative, Melodrama is a condensed serif too near what it
+   replaces. Cabinet sets the word at 10.14em, so the existing phone scale still holds, and
+   every Icelandic letter is in the file (checked against the cmap, not assumed). */
+.head{font-family:'CabinetGrotesk-Medium','Instrument Sans',system-ui,sans-serif;
+  font-weight:500;text-transform:uppercase;line-height:1.02;letter-spacing:-.01em;
   color:var(--ink)}
 .body{color:var(--ink-2);font-size:clamp(15.5px,1.15vw,17px);line-height:1.55;max-width:44ch}
 .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
@@ -104,7 +113,8 @@ html.mnav-open .burger i{background:#fff}
 .card .ph img{width:100%;height:100%;object-fit:cover;display:block;object-position:50% 16%}
 /* small info under a big picture: the photograph carries him, the type just labels it */
 .card .id{padding:12px 0 0}
-.card .nm{font-family:Boska,serif;font-weight:500;line-height:1.15;color:var(--ink);
+.card .nm{font-family:'CabinetGrotesk-Medium','Instrument Sans',system-ui,sans-serif;
+  font-weight:500;line-height:1.15;color:var(--ink);
   font-size:clamp(14.5px,1.05vw,16.5px)}
 .card .rl{margin-top:4px;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--bronze)}
@@ -114,15 +124,33 @@ html.mnav-open .burger i{background:#fff}
    A print on a wall with a proper margin around it, then the name, then the words. The most
    conservative of the four and the one that would age slowest.
    ========================================================================================== */
-.optB{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(150px,26svh,280px)}
+/* 2026-09-12, from Baldvin's call and email ("athuga hvort hægt sé að laga að hún dragist
+   ekki inn þegar maður skoðar úr tölvu"): measured, the old band was 6.2:1 at 1440 and 6.9:1
+   at 1920 against a 1.79:1 painting, so a desktop showed only 26-29% of its height, upscaled
+   1.2x at 1920 — that is the "pulled in" he saw. Two changes, one for each half of that:
+   the painting is now painted wide (2.36:1, from the Akranes shore as he asked), and the band
+   grows from 26svh to 42svh, paid for by a slightly smaller portrait below it. The window now
+   shows about 56-62% of the painting's height and is aimed with object-position at the band
+   from the upper sky to the shoreline houses: ridge at 48% of the source, houses at ~76%. */
+.optB{--plate-top:clamp(118px,14vh,150px);--plate-h:clamp(170px,42svh,520px)}
 .optB .art{inset:auto 0 auto 0;top:var(--plate-top);height:var(--plate-h);width:auto}
-.optB .art img{object-position:50% 44%}
+.optB .art img{object-position:50% 47%}
+/* The LA seal, centred in the painting's sky — "á miðja mynd af akrafjalli". Sized and placed
+   as a fraction of the BAND, not of the viewport, because the visible sky is a fixed share of
+   the band at every width once the crop is aimed: the ridge sits at ~49% of the band on desktop
+   and ~48% on a phone, so a seal centred at 24% and 30% tall ends at 39% and never touches rock.
+   512px source, largest render ~136px, so it stays sharp at 3x. No shadow: it is a mark on the
+   paper, not a badge floating over it. alt="" because the header already names the firm. */
+.optB .seal{position:absolute;left:50%;top:24%;height:30%;width:auto;aspect-ratio:1/1;
+  transform:translate(-50%,-50%);z-index:1;pointer-events:none}
 .optB .wrap2{flex-direction:row;justify-content:flex-start;align-items:flex-start;
   max-width:940px;gap:clamp(24px,3.4vw,48px);
   padding-top:calc(var(--plate-top) + var(--plate-h) + clamp(20px,3.2vh,34px));
   padding-bottom:clamp(26px,5vh,54px)}
 .optB .copy{flex:1;order:1}
-.optB .card{order:2;width:clamp(200px,min(25vw,32svh),320px)}
+/* smaller than it was (up to 25vw) so the taller painting fits above it in one viewport; the
+   floor only has to clear HÉRAÐSDÓMSLÖGMAÐUR (~158px at the desktop role size), not 196 */
+.optB .card{order:2;width:clamp(180px,min(22vw,26svh),320px)}
 .optB .head{font-size:clamp(30px,3.2vw,52px)}
 
 /* ==========================================================================================
@@ -321,9 +349,9 @@ html.mnav-open .burger i{background:#fff}
 <section class="opt optB" data-hdr="ink">
   <div class="tag"><b>B</b><i>Myndin hengd upp, allt undir henni</i></div>
   <div class="art"><picture>
-    <source media="(max-width:900px)" srcset="../img/akrafjall-vatnslitur-sm.webp">
-    <img src="../img/akrafjall-vatnslitur.webp" alt="Vatnslitamynd af Akrafjalli" width="1600" height="893" fetchpriority="high">
-  </picture></div>
+    <source media="(max-width:900px)" srcset="../img/akrafjall-akranes-1200.webp">
+    <img src="../img/akrafjall-akranes-2400.webp" alt="Vatnslitamynd af Akrafjalli séð frá Akranesi" width="2400" height="1018" fetchpriority="high">
+  </picture><img class="seal" src="../img/la-mark.png" alt="" width="512" height="512"></div>
   <div class="wrap2">
     <article class="card">
       <div class="ph"><img src="../img/baldvin.webp" alt="Baldvin Már Kristjánsson" width="636" height="739"></div>

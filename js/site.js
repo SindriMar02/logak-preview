@@ -1,8 +1,6 @@
-/* LÖGFRÆÐIÞJÓNUSTA AKRANESS — shared script, extracted from index.html 2026-09-03 so the
-   practice-area subpages reuse the same mask reveal, drift, mobile menu and contact-form
-   logic without duplicating it. The aperture-intro IIFE near the bottom already guards on
-   `if (!hero || !h1 || !heroImg) return;`, so it safely no-ops on any page without a .hero
-   section — subpages load this unmodified, they just never trigger that block. */
+/* LÖGFRÆÐIÞJÓNUSTA AKRANESS — shared script for the homepage and the practice-area subpages:
+   mask reveal, drift, mobile menu, contact form, and the homepage intro. The intro guards on
+   the hero's own elements, so it no-ops on every subpage. */
 
 (function(){
   "use strict";
@@ -35,13 +33,14 @@
   var drifters = [].slice.call(document.querySelectorAll('.frame-in, .drift'));
   var hdr = document.getElementById('hdr'), lastScrolled = null;
   /* Ceiling for a text block's drift, in px. A % translate resolves against the element's OWN
-     height, so a long column would otherwise swing many times further than a short one. Cap it:
-     26 on desktop is the largest swing the design actually authors, and 12 on the stacked mobile
-     layout stays comfortably inside the ~28px grid gap a drifting column has to clear. */
+     height, so a long column would otherwise swing many times further than a short one. */
   function driftCap(){ return innerWidth < 1000 ? 12 : 26; }
 
   function loop(){
     requestAnimationFrame(loop);
+    var sy = window.scrollY;
+    var scrolled = sy > 40;
+    if (hdr && scrolled !== lastScrolled){ hdr.classList.toggle('scrolled', scrolled); lastScrolled = scrolled; }
     if (reduce || !drifters.length) return;
     var vh = window.innerHeight, cap = driftCap(), i, rects = new Array(drifters.length);
 
@@ -49,7 +48,6 @@
       var el = drifters[i];
       rects[i] = (el.classList.contains('frame-in') ? el.parentElement : el).getBoundingClientRect();
     }
-    var sy = window.scrollY;
 
     for (i = 0; i < drifters.length; i++){                       // WRITES
       var dEl = drifters[i], r = rects[i];
@@ -58,48 +56,41 @@
       if (p < -1) p = -1; else if (p > 1) p = 1;
       var d = parseFloat(dEl.dataset.drift) || 9;
       if (dEl.classList.contains('frame-in')){
-        /* An image inside an overflow:hidden frame. % of its own box is exactly what we want here
-           (the drift scales with the crop) and it has nothing in flow to collide with. */
         dEl.style.transform = 'translate3d(0,' + (-p * d).toFixed(3) + '%,0)';
       } else {
-        /* A text block in normal flow. A % translate is a % of the element's OWN height, so a long
-           stacked column drifts much further than the short heading above it and shears into it —
-           at 375px the #baldvin body swung 62px against the name's 17px and closed a 114px gap to
-           69px mid-scroll. Resolve the % against the height once, then cap it in px so short and
-           long blocks drift by the same order of magnitude. */
+        /* resolve the % against the block's height once, then cap it in px, so a long stacked
+           column cannot shear into the heading above it */
         var t = -p * d / 100 * r.height;
         if (t > cap) t = cap; else if (t < -cap) t = -cap;
         dEl.style.transform = 'translate3d(0,' + t.toFixed(2) + 'px,0)';
       }
     }
-
-    var scrolled = sy > 40;
-    if (scrolled !== lastScrolled){ hdr.classList.toggle('scrolled', scrolled); lastScrolled = scrolled; }
   }
   requestAnimationFrame(loop);
 
-  /* mobile menu */
+  /* mobile menu. html.menu-open lets the header turn white over the night overlay. */
   var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
   function setMenu(open){
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     burger.setAttribute('aria-label', open ? 'Loka valmynd' : 'Opna valmynd');
     mnav.classList.toggle('open', open);
+    document.documentElement.classList.toggle('menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
     if (lenis) { open ? lenis.stop() : lenis.start(); }
   }
-  burger.addEventListener('click', function(){ setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
-  addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true'){ setMenu(false); burger.focus(); }
-  });
-  mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  if (burger && mnav){
+    burger.addEventListener('click', function(){ setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
+    addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true'){ setMenu(false); burger.focus(); }
+    });
+    mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  }
 
   /* ---------- contact form ----------
      FormSubmit's HTTP 200 means "I received your POST", never "I did what you asked" —
-     a fresh recipient address returns 200 with success:"false" until it is activated by
-     clicking a one-time link FormSubmit emails to that address. So this NEVER shows a
-     success message off res.ok alone: it checks the JSON body's success field explicitly,
-     and treats anything else (activation pending, network failure, bad response) as a
-     failure that hands the visitor the phone number and email instead of a false promise. */
+     a fresh recipient address returns 200 with success:"false" until it is activated. So this
+     NEVER shows a success message off res.ok alone: it checks the JSON body's success field,
+     and treats anything else as a failure that hands the visitor the phone number and email. */
   (function(){
     var form = document.getElementById('cform');
     if (!form) return;
@@ -115,7 +106,7 @@
       status.textContent = '';
       status.className = 'cform-status';
       btn.disabled = true;
-      btn.textContent = 'Sendi…';
+      btn.textContent = 'Sendi fyrirspurn…';
 
       fetch(form.action, {
         method: 'POST',
@@ -125,7 +116,7 @@
       .then(function(r){ return r.json(); })
       .then(function(data){
         if (data && (data.success === true || data.success === 'true')){
-          status.textContent = 'Takk fyrir. Skilaboðin voru send og við höfum samband fljótlega.';
+          status.textContent = 'Fyrirspurnin hefur verið send.';
           status.className = 'cform-status ok';
           form.reset();
         } else {
@@ -133,7 +124,7 @@
         }
       })
       .catch(function(){
-        status.innerHTML = 'Ekki tókst að staðfesta að skilaboðin hafi borist. Hringdu í <a href="tel:+3548578660">857 8660</a> eða sendu tölvupóst á <a href="mailto:baldvin@delikt.is">baldvin@delikt.is</a>.';
+        status.innerHTML = 'Ekki tókst að staðfesta að fyrirspurnin hafi borist. Hringdu í <a href="tel:+3548578660">857 8660</a> eða sendu tölvupóst á <a href="mailto:baldvin@delikt.is">baldvin@delikt.is</a>.';
         status.className = 'cform-status err';
       })
       .finally(function(){
@@ -143,20 +134,17 @@
     });
   })();
 
-  /* ---------- aperture intro ----------
-     Gate on real image DECODE, never a timer. Once per session; ?reveal forces it.
-     Scroll is released 0.8s before the timeline ends so the last beat plays under
-     the user's first scroll, with no dead pause. */
+  /* ---------- homepage intro ----------
+     The inline script in <head> has already added html.is-intro + html.is-hold (once per
+     session, never under reduced motion). This splits the headline into characters, waits
+     for the painting to DECODE (never a bare timer), then releases the hold. */
   (function(){
-    var force = /[?&]reveal\b/.test(location.search);
-    if (reduce) return;
-    if (!force && sessionStorage.getItem('la-intro') === '1') return;
-
     var root = document.documentElement;
+    if (!root.classList.contains('is-intro')) return;
     var hero = document.querySelector('.hero');
     var h1 = document.getElementById('h1');
-    var heroImg = hero && hero.querySelector('.frame img');
-    if (!hero || !h1 || !heroImg) return;
+    var art = hero && hero.querySelector('.hero-art picture img');
+    if (!hero || !h1 || !art){ root.classList.remove('is-hold', 'is-intro'); return; }
 
     // split the h1 into chars WITHOUT destroying its accessible name or textContent
     var text = h1.textContent;
@@ -173,37 +161,24 @@
         w.appendChild(s);
       });
       frag.appendChild(w);
-      // a REAL space text node between words: keeps textContent correct and gives
-      // the line-breaker somewhere legal to break
+      // a REAL space between words, so textContent stays right and lines can break there
       if (wi < words.length - 1) frag.appendChild(document.createTextNode(' '));
     });
     h1.textContent = '';
     h1.appendChild(frag);
+    h1.classList.add('is-split');
 
     var started = false;
     function start(){
       if (started) return; started = true;
-      sessionStorage.setItem('la-intro', '1');
-      // hero copy is driven by the intro, so retire its scroll-mask reveal
-      hero.querySelectorAll('.mask').forEach(function(m){ m.classList.add('in'); });
-      root.classList.add('is-intro');
-      root.classList.add('is-locked');
-      if (lenis) lenis.stop();
-      setTimeout(function(){                       // 4000 - 800: last beat plays under the first scroll
-        if (lenis) lenis.start();
-        root.classList.remove('is-locked');
-      }, 3200);
-      setTimeout(function(){                       // timeline over; base styles already ARE the end state
-        root.classList.remove('is-intro');
-      }, 4400);
+      try { sessionStorage.setItem('la-intro', '1'); } catch(e){}
+      root.classList.remove('is-hold');
+      setTimeout(function(){ root.classList.remove('is-intro'); }, 3000);   // base styles are the end state
     }
-    // decode gate, with a ceiling so a slow image can never hang the page
-    var done = false;
-    var go = function(){ if (!done){ done = true; start(); } };
-    setTimeout(go, 2500);
-    if (heroImg.decode) heroImg.decode().then(go).catch(go);
-    else if (heroImg.complete) go();
-    else heroImg.addEventListener('load', go), heroImg.addEventListener('error', go);
+    setTimeout(start, 2000);                                              // ceiling for a slow image
+    if (art.decode) art.decode().then(start, start);
+    else if (art.complete) start();
+    else { art.addEventListener('load', start); art.addEventListener('error', start); }
   })();
 
   /* anchors */
