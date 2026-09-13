@@ -106,7 +106,7 @@
       status.textContent = '';
       status.className = 'cform-status';
       btn.disabled = true;
-      btn.textContent = 'Sendi fyrirspurn…';
+      btn.textContent = 'Verið er að senda fyrirspurn…';
 
       fetch(form.action, {
         method: 'POST',
