@@ -60,7 +60,10 @@ p{font-size:16px;line-height:1.5}
 .frame-in img{width:100%;height:100%;object-fit:cover}
 .frame.deep .frame-in{inset:-15% 0}
 .mask{overflow:hidden;padding-bottom:.22em;margin-bottom:-.22em}
-.js .mask > *{transform:translateY(108%);transition:transform .95s var(--ease)}
+/* 100% + .7em, not 108%: capitals in Host Grotesk carry their Icelandic accents above the line
+   box, and at 108% the Á/É/Ð accents peeked through the bottom of the mask before the reveal
+   fired (seen on an iPhone, 2026-09-14) */
+.js .mask > *{transform:translateY(calc(100% + .7em));transition:transform .95s var(--ease)}
 .js .mask.in > *{transform:translateY(0)}
 .js .mask.d1 > *{transition-delay:.07s}
 .js .mask.d2 > *{transition-delay:.14s}
