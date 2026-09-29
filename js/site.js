@@ -77,6 +77,13 @@
     document.documentElement.classList.toggle('menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
     if (lenis) { open ? lenis.stop() : lenis.start(); }
+    /* the overlay covers the page: keep keyboard and screen readers out of what is behind it */
+    ['main', 'footer', '.sr'].forEach(function(sel){
+      document.querySelectorAll('body > ' + sel).forEach(function(el){
+        if (open) el.setAttribute('inert', ''); else el.removeAttribute('inert');
+      });
+    });
+    if (open){ var first = mnav.querySelector('a'); if (first) setTimeout(function(){ if (burger.getAttribute('aria-expanded') === 'true') first.focus(); }, 90); }
   }
   if (burger && mnav){
     burger.addEventListener('click', function(){ setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
@@ -87,10 +94,10 @@
   }
 
   /* ---------- contact form ----------
-     FormSubmit's HTTP 200 means "I received your POST", never "I did what you asked" —
-     a fresh recipient address returns 200 with success:"false" until it is activated. So this
-     NEVER shows a success message off res.ok alone: it checks the JSON body's success field,
-     and treats anything else as a failure that hands the visitor the phone number and email. */
+     The form posts to our own relay (04-platform/sndr-contact). It answers {ok:true} ONLY when the mail
+     provider has accepted the message; anything else is a failure that hands the visitor the phone number
+     and email. Never show success off res.ok alone. Without script the form posts natively and the relay
+     sends the visitor back here with #sent or #senderror, which CSS :target shows. */
   (function(){
     var form = document.getElementById('cform');
     if (!form) return;
@@ -108,14 +115,16 @@
       btn.disabled = true;
       btn.textContent = 'Verið er að senda fyrirspurn…';
 
+      var payload = {};
+      new FormData(form).forEach(function(v, k){ if (typeof v === 'string') payload[k] = v; });
       fetch(form.action, {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       })
       .then(function(r){ return r.json(); })
       .then(function(data){
-        if (data && (data.success === true || data.success === 'true')){
+        if (data && data.ok === true){
           status.textContent = 'Fyrirspurnin hefur verið send.';
           status.className = 'cform-status ok';
           form.reset();

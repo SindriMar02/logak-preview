@@ -296,10 +296,8 @@ setTimeout(function(){h.classList.remove('is-intro')},6000);}catch(e){}})();
           </div>
         </div>
 
-        <form class="cform" id="cform" action="https://formsubmit.co/ajax/baldvin@delikt.is" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="Ný fyrirspurn af logak.is">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
+        <form class="cform" id="cform" action="https://sndr-contact.sindri-381.workers.dev/" method="POST" novalidate>
+          <input type="hidden" name="site" value="logak">
           <div class="hp" aria-hidden="true">
             <label for="cf-hp">Ekki fylla út þennan reit</label>
             <input type="text" id="cf-hp" name="_honey" tabindex="-1" autocomplete="off">
@@ -337,8 +335,10 @@ setTimeout(function(){h.classList.remove('is-intro')},6000);}catch(e){}})();
           </div>
 
           <button type="submit">Senda fyrirspurn</button>
-          <p class="cform-note">Sendu ekki viðkvæmar persónuupplýsingar í gegnum formið. Fyrirspurn felur ekki í sér að stofan hafi tekið málið að sér.</p>
+          <p class="cform-note">Sendu ekki viðkvæmar persónuupplýsingar í gegnum formið. Fyrirspurn felur ekki í sér að stofan hafi tekið málið að sér. Nánar um meðferð upplýsinga í <a href="personuvernd/">persónuverndaryfirlýsingu</a>.</p>
           <p class="cform-status" id="cform-status" role="status" aria-live="polite"></p>
+          <p class="cform-flash ok" id="sent">Fyrirspurnin hefur verið send.</p>
+          <p class="cform-flash err" id="senderror">Ekki tókst að staðfesta að fyrirspurnin hafi borist. Hringdu í <a href="tel:+3548578660">857 8660</a> eða sendu tölvupóst á <a href="mailto:baldvin@delikt.is">baldvin@delikt.is</a>.</p>
         </form>
       </div>
     </div>
@@ -371,6 +371,7 @@ setTimeout(function(){h.classList.remove('is-intro')},6000);}catch(e){}})();
     </div>
     <div class="f-bot">
       <span>Baldvin Már Kristjánsson héraðsdómslögmaður</span>
+      <a class="f-priv" href="personuvernd/">Persónuvernd</a>
       <span class="f-credit"><span aria-hidden="true">Hannað af</span><a class="sndr" href="https://sndrstudio.is" target="_blank" rel="noopener" aria-label="Hannað af SNDR Studio" data-logotype translate="no"><span class="sndr__mark">SN<i>✦</i>DR</span><span class="sndr__studio">STUDIO</span></a></span>
     </div>
     <p class="credit">Efni síðunnar er almenns eðlis og kemur ekki í stað lögfræðiráðgjafar í einstöku máli. Ljósmynd af Akranesvitum: <a href="https://commons.wikimedia.org/wiki/File:Faros_de_Akranes,_Vesturland,_Islandia,_2014-08-14,_DD_009.JPG" target="_blank" rel="noopener">Diego Delso</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.is" target="_blank" rel="noopener license">CC BY-SA 4.0</a>, skorin til. Ljósmynd af Baldvin: delikt.is. Þetta er hönnunartillaga og ekki endanleg vefsíða.</p>

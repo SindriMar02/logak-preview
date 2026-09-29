@@ -47,6 +47,8 @@ p{font-size:16px;line-height:1.5}
 .on-dark{color:#fff}
 .on-dark .lead{color:#AEB6BF}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* the skip link is the first tab stop, so it has to be visible when it has focus */
+a.sr:focus,a.sr:focus-visible{position:fixed;z-index:200;top:12px;left:12px;width:auto;height:auto;overflow:visible;clip:auto;padding:12px 18px;background:var(--ink,#1B2733);color:#fff;font-size:14px;text-decoration:none;outline:2px solid var(--bronze,#8A6A3E);outline-offset:2px}
 :focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
 .on-dark :focus-visible,footer :focus-visible,.mnav :focus-visible{outline-color:var(--bronze-lift)}
 .eyebrow{font-size:11px;letter-spacing:.19em;text-transform:uppercase;font-weight:600;color:var(--bronze)}
@@ -374,3 +376,12 @@ html.is-intro .hdr-in > *:nth-child(4){animation-delay:.55s}
   html.is-intro *{animation:none!important}
   html.is-intro .hero h1{opacity:1!important}
 }
+
+/* native form post (no script): the relay sends the visitor back with #sent / #senderror */
+.cform-flash{display:none;margin:0;font-size:14px}
+.cform-flash:target{display:block}
+.cform-flash.ok{color:#2F5D3A}.cform-flash.err{color:#8C3A34}
+.f-priv{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.prose{max-width:68ch}
+.prose h2{margin:2.2em 0 .5em;font-size:clamp(20px,2vw,26px)}
+.prose p{margin:0 0 1em}
