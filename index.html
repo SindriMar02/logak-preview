@@ -306,16 +306,16 @@ setTimeout(function(){h.classList.remove('is-intro')},6000);}catch(e){}})();
           <div class="row2">
             <div class="field">
               <label for="cf-name">Nafn</label>
-              <input type="text" id="cf-name" name="Nafn" autocomplete="name" required>
+              <input type="text" id="cf-name" name="Nafn" autocomplete="name" maxlength="120" required>
             </div>
             <div class="field">
               <label for="cf-phone">Sími</label>
-              <input type="tel" id="cf-phone" name="Sími" autocomplete="tel">
+              <input type="tel" id="cf-phone" name="Sími" autocomplete="tel" maxlength="40">
             </div>
           </div>
           <div class="field">
             <label for="cf-email">Netfang</label>
-            <input type="email" id="cf-email" name="Netfang" autocomplete="email" spellcheck="false" required>
+            <input type="email" id="cf-email" name="Netfang" autocomplete="email" spellcheck="false" maxlength="200" required>
           </div>
           <div class="field">
             <label for="cf-topic">Málaflokkur</label>
@@ -331,7 +331,7 @@ setTimeout(function(){h.classList.remove('is-intro')},6000);}catch(e){}})();
           </div>
           <div class="field">
             <label for="cf-msg">Lýsing á erindinu</label>
-            <textarea id="cf-msg" name="Erindi" required></textarea>
+            <textarea id="cf-msg" name="Erindi" maxlength="4000" required></textarea>
           </div>
 
           <button type="submit">Senda fyrirspurn</button>

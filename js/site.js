@@ -124,6 +124,11 @@
       })
       .then(function(r){ return r.json(); })
       .then(function(data){
+        if (data && data.reason === 'too-long'){
+          status.textContent = 'Textinn er of langur. Styttu hann og reyndu aftur.';
+          status.className = 'cform-status err';
+          return;
+        }
         if (data && data.ok === true){
           status.textContent = 'Fyrirspurnin hefur verið send.';
           status.className = 'cform-status ok';
