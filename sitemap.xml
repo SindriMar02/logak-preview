@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://logak.is/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -12,48 +12,72 @@
     </image:image>
     <image:image>
       <image:loc>https://logak.is/img/baldvin.webp</image:loc>
-      <image:title>Baldvin Már Kristjánsson héraðsdómslögmaður</image:title>
+      <image:title>Baldvin Már Kristjánsson lögmaður</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://logak.is/fasteignamal/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://logak.is/erfdarettur/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://logak.is/erfdamal/</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://logak.is/samningar-og-innheimta/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://logak.is/sakamal/</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://logak.is/skadabotarettur/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://logak.is/slys-og-skadabaetur/</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://logak.is/vinnurettur/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://logak.is/malarekstur/</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://logak.is/felagarettur/</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://logak.is/fjolskyldumal/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://logak.is/fyrirtaeki/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://logak.is/skjalagerd-og-samningar/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://logak.is/innheimta/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://logak.is/ferilskra/</loc>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://logak.is/personuvernd/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

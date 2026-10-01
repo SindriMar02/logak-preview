@@ -153,6 +153,7 @@ html.menu-open .hdr.scrolled{background:transparent;-webkit-backdrop-filter:none
 .hero-kicker{font-family:'Instrument Serif',Georgia,serif;font-style:italic;
   font-size:clamp(18px,1.6vw,24px);line-height:1.3;color:var(--ink-2);margin-bottom:10px}
 .hero h1{font-size:clamp(30px,3.2vw,52px);line-height:1.04;color:var(--ink)}
+.hero-tag{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:clamp(20px,1.8vw,27px);line-height:1.3;color:var(--ink-2);margin-top:14px}
 .hero-sub{margin-top:16px;color:var(--ink-2);font-size:clamp(15.5px,1.15vw,17px);line-height:1.55;max-width:44ch}
 .hero-acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
 /* his photograph with his name typeset under it: no frame, no radius, no shadow */
@@ -218,6 +219,14 @@ html.menu-open .hdr.scrolled{background:transparent;-webkit-backdrop-filter:none
 .cv div{display:flex;gap:18px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.09);font-size:15px}
 .cv b{flex:none;width:66px;color:var(--bronze-lift);font-weight:600;font-size:13px;padding-top:2px}
 .cv span{color:#C4CBD2}
+/* /ferilskra/: his photograph beside the timeline, years in the bronze column */
+.cvp{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(28px,5vw,96px);align-items:start}
+.cvp-photo{display:block;aspect-ratio:636/739;overflow:hidden;background:var(--paper-2);max-width:360px}
+.cvp-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 16%}
+.cvp-list{border-top:1px solid rgba(27,32,39,.16);margin-top:clamp(18px,2vw,28px)}
+.cvp-list div{display:grid;grid-template-columns:clamp(96px,10vw,140px) minmax(0,1fr);gap:18px;padding:18px 0;border-bottom:1px solid rgba(27,32,39,.11)}
+.cvp-list b{color:var(--bronze);font-weight:600;font-size:14px;letter-spacing:.02em;padding-top:2px}
+.cvp-list span{color:var(--ink);font-size:clamp(16px,1.2vw,18px);line-height:1.45}
 
 /* FAQ */
 .faq{display:grid;grid-template-columns:repeat(2,1fr);gap:0 clamp(28px,4vw,64px)}
@@ -303,6 +312,7 @@ html.is-intro .hero-art{animation:laCurtain 1.5s cubic-bezier(.77,0,.175,1) both
 html.is-intro .hero-art picture img{animation:laSettle 2.4s cubic-bezier(.19,1,.22,1) both}
 html.is-intro .hero-seal{animation:laSealIn 1s var(--ease-out) .9s both}
 html.is-intro .hero-kicker{animation:laRiseIn .9s var(--ease-out) 1.05s both}
+html.is-intro .hero-tag{animation:laRiseIn .9s var(--ease-out) 1.45s both}
 html.is-intro .hero h1:not(.is-split){opacity:0}
 html.is-intro .hero h1 .ch{animation:laChar 1.1s cubic-bezier(.19,1,.22,1) both;animation-delay:calc(1.15s + var(--i) * 14ms)}
 html.is-intro .hero-card{animation:laRiseIn 1s var(--ease-out) 1.35s both}
@@ -349,6 +359,9 @@ html.is-intro .hdr-in > *:nth-child(4){animation-delay:.55s}
   .hero{--plate-top:114px;--plate-h:clamp(110px,18svh,196px);min-height:100svh}
   .hero-row{flex-direction:column;align-items:stretch;gap:clamp(14px,2.2vh,20px);max-width:none}
   .hero-kicker{font-size:clamp(16px,4.4vw,19px);margin-bottom:8px}
+  .hero-tag{font-size:clamp(18px,5vw,21px);margin-top:10px}
+  .cvp{grid-template-columns:1fr}
+  .cvp-photo{max-width:260px}
   .hero-sub{font-size:15.5px;line-height:1.5;max-width:none}
   .hero-acts{gap:10px;margin-top:20px}
   .hero-acts .btn{flex:1 1 46%;padding:12px}
