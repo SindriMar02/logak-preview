@@ -239,7 +239,7 @@ html.menu-open .hdr.scrolled{background:transparent;-webkit-backdrop-filter:none
   border-right:1.5px solid var(--bronze);border-bottom:1.5px solid var(--bronze);
   transform:translateY(-70%) rotate(45deg);transition:transform .3s var(--ease)}
 .faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
-.faq summary:hover{color:var(--bronze)}
+@media (hover:hover){.faq summary:hover{color:var(--bronze)}}
 .faq p{color:var(--ink-2);padding:0 34px 20px 0;font-size:15.5px;max-width:54ch}
 
 /* samband */

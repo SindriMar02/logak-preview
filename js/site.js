@@ -70,7 +70,9 @@
 
   /* mobile menu. html.menu-open lets the header turn white over the night overlay. */
   var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
-  function setMenu(open){
+  /* focus moves into the menu only when it was opened from the keyboard. A tap or click leaves focus on
+     the burger, so the first link ("Um okkur") does not show a focus ring as if it were selected. */
+  function setMenu(open, fromKeyboard){
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     burger.setAttribute('aria-label', open ? 'Loka valmynd' : 'Opna valmynd');
     mnav.classList.toggle('open', open);
@@ -83,10 +85,10 @@
         if (open) el.setAttribute('inert', ''); else el.removeAttribute('inert');
       });
     });
-    if (open){ var first = mnav.querySelector('a'); if (first) setTimeout(function(){ if (burger.getAttribute('aria-expanded') === 'true') first.focus(); }, 90); }
+    if (open && fromKeyboard){ var first = mnav.querySelector('a'); if (first) setTimeout(function(){ if (burger.getAttribute('aria-expanded') === 'true') first.focus(); }, 90); }
   }
   if (burger && mnav){
-    burger.addEventListener('click', function(){ setMenu(burger.getAttribute('aria-expanded') !== 'true'); });
+    burger.addEventListener('click', function(ev){ setMenu(burger.getAttribute('aria-expanded') !== 'true', ev.detail === 0); });
     addEventListener('keydown', function(e){
       if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true'){ setMenu(false); burger.focus(); }
     });
