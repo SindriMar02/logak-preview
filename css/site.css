@@ -243,6 +243,7 @@ html.menu-open .hdr.scrolled{background:transparent;-webkit-backdrop-filter:none
 .faq p{color:var(--ink-2);padding:0 34px 20px 0;font-size:15.5px;max-width:54ch}
 
 /* samband */
+.contact>*{min-width:0}
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,64px);align-items:start}
 .lines{margin-top:clamp(26px,3.2vw,40px)}
 .lines a,.lines div{display:block;padding:11px 0;border-bottom:1px solid rgba(27,32,39,.13)}
@@ -256,8 +257,10 @@ html.menu-open .hdr.scrolled{background:transparent;-webkit-backdrop-filter:none
 .cform .field{display:flex;flex-direction:column;gap:7px}
 .cform label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 /* 16px, not 15: iOS Safari zooms the page into any focused input set smaller than 16px */
+/* width + min-width 0: a <select> is as wide as its longest option, which pushed the
+   one-column contact grid to 423 px on a 390 px phone and the section clipped it */
 .cform input,.cform select,.cform textarea{
-  font:inherit;font-size:16px;color:var(--ink);background:#fff;
+  width:100%;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:#fff;
   border:1px solid rgba(27,32,39,.2);border-radius:0;padding:12px 14px;
   transition:border-color .2s var(--ease)}
 .cform input:focus,.cform select:focus,.cform textarea:focus{outline:none;border-color:var(--bronze);box-shadow:0 0 0 1px var(--bronze)}
