@@ -135,6 +135,7 @@
           status.textContent = 'Fyrirspurnin hefur verið send.';
           status.className = 'cform-status ok';
           form.reset();
+          if (window.sndrPulse) window.sndrPulse('form');   // Pulse counts only a confirmed send (tag is production-only, golive.mjs)
         } else {
           throw new Error('not confirmed');
         }
